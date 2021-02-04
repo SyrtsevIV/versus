@@ -1,3 +1,5 @@
-const initState = {};
+const initState = {
+
+};
 
 export default initState;

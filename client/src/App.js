@@ -1,12 +1,13 @@
-import Footer from './Components/Footer/Footer';
-import Header from './Components/Header/Header';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Header from "./Components/Layout/Header/Header";
+import Footer from "./Components/Layout/Footer/Footer";
+import Signup from "./Components/Auth/Signup/Signup";
 
 function App() {
   return (
     <Router>
       <Header />
-
+      <Signup />
       <Switch>
         <Route exact path="/">
           <h1>Main page</h1>
@@ -15,7 +16,6 @@ function App() {
           <h1>404</h1>
         </Route>
       </Switch>
-
       <Footer />
     </Router>
   );
