@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   return (
     <Router>
-               <Header />
+      <Header />
 
       <Switch>
         <Route exact path="/">
@@ -13,6 +13,9 @@ function App() {
         </Route>
         <Route>
           <h1>404</h1>
+        </Route>
+        <Route>
+          <h1>Profile</h1>
         </Route>
       </Switch>
 
