@@ -14,6 +14,9 @@ function App() {
         <Route>
           <h1>404</h1>
         </Route>
+        <Route>
+          <h1>Profile</h1>
+        </Route>
       </Switch>
 
       <Footer />
