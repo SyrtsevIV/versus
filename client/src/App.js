@@ -1,16 +1,21 @@
-// import Footer from './Components/Footer/Footer';
-// import Header from './Components/Header/Header';
+
 import Profile from './Components/Profile/Profile';
+
+import Footer from './Components/Layout/Footer/Footer';
+import Header from './Components/Layout/Header/Header';
+import Main from './Components/Layout/Main/Main';
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
-      {/* <Header /> */}
+
+      <Header />
 
       <Switch>
         <Route exact path="/">
-          <h1>Main page</h1>
+          <Main />
         </Route>
         <Route path="/profile/:id">
           <Profile />
@@ -19,9 +24,8 @@ function App() {
           <h1>404</h1>
         </Route>
       </Switch>
-
-      {/* <Footer /> */}
-    </Router>
+        <Footer />
+      </Router>
   );
 }
 
