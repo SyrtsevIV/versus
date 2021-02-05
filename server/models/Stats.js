@@ -6,6 +6,23 @@ const Stats = mongoose.model('Stats', {
     require: true,
   },
   user: { type: mongoose.ObjectId, ref: 'User' },
+  mmr: {
+    type: Number,
+    default: 500,
+  },
+  rating: Number,
+  gold: {
+    type: Number,
+    default: 0,
+  },
+  silver: {
+    type: Number,
+    default: 0,
+  },
+  bronze: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = Stats;
