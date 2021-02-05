@@ -1,5 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Caveat', cursive;
+  padding: 0;
+  font-family: 'Noto Serif', serif;
   font-size: 20px;
+}
+
+#root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
