@@ -11,7 +11,8 @@ import Bracket from './Components/Bracket/Bracket';
 function App() {
   return (
     <Router>
-        <Header />
+      <Header />
+      <div className="main">
         <Switch>
           <Route exact path="/">
             <Main />
@@ -26,6 +27,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+      </div>
         <Footer />
       </Router>
   );

@@ -1,5 +1,6 @@
 const initState = {
-  profile: {}
+  profile: {},
+  mainPage: '',
 };
 
 export default initState;
