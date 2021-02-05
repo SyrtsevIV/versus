@@ -6,7 +6,7 @@ const Header = () => {
     <div className="nav-wrapper">
         <Link className="brand-logo" to='/'>Logo</Link>
       <ul>
-        <li><Link class="brand-logo center" to='/tournament/new'>Создать турнир</Link></li>
+        <li><Link className="brand-logo center" to='/tournament/new'>Создать турнир</Link></li>
       </ul>
       <ul id="nav-mobile" className="right">
        <li><NavLink to='/rating'>Рейтинг</NavLink></li>
