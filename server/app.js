@@ -15,14 +15,20 @@ mongoose.connect('mongodb://localhost:27017/Versus', {
   useCreateIndex: true,
 });
 
+const tableTennisTournamentRouter = require('./routes/tableTennisTournament');
+
 // Значения корс для приема фетчей с клиента.
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:3000',
-}));
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  })
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/tabletennis/tournament', tableTennisTournamentRouter);
 
 app.get('/profile/:id', async (req, res) => {
   const { id } = req.params;
