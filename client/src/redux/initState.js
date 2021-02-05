@@ -1,3 +1,5 @@
-const initState = {};
+const initState = {
+  userSession: {},
+};
 
 export default initState;
