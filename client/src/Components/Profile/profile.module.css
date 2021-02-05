@@ -1,6 +1,17 @@
-.cupBlock {
+.profileBlock {
   
+}
+.userRankBlock {
+  display: flex;
+  justify-content: center;
+}
+.cupBlock {
+  display: flex;
+  justify-content: center;
 }
 .statsBlock {
   
+}
+.price {
+  font-size: 70px;
 }

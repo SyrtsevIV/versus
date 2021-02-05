@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const Stats = require('./models/Stats');
+const User = require('./models/User');
 
 const app = express();
 
@@ -21,6 +23,18 @@ app.use(cors({
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.get('/profile/:id', async (req, res) => {
+  const { id } = req.params;
+  const allPlayerRanks = await Stats.find();
+  allPlayerRanks.sort((a, b) => b.mmr - a.mmr);
+
+  // Найти индекс по которому находится пользователь. Это будет его место в общем рейтинге
+  console.log(allPlayerRanks);
+
+  const stats = await Stats.findOne({ user: id });
+  res.send(stats);
+});
 
 app.listen(PORT, () => {
   console.log('Server has been started on port: ', PORT);

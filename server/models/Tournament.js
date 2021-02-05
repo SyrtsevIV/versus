@@ -18,6 +18,7 @@ const Tournament = mongoose.model('Tournament', {
     type: String,
     require: true,
   },
+  creator: { type: mongoose.ObjectId, ref: 'User' },
   participants: [{ type: mongoose.ObjectId, ref: 'User' }],
 });
 
