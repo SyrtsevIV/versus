@@ -5,47 +5,6 @@ const Stats = require('../models/Stats');
 
 const router = express.Router();
 
-const tournamentDB = {
-  participants: [
-    {
-      login: 'Semen',
-      stats: {
-        mmr: 3000,
-      },
-    },
-    {
-      login: 'Igor',
-      stats: {
-        mmr: 2500,
-      },
-    },
-    {
-      login: 'Tapac',
-      stats: {
-        mmr: 1000,
-      },
-    },
-    {
-      login: 'Ilona',
-      stats: {
-        mmr: 4000,
-      },
-    },
-    {
-      login: 'Alex',
-      stats: {
-        mmr: 2000,
-      },
-    },
-    {
-      login: 'Bravo',
-      stats: {
-        mmr: 2600,
-      },
-    },
-  ],
-};
-
 // функция для перемешивания
 function shuffle(array) {
   let currentIndex = array.length;
@@ -94,14 +53,29 @@ function getBracket(array) {
   return makePairs(array);
 }
 
+router.get('/:tournamentId', async (req, res) => {
+  console.log(req.params.tournamentId);
+  const tournament = await Tournament.findById(req.params.tournamentId).populate(
+    'bracket'
+  );
+  res.json(tournament);
+});
+
 router.get('/:tournamentId/bracket/new', async (req, res) => {
-  // const tournament = await Tournament.findById(req.params.id).populate(
-  //   'participants.stats'
-  // );
-  // const firstRoundBracket = getBracket(tournament.participants);
+  const tournament = await Tournament.findById(
+    req.params.tournamentId
+  ).populate('participants.stats');
+  console.log(tournament);
+
+  const firstRoundBracket = getBracket(tournament.participants);
+
   // res.json(firstRoundBracket);
-  const firstRoundBracket = getBracket(tournamentDB.participants);
-  const bracket = await Bracket.create({ firstRound: firstRoundBracket });
+  // const firstRoundBracket = getBracket(tournamentDB.participants);
+
+  const bracket = await Bracket.create({
+    tournament: req.params.tournamentId,
+    firstRound: firstRoundBracket,
+  });
   res.json(bracket);
 });
 
