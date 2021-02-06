@@ -11,6 +11,10 @@ const Stats = mongoose.model('Stats', {
     default: 500,
   },
   rating: Number,
+  won: Number,
+  lost: Number,
+  score: Number,
+  missed: Number,
   gold: {
     type: Number,
     default: 0,

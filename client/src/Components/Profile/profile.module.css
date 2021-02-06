@@ -1,17 +1,50 @@
-.profileBlock {
-  
-}
-.userRankBlock {
+.topBlock {
+  margin-top: 25px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+}
+.profileBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .cupBlock {
   display: flex;
+  justify-content: space-around;
+}
+.cupInfo {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.avatar > img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50% 50% 50% 50%;
+}
+.rankBlock {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.icon1 {
+  font-size: 100px;
+  filter: grayscale(100%);
+}
+.icon2 {
+  font-size: 85px;
+  filter: grayscale(100%);
+}
+.icon3 {
+  font-size: 85px;
+  filter: grayscale(100%);
 }
 .statsBlock {
-  
+  display: flex;
+  justify-content: space-around;
 }
-.price {
-  font-size: 70px;
+.gameInfo {
+  text-align: center;
 }
