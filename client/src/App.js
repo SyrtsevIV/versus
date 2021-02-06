@@ -1,47 +1,79 @@
-import Profile from './Components/Profile/Profile';
-import Footer from './Components/Layout/Footer/Footer';
-import Bracket from './Components/Bracket/Bracket';
-import Header from './Components/Layout/Header/Header';
-import Main from './Components/Main/Main';
-import Error from './Components/Error/Error';
+import Profile from "./Components/Profile/Profile";
+import Footer from "./Components/Layout/Footer/Footer";
+import Bracket from "./Components/Bracket/Bracket";
+import Main from "./Components/Main/Main";
+import Error from "./Components/Error/Error";
 import Signup from "./Components/Auth/Signup/Signup";
 import Signin from "./Components/Auth/Signin/Signin";
-
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  NavLink,
+  Link,
 } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { userInSession, logoutUser } from "./redux/actionCreators/auth";
+import Preloader from "./Components/Preloader/Preloader";
+
 
 function App() {
-  const userSession = useSelector((store) => store.userSession);
   const dispatch = useDispatch();
-
-  const getUser = async () => {
-    const response = await fetch("http://localhost:3001/auth/", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Credentials": "true",
-      },
-    });
-    const res = await response.json();
-    console.log(res);
-    dispatch({ type: "IN_SESSION", payload: res });
-  };
+  const userSession = useSelector((store) => store.authReducer.userSession);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getUser();
+    dispatch(userInSession());
+    setTimeout(() => {
+      setLoading(false)
+    }, 100)
   }, []);
 
-<Signup />
   return (
     <Router>
-      <Header />
-      <div className="main">
+      {loading ? < Preloader /> :
+      <>
+      <nav>
+        <div className="nav-wrapper">
+          <Link className="brand-logo" to="/">
+            Logo
+          </Link>
+          <ul>
+            <li>
+              <Link className="brand-logo center" to="/tournament/new">
+                Создать турнир
+              </Link>
+            </li>
+          </ul>
+          <ul id="nav-mobile" className="right">
+            <li>
+              <NavLink to="/rating">Рейтинг</NavLink>
+            </li>
+            {userSession && userSession ? (
+              <li>
+                <Link to='' onClick={() => dispatch(logoutUser())}>
+                  Выйти
+                </Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <NavLink to="/signin">Войти</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/signup">Зарегистрироваться</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/profile">Профиль</NavLink>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      </nav>
+    
+      
         <Switch>
           <Route exact path="/">
             <Main />
@@ -58,13 +90,14 @@ function App() {
           <Route exact path="/signup">
             <Signup />
           </Route>
-        <Route>
-          <Error />
-        </Route>
+          <Route>
+            <Error />
+          </Route>
         </Switch>
-      </div>
-        <Footer />
-      </Router>
+     <Footer />
+     </>
+    }
+     </Router>
   );
 }
 

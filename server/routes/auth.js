@@ -6,7 +6,8 @@ const router = express.Router();
 router.get("/logout", (req, res) => {
   req.logout();
   req.session.destroy();
-  res.sendStatus(200);
+  res.redirect('/')
+  // res.sendStatus(200);
 });
 
 router.get("/", async (req, res) => {
@@ -29,11 +30,13 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   res.redirect("http://localhost:3000/");
 });
 
-router.post("/signin", passport.authenticate("local"), (req, res) => {
+//дописать логику, если прилетает дублированный пароль
+router.post("/signin", passport.authenticate("local", { failureRedirect: '/' }), (req, res) => {
   res.json({ status: 200 });
 });
 
-router.post("/signup", passport.authenticate("local"), (req, res) => {
+//дописать логику, если прилетает дублированный пароль
+router.post("/signup", passport.authenticate("local", { failureRedirect: '/' }), (req, res) => {
   res.json({ status: 200 });
 });
 

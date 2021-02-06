@@ -50,10 +50,13 @@ const authenticateUser = async (req, email, password, done) => {
     if (await bcrypt.compare(password, user.password)) return done(null, user);
     return done(null, false);
   }
-
+  console.log(req.body);
   const { login, passwordCheck } = req.body;
-  const isEmail = User.findOne({ email });
-  if (isEmail.length > 1) return done(null, false);
+  const userFound = await User.findOne({ email });
+  if (userFound) {
+    console.log("Дубликат");
+    return done(null, false);
+  }
   if (login && email && password && passwordCheck) {
     const hashPassword = await bcrypt.hash(password, 10);
     const newUser = await new User({ login, email, password: hashPassword });
