@@ -10,7 +10,7 @@ const Profile = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.profileStats);
   const enemy = useSelector((state) => state.profileStats.compare)
-  console.log(enemy, 'ENEMY!!!');
+  
   const [chartData, setChartData] = useState({})
   const [radarData, setRadarData] = useState({})
 

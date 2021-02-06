@@ -41,7 +41,6 @@ app.get('/compare/:id', async (req, res) => {
   const user = req.params.id;
   const findUser = await User.findOne({ login: user });
   const userStat = await Stats.findOne({ user: findUser.id });
-  
   res.json(userStat);
 });
 

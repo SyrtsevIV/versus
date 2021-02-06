@@ -1,5 +1,6 @@
 import { GET_STATS, COMPARE_STATS } from '../types/types'
 
+// Получение стастики авторизованного пользователя
 export function getUserProfile(id) {
   return async (dispatch) => {
     const request = await fetch(`http://localhost:3001/profile/${id}`, {
