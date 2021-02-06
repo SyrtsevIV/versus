@@ -1,6 +1,6 @@
 import Profile from './Components/Profile/Profile';
 import Footer from './Components/Layout/Footer/Footer';
-import Bracket from './Components/Bracket/Bracket';
+import Bracket from './Components/Brackets/Bracket';
 import Header from './Components/Layout/Header/Header';
 import Main from './Components/Main/Main';
 import Error from './Components/Error/Error';

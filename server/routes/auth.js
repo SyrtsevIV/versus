@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   if (req.session) {
-    const userId = req.session.passport.user;
+    const userId = req.session.passport?.user;
     const user = await User.findById(userId)
     res.json(user);
   }

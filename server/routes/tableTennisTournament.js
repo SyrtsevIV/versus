@@ -55,16 +55,20 @@ function getBracket(array) {
 
 router.get('/:tournamentId', async (req, res) => {
   console.log(req.params.tournamentId);
-  const tournament = await Tournament.findById(req.params.tournamentId).populate(
-    'bracket'
-  );
+  const tournament = await Tournament.findById(
+    req.params.tournamentId
+  ).populate('bracket');
   res.json(tournament);
 });
 
 router.get('/:tournamentId/bracket/new', async (req, res) => {
   const tournament = await Tournament.findById(
     req.params.tournamentId
-  ).populate('participants.stats');
+  ).populate({
+    path: 'participants',
+    // Get friends of friends - populate the 'friends' array for every friend
+    populate: { path: 'stats' },
+  });
   console.log(tournament);
 
   const firstRoundBracket = getBracket(tournament.participants);
