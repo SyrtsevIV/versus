@@ -27,7 +27,7 @@ const initState = {
       silver: 0,
       bronze: 0,
     }
-  }
+  },
   profile: {},
   userSession: {},
   mainPage: '',
