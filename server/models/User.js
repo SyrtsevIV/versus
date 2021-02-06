@@ -13,8 +13,13 @@ const User = mongoose.model('User', {
     type: String,
     require: true,
   },
+  avatar: {
+    type: String,
+    default: '🏓',
+  },
   stats: { type: mongoose.ObjectId, ref: 'Stats' },
   googleId: String,
   avatar: String,
 });
 module.exports = User;
+

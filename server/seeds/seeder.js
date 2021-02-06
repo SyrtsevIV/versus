@@ -13,19 +13,19 @@ mongoose.connect('mongodb://localhost:27017/Versus', {
 const randomName = () => faker.name.findName();
 const randomEmail = () => faker.internet.email();
 const randomPass = () => faker.internet.password();
-const randomMmr = () => faker.random.number();
-const randomRating = () => faker.random.number();
-const randomGold = () => faker.random.number();
-const randomSilver = () => faker.random.number();
-const randomBronze = () => faker.random.number();
+const randomNumber = () => faker.random.number();
+const randomImageUrl = () => faker.image.imageUrl();
 
 // Seed users
+async function seedUsers() {
+  for (let i = 0; i < 30; i+=1) {
 async function seedUsers(num) {
   for (let i = 0; i < num; i += 1) {
     User.create({
       login: randomName(),
       email: randomEmail(),
       password: randomPass(),
+      avatar: randomImageUrl(),
     });
   }
 }
@@ -39,11 +39,15 @@ async function seedStats() {
     const stats = await Stats.create({
       sport: 'table tennis',
       user: users[i]._id,
-      mmr: randomMmr(),
-      rating: randomRating(),
-      gold: randomGold(),
-      silver: randomSilver(),
-      bronze: randomBronze(),
+      mmr: randomNumber(),
+      rating: randomNumber(),
+      won: randomNumber(),
+      lost: randomNumber(),
+      score: randomNumber(),
+      missed: randomNumber(),
+      gold: randomNumber(),
+      silver: randomNumber(),
+      bronze: randomNumber(),
     });
     const user = await User.findById(users[i]._id);
     user.stats = stats._id;
