@@ -21,7 +21,7 @@ const Profile = () => {
   const gameValue = won + lost
   const percent = ((won / (won + lost)) * 100).toFixed(2) 
 
-  // Круговая диаграмма по статистике побед - поражений
+  // Круговая диаграмма по статистике побед - поражений 
   const chart = () => {
     setChartData({
       labels: ['Победа', 'Поражение'],
