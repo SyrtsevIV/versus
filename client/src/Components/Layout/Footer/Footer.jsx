@@ -1,5 +1,11 @@
 const Footer = () => {
-  return <h1>Footer</h1>;
+  return (
+    <footer className="page-footer">
+          <div className="container">
+            © 2021 Copyright
+          </div>
+        </footer>
+  );
 };
 
 export default Footer;

@@ -14,5 +14,7 @@ const User = mongoose.model('User', {
     require: true,
   },
   stats: { type: mongoose.ObjectId, ref: 'Stats' },
+  googleId: String,
+  avatar: String,
 });
 module.exports = User;
