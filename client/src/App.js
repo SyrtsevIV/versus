@@ -9,7 +9,6 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Signup from "./Components/Auth/Signup/Signup";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -37,23 +36,23 @@ function App() {
 
   return (
     <Router>
-
       <Header />
-      <Signup />
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/profile/:id">
-          <Profile />
-        </Route>
-        <Route exact path="/bracket">
+      <div className="main">
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/profile/:id">
+            <Profile />
+          </Route>
+          <Route exact path="/bracket">
             <Bracket />
           </Route>
         <Route>
           <Error />
         </Route>
-      </Switch>
+        </Switch>
+      </div>
         <Footer />
       </Router>
   );
