@@ -15,7 +15,6 @@ mongoose.connect('mongodb://localhost:27017/Versus', {
   useCreateIndex: true,
 });
 
-// Значения корс для приема фетчей с клиента.
 app.use(cors({
   credentials: true,
   origin: 'http://localhost:3000',
@@ -26,14 +25,24 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/profile/:id', async (req, res) => {
   const { id } = req.params;
-  const allPlayerRanks = await Stats.find();
-  allPlayerRanks.sort((a, b) => b.mmr - a.mmr);
-
-  // Найти индекс по которому находится пользователь. Это будет его место в общем рейтинге
-  console.log(allPlayerRanks);
-
   const stats = await Stats.findOne({ user: id });
-  res.send(stats);
+  const allPlayerRanks = await Stats.find();
+  const allPlayerValue = await allPlayerRanks.length;
+  allPlayerRanks.sort((a, b) => b.mmr - a.mmr);
+  const user = await User.findById(id);
+  let rating = allPlayerRanks.findIndex((el) => {
+    return String(el.user) == id
+  });
+  rating += 1;
+  res.json({ stats, rating, user, allPlayerValue });
+});
+
+app.get('/compare/:id', async (req, res) => {
+  const user = req.params.id;
+  const findUser = await User.findOne({ login: user });
+  const userStat = await Stats.findOne({ user: findUser.id });
+  
+  res.json(userStat);
 });
 
 app.listen(PORT, () => {
