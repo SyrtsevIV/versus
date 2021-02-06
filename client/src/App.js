@@ -41,14 +41,15 @@ function App() {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/profile/:id">
-          <Profile />
-        </Route>
-        <Route exact path="/bracket">
+      <div className="main">
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/profile/:id">
+            <Profile />
+          </Route>
+          <Route exact path="/bracket">
             <Bracket />
           </Route>
           <Route exact path="/signin">
@@ -60,7 +61,8 @@ function App() {
         <Route>
           <Error />
         </Route>
-      </Switch>
+        </Switch>
+      </div>
         <Footer />
       </Router>
   );

@@ -17,9 +17,11 @@ const Tournament = mongoose.model('Tournament', {
   status: {
     type: String,
     require: true,
+    default: 'future',
   },
   creator: { type: mongoose.ObjectId, ref: 'User' },
   participants: [{ type: mongoose.ObjectId, ref: 'User' }],
+  bracket: { type: mongoose.ObjectId, ref: 'Bracket' },
 });
 
 module.exports = Tournament;
