@@ -17,15 +17,15 @@ const initState = {
     rating: null,
     allPlayerValue: null,
     compare : {
-      mmr: 1,
-      rating: 2,
-      won: 3,
-      lost: 4,
-      score: 5,
-      missed: 6,
-      gold: 7,
-      silver: 8,
-      bronze: 9,
+      mmr: 0,
+      rating: 0,
+      won: 0,
+      lost: 0,
+      score: 0,
+      missed: 0,
+      gold: 0,
+      silver: 0,
+      bronze: 0,
     }
   }
 };
