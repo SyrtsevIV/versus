@@ -28,6 +28,9 @@ const initState = {
       bronze: 0,
     }
   }
+  profile: {},
+  userSession: {},
+  mainPage: '',
 };
 
 export default initState;

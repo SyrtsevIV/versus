@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const User = mongoose.model('User', {
   login: {
     type: String,
@@ -19,7 +18,8 @@ const User = mongoose.model('User', {
     default: '🏓',
   },
   stats: { type: mongoose.ObjectId, ref: 'Stats' },
+  googleId: String,
+  avatar: String,
 });
-
 module.exports = User;
 

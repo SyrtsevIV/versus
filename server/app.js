@@ -1,9 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const Stats = require('./models/Stats');
 const User = require('./models/User');
+const passport = require('passport');
+const authRouter = require('./routes/auth');
+const passportSetup = require('./config/passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 
@@ -15,13 +21,39 @@ mongoose.connect('mongodb://localhost:27017/Versus', {
   useCreateIndex: true,
 });
 
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:3000',
-}));
+const tableTennisTournamentRouter = require('./routes/tableTennisTournament');
+
+// Значения корс для приема фетчей с клиента.
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('sessionName', 'sid');
+
+app.use(
+  session({
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    secret: 'VersusIsTheBestTeamInTheWorld',
+    name: app.get('sessionName'),
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
+  })
+);
+
+app.use('/auth', authRouter);
+
+app.use('/tabletennis/tournament', tableTennisTournamentRouter);
 
 app.get('/profile/:id', async (req, res) => {
   const { id } = req.params;
