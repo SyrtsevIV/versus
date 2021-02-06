@@ -1,23 +1,29 @@
-import styles from "./activtournament.module.css";
-import "./slider-animation.css";
+import styles from "../main.module.css";
+import "../slider-animation.css";
 import Slider from 'react-animated-slider';
 import "react-animated-slider/build/horizontal.css";
+import { useEffect } from 'react';
 
 export default function Activtournament() {
-
   const slides = [
-   {title: 'Название турнира1', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
-   {title: 'Название турнира2', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
-   {title: 'Название турнира3', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
-   {title: 'Название турнира4', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
-   {title: 'Название турнира5', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
-   {title: 'Название турнира5', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
-   {title: 'Название турнира5', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
+   {id: 11, title: 'Название турнира11', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
+   {id: 1111, title: 'Название турнира1111', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
+   {id: 111111, title: 'Название турнира111111', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
+   {id: 11111111, title: 'Название турнира11111111', table0: '##############################', table1: '##############################', table2:'##############################', date: '05.02.2021'},
   ];
+
+  const slideHandler = (index) => {
+    const slide = slides.find((el, i) => i === index);
+    window.history.replaceState({},'', `/${slide.id}`);
+  }
+  useEffect(() => {
+    slideHandler(0);
+  }, [])
+
   return (
     <div className={styles.center}>
       <h4>Активные турниры:</h4>
-      <Slider>
+      <Slider onSlideChange={({slideIndex})=>slideHandler(slideIndex)}>
         {slides.map(el =>
           <div className={styles.center} key={Math.random()}>
             <div>
@@ -35,4 +41,3 @@ export default function Activtournament() {
     </div>
   )
 }
-

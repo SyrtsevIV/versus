@@ -5,10 +5,10 @@ const Error = () => {
   return (
     <div>
       <h1>404</h1>
-      <div class={styles.wrapper}>
-        <div class={styles.ping}></div>
-        <div class={styles.ping}></div>
-        <div class={styles.trailMask}></div>
+      <div className={styles.wrapper}>
+        <div className={styles.ping}></div>
+        <div className={styles.ping}></div>
+        <div className={styles.trailMask}></div>
       </div>
     </div>
   );
