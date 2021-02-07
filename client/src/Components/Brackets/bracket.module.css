@@ -1,4 +1,4 @@
-.playoff-table *{
+.playoff-table * {
   box-sizing: border-box;
 }
 .playoff-table {
@@ -64,7 +64,7 @@
 .playoff-table .playoff-table-pair-style {
   border: 1px solid #cccccc;
   background-color: white;
-  width: 160px;
+  width: 200px;
   margin-bottom: 20px;
 }
 .playoff-table .playoff-table-group {
@@ -102,6 +102,11 @@
 }
 .playoff-table .playoff-table-group:last-child {
   margin-bottom: 0;
+}
+.flex-row-sb {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .playoff-table .playoff-table-left-player,
 .playoff-table .playoff-table-right-player {
@@ -146,4 +151,21 @@
 .playoff-table .playoff-table-tour:last-child .playoff-table-pair:after,
 .playoff-table .playoff-table-tour:last-child .playoff-table-pair:before {
   display: none;
+}
+.score-input,
+.score-input:active {
+  margin: 0px !important;
+  padding: 0px !important;
+  width: 17px !important;
+  height: auto !important;
+  border: unset !important;
+}
+.height-250 {
+  height: 250px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }

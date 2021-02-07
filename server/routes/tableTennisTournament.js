@@ -1,6 +1,8 @@
+/* eslint-disable no-await-in-loop */
 const express = require('express');
 const Bracket = require('../models/Bracket');
 const Tournament = require('../models/Tournament');
+const Match = require('../models/Match');
 const Stats = require('../models/Stats');
 
 const router = express.Router();
@@ -22,7 +24,7 @@ function shuffle(array) {
 }
 
 // разбивает на пары и перемешивает
-function makePairs(array, num = array.length) {
+async function makePairs(array, num = array.length) {
   // сортировка по рейтингу по убыванию
   array.sort((a, b) => (a.stats.mmr > b.stats.mmr ? -1 : 1));
 
@@ -31,13 +33,20 @@ function makePairs(array, num = array.length) {
   const bot = array.slice(num - array.length);
 
   // добавление фантомного игрока топам
-  const topOnPair = top.map((el) => [el, { login: '' }]);
+  shuffle(top);
+  const topOnPair = [];
+  for (let i = 0; i < top.length; i += 1) {
+    topOnPair[i] = await Match.create({ player1: top[i] });
+  }
 
   // перемешиваем и разбиваем на пары оставшихся
   shuffle(bot);
   const botOnPair = [];
   for (let i = 0; i < Math.ceil(bot.length / 2); i += 1) {
-    botOnPair[i] = bot.slice(i * 2, i * 2 + 2);
+    botOnPair[i] = await Match.create({
+      player1: bot.slice(i * 2, i * 2 + 2)[0],
+      player2: bot.slice(i * 2, i * 2 + 2)[1],
+    });
   }
 
   // объединяем пары и перемешиваем сетку
@@ -54,33 +63,54 @@ function getBracket(array) {
 }
 
 router.get('/:tournamentId', async (req, res) => {
-  console.log(req.params.tournamentId);
-  const tournament = await Tournament.findById(
-    req.params.tournamentId
-  ).populate('bracket');
+  const tournament = await Tournament.findById(req.params.tournamentId).populate('bracket');
   res.json(tournament);
 });
 
+// создание турнирной сетки
 router.get('/:tournamentId/bracket/new', async (req, res) => {
-  const tournament = await Tournament.findById(
-    req.params.tournamentId
-  ).populate({
+  const tournament = await Tournament.findById(req.params.tournamentId).populate({
     path: 'participants',
-    // Get friends of friends - populate the 'friends' array for every friend
     populate: { path: 'stats' },
   });
-  console.log(tournament);
 
-  const firstRoundBracket = getBracket(tournament.participants);
+  const firstRoundBracket = await getBracket(tournament.participants);
 
-  // res.json(firstRoundBracket);
-  // const firstRoundBracket = getBracket(tournamentDB.participants);
+  let semifinal = [];
+  let quarterfinals = [];
+  let oneEighth = [];
+  let oneSixteenth = [];
+  switch (firstRoundBracket.length) {
+    case 2:
+      semifinal = firstRoundBracket;
+      break;
+    case 4:
+      quarterfinals = firstRoundBracket;
+      break;
+    case 8:
+      oneEighth = firstRoundBracket;
+      break;
+    case 16:
+      oneSixteenth = firstRoundBracket;
+      break;
+    default:
+      break;
+  }
 
   const bracket = await Bracket.create({
     tournament: req.params.tournamentId,
-    firstRound: firstRoundBracket,
+    semifinal,
+    quarterfinals,
+    oneEighth,
+    oneSixteenth,
   });
+
   res.json(bracket);
+});
+
+router.get('/match/:id', async (req, res) => {
+  const match = await Match.findById(req.params.id).populate('player1').populate('player2');
+  res.json({ match });
 });
 
 module.exports = router;
