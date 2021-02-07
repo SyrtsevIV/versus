@@ -10,11 +10,11 @@ import {
   Switch,
   Route,
   NavLink,
-  Link,
+  Link
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userInSession, logoutUser } from "./redux/actionCreators/auth";
+import { userInSession, logoutUser } from "./redux/actionCreators/authActionCreator";
 import Preloader from "./Components/Preloader/Preloader";
 
 
@@ -28,7 +28,7 @@ function App() {
     setTimeout(() => {
       setLoading(false)
     }, 100)
-  }, []);
+  }, [dispatch]);
 
   return (
     <Router>
@@ -47,6 +47,7 @@ function App() {
             </li>
           </ul>
           <ul id="nav-mobile" className="right">
+            <li>{userSession && `Привет, ${userSession.login}`}</li>
             <li>
               <NavLink to="/rating">Рейтинг</NavLink>
             </li>

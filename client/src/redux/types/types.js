@@ -7,3 +7,4 @@ export const PUT_STATUS = "PUT_STATUS";
 export const IN_SESSION = "IN_SESSION";
 export const LOGOUT = "LOGOUT";
 export const SIGNUP = "SIGNUP";
+export const SIGNIN = "SIGNUP";
