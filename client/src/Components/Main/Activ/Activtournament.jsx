@@ -17,9 +17,9 @@ export default function Activtournament() {
             <div>
               <span>{el.status}</span>
               <p>Активный {el._id}</p>
-              <p>{el.participants}</p>
-              <p>{el.participants}</p>
-              <p>{el.participants}</p>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
                 <br/>
               <button>Нажми меня полностью</button> <button>И ещё раз нажми</button>
             </div>
