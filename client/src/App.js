@@ -5,6 +5,7 @@ import Main from "./Components/Main/Main";
 import Error from "./Components/Error/Error";
 import Signup from "./Components/Auth/Signup/Signup";
 import Signin from "./Components/Auth/Signin/Signin";
+import Ratings from './Components/Ratings/Ratings';
 import {
   BrowserRouter as Router,
   Switch,
@@ -47,7 +48,7 @@ function App() {
           <ul id="nav-mobile" className="right">
             <li>{userSession && `Привет, ${userSession.login}`}</li>
             <li>
-              <NavLink to="/rating">Рейтинг</NavLink>
+              <NavLink to="/ratings">Рейтинг</NavLink>
             </li>
             {userSession && userSession ? (
               <li>
@@ -88,6 +89,9 @@ function App() {
           </Route>
           <Route exact path="/signup">
             <Signup />
+          </Route>
+          <Route exact path="/ratings">
+            <Ratings />
           </Route>
           <Route>
             <Error />

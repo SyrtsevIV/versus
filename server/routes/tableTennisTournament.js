@@ -63,8 +63,8 @@ router.get('/past', async (req, res) => {
   res.json(tournament);
 });
 
-router.get('/activ', async (req, res) => {
-  const tournament = await Tournament.find({ status: 'activ' });
+router.get('/current', async (req, res) => {
+  const tournament = await Tournament.find({ status: 'current' });
   res.json(tournament);
 });
 
@@ -75,7 +75,6 @@ router.get('/:tournamentId', async (req, res) => {
   );
   res.json(tournament);
 });
-
 
 router.get('/:tournamentId/bracket/new', async (req, res) => {
   const tournament = await Tournament.findById(

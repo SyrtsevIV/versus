@@ -12,11 +12,11 @@ export default function Activtournament() {
     <div className={styles.center}>
       {tours.length ?
       <Slider onSlideChange={({slideIndex})=>slideHandler(slideIndex, tours)}>
-        {tours.map(el =>
-          <div className={styles.center} key={el._id}>
+          {tours.map(tour =>
+          <div className={styles.center} key={tour._id}>
             <div>
-              <span>{el.status}</span>
-              <p>Активный {el._id}</p>
+              <span>{tour.status}</span>
+              <p>Активный {tour._id}</p>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
