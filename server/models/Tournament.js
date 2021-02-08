@@ -9,7 +9,7 @@ const Tournament = mongoose.model('Tournament', {
   date: {
     type: Date,
     require: true,
-    default: Date.now()
+    default: new Date(),
   },
   description: String,
   place: {
@@ -21,9 +21,9 @@ const Tournament = mongoose.model('Tournament', {
     require: true,
     default: 'future',
   },
-  creator: { type: mongoose.ObjectId, ref: 'User' },
-  participants: [{ type: mongoose.ObjectId, ref: 'User' }],
-  bracket: { type: mongoose.ObjectId, ref: 'Bracket' },
+  creator: { type: mongoose.ObjectId, ref: 'users' },
+  participants: [{ type: mongoose.ObjectId, ref: 'users' }],
+  bracket: { type: mongoose.ObjectId, ref: 'brackets' },
 });
 
 module.exports = Tournament;

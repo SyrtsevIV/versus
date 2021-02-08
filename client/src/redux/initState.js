@@ -34,7 +34,12 @@ const initState = {
   mainPageTours: [],
   ratings: {
    tableTennis: [],
-  },
+  }, 
+  tourList: {
+    past: [],
+    current: [],
+    future: [],
+  }
 };
 
 export default initState;

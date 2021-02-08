@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getTournamentsList } from '../../redux/actionCreators/tournamentActionCreator';
+import { getTournamentsList } from '../../redux/actionCreators/tournamentsListCreator';
 
 const TournamentItem = () => {
   const { id } = useParams();

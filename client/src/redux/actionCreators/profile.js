@@ -1,4 +1,4 @@
-import { GET_STATS, COMPARE_STATS } from '../types/types'
+import { GET_STATS, COMPARE_STATS, EDIT_PROFILE } from '../types/types'
 
 // Получение стастики авторизованного пользователя
 export function getUserProfile(id) {
@@ -18,7 +18,6 @@ export function getUserProfile(id) {
     });
   };
 }
-
 
 // Получение статистики соперника для сравнения
 export function findUserStats(login) {
@@ -40,4 +39,22 @@ export function findUserStats(login) {
   }
 }
 
-export default getUserProfile
+export function editUserProfile({ id, changeLogin, changeEmail }) {
+
+  return async (dispatch) => {
+    const request = await fetch(`http://localhost:3001/profile/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({ id, changeLogin, changeEmail }),
+      credentials: 'include',
+    });
+    const result = await request.json();
+    
+    dispatch({
+      type: EDIT_PROFILE,
+      payload: result
+    })
+  }
+}

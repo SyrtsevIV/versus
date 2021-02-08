@@ -9,6 +9,9 @@ const passport = require("passport");
 const authRouter = require("./routes/auth");
 const passportSetup = require("./config/passport");
 const tournament = require("./routes/tournament");
+const profileRouter = require('./routes/profile');
+const compareRouter = require('./routes/compare');
+const tournamentlistRoter = require('./routes/tournamentsList');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
@@ -77,26 +80,9 @@ app.use("/tabletennis/tournament", tableTennisTournamentRouter);
 app.use("/ratings", rating);
 app.use("/tournament", tournament);
 
-app.get("/profile/:id", async (req, res) => {
-  const { id } = req.params;
-  const stats = await Stats.findOne({ user: id });
-  const allPlayerRanks = await Stats.find();
-  const allPlayerValue = await allPlayerRanks.length;
-  allPlayerRanks.sort((a, b) => b.mmr - a.mmr);
-  const user = await User.findById(id);
-  let rating = allPlayerRanks.findIndex((el) => {
-    return String(el.user) == id;
-  });
-  rating += 1;
-  res.json({ stats, rating, user, allPlayerValue });
-});
-
-app.get("/compare/:id", async (req, res) => {
-  const user = req.params.id;
-  const findUser = await User.findOne({ login: user });
-  const userStat = await Stats.findOne({ user: findUser.id });
-  res.json(userStat);
-});
+app.use('/profile', profileRouter);
+app.use('/compare', compareRouter);
+app.use('/tournamentlist', tournamentlistRoter);
 
 app.listen(PORT, () => {
   console.log("Server has been started on port: ", PORT);

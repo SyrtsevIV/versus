@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('User', {
+
+// mongoose.pluralize(null);
+
+const User = mongoose.model('users', {
   login: {
     type: String,
     require: true,
@@ -17,9 +20,7 @@ const User = mongoose.model('User', {
     type: String,
     default: '🏓',
   },
-  stats: { type: mongoose.ObjectId, ref: 'Stats' },
+  stats: { type: mongoose.ObjectId, ref: 'stats' },
   googleId: String,
-  avatar: String,
 });
 module.exports = User;
-

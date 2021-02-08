@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 
+// mongoose.pluralize(null);
+
 const Stats = mongoose.model('Stats', {
   sport: {
     type: String,
     require: true,
   },
-  user: { type: mongoose.ObjectId, ref: 'User' },
+  user: { type: mongoose.ObjectId, ref: 'users' },
   mmr: {
     type: Number,
     default: 500,

@@ -10,3 +10,4 @@ export const LOGOUT = "LOGOUT";
 export const SIGNUP = "SIGNUP";
 export const SIGNIN = "SIGNUP";
 export const GET_RATINGS = "GET_RATINGS";
+export const GET_TOUR_LIST = "GET_TOUR_LIST";

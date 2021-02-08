@@ -6,8 +6,9 @@ import Error from "./Components/Error/Error";
 import Signup from "./Components/Auth/Signup/Signup";
 import Signin from "./Components/Auth/Signin/Signin";
 import Ratings from './Components/Ratings/Ratings';
-import TournamentList from "./Components/";
 import TournamentItem from "./Components/TournamentItem/TournamentItem";
+import TournamentList from "./Components/TournamentList/TournamentList";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -94,22 +95,22 @@ function App() {
           </Route>
           <Route exact path="/tournament/new">
             <Tournament />
+          </Route>  
+          <Route exact path="/tournaments">
+            <TournamentList />
           </Route>
           <Route path="/tournament/:id">
             <TournamentItem />
-          </Route>
-          <Route path="/tournaments">
-            <TournamentList />
           </Route>
           <Route>
             <Error />
           </Route>
         </Switch>
-    </div>
      <Footer />
+     </div>
      </>
     }
-     </Router>
+  </Router>
   );
 }
 export default App;
