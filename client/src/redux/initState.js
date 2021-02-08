@@ -27,10 +27,14 @@ const initState = {
       silver: 0,
       bronze: 0,
     }
-  }
+  },
   profile: {},
   userSession: {},
   mainPage: '',
+  mainPageTours: [],
+  ratings: {
+   tableTennis: [],
+  },
 };
 
 export default initState;

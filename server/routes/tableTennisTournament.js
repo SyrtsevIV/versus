@@ -53,17 +53,32 @@ function getBracket(array) {
   return makePairs(array);
 }
 
+router.get('/future', async (req, res) => {
+  const tournament = await Tournament.find({ status: 'future' });
+  res.json(tournament);
+});
+
+router.get('/past', async (req, res) => {
+  const tournament = await Tournament.find({ status: 'past' });
+  res.json(tournament);
+});
+
+router.get('/current', async (req, res) => {
+  const tournament = await Tournament.find({ status: 'current' });
+  res.json(tournament);
+});
+
 router.get('/:tournamentId', async (req, res) => {
   console.log(req.params.tournamentId);
   const tournament = await Tournament.findById(req.params.tournamentId).populate(
-    'bracket'
+    'bracket',
   );
   res.json(tournament);
 });
 
 router.get('/:tournamentId/bracket/new', async (req, res) => {
   const tournament = await Tournament.findById(
-    req.params.tournamentId
+    req.params.tournamentId,
   ).populate('participants.stats');
   console.log(tournament);
 
