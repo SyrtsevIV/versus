@@ -22,6 +22,7 @@ mongoose.connect("mongodb://localhost:27017/Versus", {
 });
 
 const tableTennisTournamentRouter = require("./routes/tableTennisTournament");
+const rating = require("./routes/ratings");
 
 // Значения корс для приема фетчей с клиента.
 app.use(
@@ -74,6 +75,7 @@ const checkUser = (req, res, next) => {
 app.use("/auth", authRouter);
 
 app.use("/tabletennis/tournament", tableTennisTournamentRouter);
+app.use("/ratings", rating);
 
 app.get("/profile/:id", async (req, res) => {
   const { id } = req.params;

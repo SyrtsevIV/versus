@@ -32,6 +32,9 @@ const initState = {
   userSession: {},
   mainPage: '',
   mainPageTours: [],
+  ratings: {
+   tableTennis: [],
+  },
 };
 
 export default initState;
