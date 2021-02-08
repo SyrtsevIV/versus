@@ -12,7 +12,6 @@ export default function profileStats(state = {}, action) {
     case COMPARE_STATS:
       return {...state, compare: action.payload};
     case EDIT_PROFILE:
-      console.log(action.payload, 'MI TYT??????');
       return {...state, user: action.payload }
     default:
       return state;

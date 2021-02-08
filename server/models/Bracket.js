@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
-const Bracket = mongoose.model('Bracket', {
-  tournament: { type: mongoose.ObjectId, ref: 'Tournament' },
+const Bracket = mongoose.model('brackets', {
+  tournament: { type: mongoose.ObjectId, ref: 'tournaments' },
+  firstRound: Array,
 });
 
 module.exports = Bracket;

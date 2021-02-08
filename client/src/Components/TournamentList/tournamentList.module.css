@@ -1,0 +1,25 @@
+.TournamentList {
+  display: flex;
+  justify-content: space-around;
+}
+.blockTitle {
+  text-align: center;
+}
+.listItem {
+  display: flex;
+  flex-direction: column;
+  background-color: grey;
+  margin: 5px 0;
+  padding: 10px 5px;
+}
+.listItem:hover {
+  cursor: pointer;
+
+}
+.title {
+  text-align: center;
+}
+.action {
+  display: flex;
+  justify-content: space-between;
+}

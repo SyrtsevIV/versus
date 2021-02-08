@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const Tournament = mongoose.model('Tournament', {
+mongoose.pluralize(null);
+
+const Tournament = mongoose.model('tournaments', {
   title: {
     type: String,
     require: true,
@@ -8,6 +10,7 @@ const Tournament = mongoose.model('Tournament', {
   date: {
     type: Date,
     require: true,
+    default: Date.now(),
   },
   description: String,
   place: {
@@ -17,9 +20,11 @@ const Tournament = mongoose.model('Tournament', {
   status: {
     type: String,
     require: true,
+    default: 'future',
   },
-  creator: { type: mongoose.ObjectId, ref: 'User' },
-  participants: [{ type: mongoose.ObjectId, ref: 'User' }],
+  creator: { type: mongoose.ObjectId, ref: 'users' },
+  participants: [{ type: mongoose.ObjectId, ref: 'users' }],
+  bracket: { type: mongoose.ObjectId, ref: 'brackets' },
 });
 
 module.exports = Tournament;

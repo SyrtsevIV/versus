@@ -27,7 +27,16 @@ const initState = {
       silver: 0,
       bronze: 0,
     }
-  }
+  },
+  profile: {},
+  userSession: {},
+  mainPage: '',
+  mainPageTours: [],
+  tourList: {
+    past: [],
+    current: [],
+    future: [],
+  },
 };
 
 export default initState;
