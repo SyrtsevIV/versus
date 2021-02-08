@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserProfile, findUserStats } from '../../redux/actionCreators/profile';
+import { getUserProfile, findUserStats, editUserProfile } from '../../redux/actionCreators/profile';
 import styles from '../Profile/profile.module.css'
 import { useParams } from 'react-router-dom'
 import { Doughnut, Radar } from 'react-chartjs-2'
+import Cup from '../Cup/Cup';
+
 
 const Profile = () => {
   const {id} = useParams()
@@ -14,7 +16,13 @@ const Profile = () => {
   const [chartData, setChartData] = useState({})
   const [radarData, setRadarData] = useState({})
 
+  // State для хранения текста из инпута для сравнения игроков
   const [inputText, setInputText] = useState('');
+
+  // State для редактирования информации
+  const [editProfile, setEditProfile] = useState();
+  const [changeLogin, setChangeLogin] = useState();
+  const [changeEmail, setChangeEmail] = useState();
 
   const won = user.stats.won
   const lost = user.stats.lost
@@ -84,10 +92,23 @@ const Profile = () => {
   const textInput = ({ target }) => {
     setInputText(target.value)
   };
- 
   const compareStats = (inputText) => {
-    console.log(inputText);
     dispatch(findUserStats(inputText))
+  }
+  
+
+  // Edit profile information
+  const edithandler = (name) => {
+    setEditProfile(name)
+  }
+  const changeLoginHandler = ({target}) => {
+    setChangeLogin(target.value);
+  }
+  const changeEmailHandler = ({target}) => {
+    setChangeEmail(target.value);
+  }
+  const saveChanges = () => {
+    dispatch(editUserProfile({ id, changeLogin, changeEmail }))
   }
   
   return (
@@ -96,31 +117,27 @@ const Profile = () => {
       <div className={styles.topBlock}>
         
         <div className={styles.profileBlock}>
-          <h3>{user.user.login}</h3>
-          <span>E-mail: {user.user.email}</span>
-          <button type="button">Редактировать профиль</button>
+          {editProfile ? (
+            <>
+              <input onChange={changeLoginHandler} />
+              <input onChange={changeEmailHandler} />
+              <input type="file" placeholder="Загрузить фото"/>
+              <button type="submit" onClick={() => saveChanges()}>Сохранить</button>
+            </>
+          ) : (
+            <>
+              <h3>{user.user.login}</h3>
+              <span>E-mail: {user.user.email}</span>
+              <button type="button" onClick={() => edithandler(user.user.login)}>Редактировать профиль</button>
+            </>
+          )}
         </div>
+
         <div className={styles.avatar}>
           <img src={user.user.avatar} alt=""></img>
         </div>
-
-        <div className={styles.cupBlock}>
-          <div className={styles.cupInfo}>
-            <p>№2</p>
-            <span className={styles.icon2}>&#127942;</span>
-            <p>{user.stats.gold}</p>
-          </div>
-          <div className={styles.cupInfo}>
-            <p>№1</p>
-            <span className={styles.icon1}>&#127942;</span>
-            <p>{user.stats.silver}</p>
-          </div>
-          <div className={styles.cupInfo}>
-            <p>№3</p>
-            <span className={styles.icon3}>&#127942;</span>
-            <p>{user.stats.bronze}</p>
-          </div>
-        </div>
+          
+        <Cup />
 
       </div>
 
