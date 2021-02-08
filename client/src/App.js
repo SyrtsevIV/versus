@@ -6,6 +6,8 @@ import Error from "./Components/Error/Error";
 import Signup from "./Components/Auth/Signup/Signup";
 import Signin from "./Components/Auth/Signin/Signin";
 import Ratings from './Components/Ratings/Ratings';
+import TournamentList from "./Components/";
+import TournamentItem from "./Components/TournamentItem/TournamentItem";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,18 +19,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userInSession, logoutUser } from "./redux/actionCreators/authActionCreator";
 import Preloader from "./Components/Preloader/Preloader";
-
-
+import Tournament from "./Components/Tournament/Tournament";
 function App() {
   const dispatch = useDispatch();
   const userSession = useSelector((store) => store.authReducer.userSession);
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     dispatch(userInSession());
     setLoading(false)
   }, [dispatch]);
-
   return (
     <Router>
       {loading ? < Preloader /> :
@@ -93,6 +92,15 @@ function App() {
           <Route exact path="/ratings">
             <Ratings />
           </Route>
+          <Route exact path="/tournament/new">
+            <Tournament />
+          </Route>
+          <Route path="/tournament/:id">
+            <TournamentItem />
+          </Route>
+          <Route path="/tournaments">
+            <TournamentList />
+          </Route>
           <Route>
             <Error />
           </Route>
@@ -104,5 +112,4 @@ function App() {
      </Router>
   );
 }
-
 export default App;
