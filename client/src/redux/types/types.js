@@ -5,3 +5,7 @@ export const EDIT_PROFILE = 'EDIT_PROFILE';
 export const COMPARE_STATS = 'COMPARE_STATS'
 export const PUT_STATUS = 'PUT_STATUS';
 export const GET_MAIN_PAGE_TOURS = 'GET_MAIN_PAGE_TOURS';
+export const IN_SESSION = "IN_SESSION";
+export const LOGOUT = "LOGOUT";
+export const SIGNUP = "SIGNUP";
+export const SIGNIN = "SIGNUP";

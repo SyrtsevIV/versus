@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { signinUser } from "../../../redux/actionCreators/authActionCreator";
 
 const Signin = () => {
   const dispatch = useDispatch()
@@ -9,27 +10,7 @@ const Signin = () => {
   const [input, setInput] = useState({
     login: '',
     email: '',
-    password: '',
-    passwordCheck: ''
   })
-
-  const signInHandler = async (e) => {
-    e.preventDefault()
-    const req = await fetch('http://localhost:3001/auth/signin', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-type': 'application/json',
-        'Access-Control-Allow-Credentials': 'true'
-      },
-      body: JSON.stringify(input)
-    })
-    const res = await req.json()
-    if (req.status === 200) {
-      dispatch({ type: 'ADD_USER', payload: res })
-      history.push('/')
-    }
-  }
 
   const inputHandler = (event) => {
     setInput(prev => {
@@ -46,7 +27,7 @@ const Signin = () => {
         <div className="input-field col s6 offset-s3">
           <input id="password" placeholder='Password' type="password" className="validate" name='password' onChange={inputHandler} />
         </div>
-        <button className='btn col s2 offset-s5' onClick={signInHandler}>Войти</button>
+        <button className='btn col s2 offset-s5' onClick={() => dispatch(signinUser(input, history))}>Войти</button>
       </div>
       <a href='http://localhost:3001/auth/google'><button>Войти через Google</button></a>
     </>
