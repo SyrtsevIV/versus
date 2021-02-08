@@ -13,9 +13,15 @@ router.get("/in_session", async (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.logout();
-  req.session.destroy();
-  res.redirect('/')
+  try {
+    req.logout();
+    req.session.destroy();
+    return res.sendStatus(200)
+  } catch (error) {
+    return res.sendStatus(500)
+  }
+
+  // res.redirect("/");
 });
 
 router.get(
@@ -30,13 +36,21 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
 });
 
 //дописать логику, если прилетает дублированный пароль
-router.post("/signin", passport.authenticate("local", { failureRedirect: '/' }), (req, res) => {
-  res.json({ status: 200, user: req.user });
-});
+router.post(
+  "/signin",
+  passport.authenticate("local", { failureRedirect: "/" }),
+  (req, res) => {
+    res.json({ status: 200, user: req.user });
+  }
+);
 
 //дописать логику, если прилетает дублированный пароль
-router.post("/signup", passport.authenticate("local", { failureRedirect: '/' }), (req, res) => {
-  res.json({ status: 200, user: req.user });
-});
+router.post(
+  "/signup",
+  passport.authenticate("local", { failureRedirect: "/" }),
+  (req, res) => {
+    res.json({ status: 200, user: req.user });
+  }
+);
 
 module.exports = router;

@@ -25,9 +25,7 @@ function App() {
 
   useEffect(() => {
     dispatch(userInSession());
-    setTimeout(() => {
-      setLoading(false)
-    }, 100)
+    setLoading(false)
   }, [dispatch]);
 
   return (
