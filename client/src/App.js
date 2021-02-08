@@ -1,6 +1,6 @@
 import Profile from "./Components/Profile/Profile";
 import Footer from "./Components/Layout/Footer/Footer";
-import Bracket from "./Components/Bracket/Bracket";
+import Bracket from "./Components/Brackets/Bracket";
 import Main from "./Components/Main/Main";
 import Error from "./Components/Error/Error";
 import Signup from "./Components/Auth/Signup/Signup";
@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userInSession, logoutUser } from "./redux/actionCreators/authActionCreator";
 import Preloader from "./Components/Preloader/Preloader";
+import Match from './Components/Match/Match';
 
 
 function App() {
@@ -92,6 +93,9 @@ function App() {
           </Route>
           <Route exact path="/ratings">
             <Ratings />
+          </Route>
+          <Route exact path="/tabletennis/match/:id">
+            <Match />
           </Route>
           <Route>
             <Error />

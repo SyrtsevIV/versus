@@ -58,10 +58,10 @@ async function seedStats() {
 
 // Seed Tournaments
 
-async function seedTournament() {
+async function seedTournament(num) {
   const users = await User.find();
   Tournament.create({
-    participants: users,
+    participants: users.slice(-num),
   });
 }
 
@@ -70,9 +70,9 @@ async function seedTournament() {
 // Seed Brackets
 
 const start = async () => {
-  await seedUsers(8);
+  await seedUsers(16);
   await seedStats();
-  await seedTournament();
+  await seedTournament(30);
 };
 
 start();
