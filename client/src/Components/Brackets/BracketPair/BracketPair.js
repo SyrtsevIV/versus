@@ -1,7 +1,14 @@
 import style from '../bracket.module.css';
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const BracketPair = ({ match, startMatchHandler }) => {
+const BracketPair = ({ match }) => {
+  const history = useHistory();
+
+  const startMatchHandler = (id) => {
+    history.push(`/tabletennis/match/${id}`);
+  };
+
   return (
     <div onClick={() => startMatchHandler(match._id)}>
       <div className={`${style['playoff-table-left-player']} ${style['flex-row-sb']}`}>

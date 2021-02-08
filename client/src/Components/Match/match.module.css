@@ -1,0 +1,26 @@
+.match {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.player {
+  margin: 20px;
+}
+
+.player p{
+  
+}
+
+.timer {
+  font-size: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
