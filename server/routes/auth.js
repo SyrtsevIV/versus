@@ -38,10 +38,8 @@ router.post(
   "/signin",
   passport.authenticate("local", {
     failureRedirect: "/",
-    failureFlash: true,
   }),
   (req, res) => {
-    console.log(res);
     res.json({ status: 200, user: req.user });
   }
 );
@@ -51,10 +49,8 @@ router.post(
   "/signup",
   passport.authenticate("local", {
     failureRedirect: "/",
-    failureFlash: true,
   }),
   (req, res) => {
-    console.log(res);
     res.json({ status: 200, user: req.user });
   }
 );

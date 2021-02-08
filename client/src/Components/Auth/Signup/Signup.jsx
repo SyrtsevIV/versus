@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { signupUser } from "../../../redux/actionCreators/authActionCreator";
 
@@ -7,7 +7,7 @@ const Signup = () => {
   const [errorValue, setErrorValue] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
-  
+
   const [input, setInput] = useState({
     login: '',
     email: '',
@@ -20,7 +20,6 @@ const Signup = () => {
       return { ...prev, [event.target.name]: event.target.value }
     })
   }
-
 
   return (
     <>

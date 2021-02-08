@@ -8,6 +8,7 @@ const User = require("./models/User");
 const passport = require("passport");
 const authRouter = require("./routes/auth");
 const passportSetup = require("./config/passport");
+const tournament = require("./routes/tournament");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
@@ -34,7 +35,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -64,6 +64,7 @@ app.use(passport.session());
 
 const checkUser = (req, res, next) => {
   if (req.session.passport) {
+    console.log(req.session.passport);
     next();
   } else {
     res.redirect("http://localhost:3000/auth/signup");
@@ -71,8 +72,8 @@ const checkUser = (req, res, next) => {
 };
 
 app.use("/auth", authRouter);
-
 app.use("/tabletennis/tournament", tableTennisTournamentRouter);
+app.use("/tournament", tournament);
 
 app.get("/profile/:id", async (req, res) => {
   const { id } = req.params;

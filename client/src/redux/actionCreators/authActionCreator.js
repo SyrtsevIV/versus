@@ -65,7 +65,6 @@ export const signinUser = (inputValue, history, setErrorValue) => {
       });
       const result = await response.json();
       const user = result.user;
-      console.log(response);
       dispatch({ type: SIGNIN, payload: user });
       history.push("/");
     } catch (err) {

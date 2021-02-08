@@ -9,3 +9,4 @@ export const IN_SESSION = "IN_SESSION";
 export const LOGOUT = "LOGOUT";
 export const SIGNUP = "SIGNUP";
 export const SIGNIN = "SIGNUP";
+export const CREATE_TOURNAMENT = "CREATE_TOURNAMENT";

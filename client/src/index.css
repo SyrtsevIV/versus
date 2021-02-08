@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Noto Serif', serif;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 #root {
@@ -14,4 +14,25 @@ body {
 .main {
   flex: 1 0 auto;
   height: 100%;
+}
+
+#createTournament {
+  background-color: rgb(146, 39, 1) !important;
+  transform: skewX(-20deg);
+  
+} 
+
+.justify-content-between {
+  width: 100%;
+}
+
+.test-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.createtornamentnavbar {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
 }
