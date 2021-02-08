@@ -15,6 +15,11 @@ const Ratings = () => {
   return (
     <div className={styles.center}>
       <h1>Rating page</h1>
+      <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <button type="button" class="btn btn-outline-primary">По MMR</button>
+        <button type="button" class="btn btn-outline-primary">По опыту турниров</button>
+        <button type="button" class="btn btn-outline-primary">По победам в матчах</button>
+      </div>
       <ul>
       {ratings.tableTennis.map(stats => 
         <li>
