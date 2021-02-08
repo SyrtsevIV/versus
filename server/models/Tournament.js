@@ -6,7 +6,7 @@ const Tournament = mongoose.model('Tournament', {
     require: true,
   },
   date: {
-    type: String,
+    type: Date,
     require: true,
   },
   description: String,
