@@ -5,18 +5,17 @@ import "react-animated-slider/build/horizontal.css";
 import { useSelector } from 'react-redux';
 import slideHandler from '../../../redux/actionCreators/mainPageStatus/getTours/getTours';
 
-export default function Pasttournament() {
+export default function Activtournament() {
   const tours = useSelector(state => state.mainPageTours);
 
   return (
     <div className={styles.center}>
-      <h4>Прошедшие турниры</h4>
       <Slider onSlideChange={({slideIndex})=>slideHandler(slideIndex, tours)}>
         {tours.map(el =>
           <div className={styles.center} key={el._id}>
             <div>
               <span>{el.status}</span>
-              <p>Прошедший {el._id}</p>
+              <p>Активный {el._id}</p>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
