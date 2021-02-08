@@ -29,40 +29,47 @@ export const logoutUser = () => {
   };
 };
 
-export const signupUser = (inputValue, history) => {
+export const signupUser = (inputValue, history, setErrorValue) => {
   return async (dispatch, getState) => {
-    const response = await fetch("http://localhost:3001/auth/signup", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Credentials": "true",
-      },
-      body: JSON.stringify(inputValue),
-    });
-    const result = await response.json();
-    const user = result.user
-    dispatch({ type: SIGNUP, payload: user });
-    history.push("/");
+    try {
+      const response = await fetch("http://localhost:3001/auth/signup", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
+        },
+        body: JSON.stringify(inputValue),
+      });
+      const result = await response.json();
+      const user = result.user;
+      dispatch({ type: SIGNUP, payload: user });
+      history.push("/");
+    } catch (err) {
+      setErrorValue("Данный электронный адрес уже занят")
+    }
   };
 };
 
-export const signinUser = (inputValue, history) => {
+export const signinUser = (inputValue, history, setErrorValue) => {
   return async (dispatch, getState) => {
-    const response = await fetch("http://localhost:3001/auth/signin", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Credentials": "true",
-      },
-      body: JSON.stringify(inputValue),
-    });
-    const result = await response.json();
-    const user = result.user
-    if (result.status === 200) {
+    try {
+      const response = await fetch("http://localhost:3001/auth/signin", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
+        },
+        body: JSON.stringify(inputValue),
+      });
+      const result = await response.json();
+      const user = result.user;
+      console.log(response);
       dispatch({ type: SIGNIN, payload: user });
       history.push("/");
+    } catch (err) {
+      setErrorValue("Неверный логин или пароль")
     }
   };
 };

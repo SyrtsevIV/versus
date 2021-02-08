@@ -16,12 +16,10 @@ router.get("/logout", (req, res) => {
   try {
     req.logout();
     req.session.destroy();
-    return res.sendStatus(200)
+    return res.sendStatus(200);
   } catch (error) {
-    return res.sendStatus(500)
+    return res.sendStatus(500);
   }
-
-  // res.redirect("/");
 });
 
 router.get(
@@ -38,8 +36,12 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
 //дописать логику, если прилетает дублированный пароль
 router.post(
   "/signin",
-  passport.authenticate("local", { failureRedirect: "/" }),
+  passport.authenticate("local", {
+    failureRedirect: "/",
+    failureFlash: true,
+  }),
   (req, res) => {
+    console.log(res);
     res.json({ status: 200, user: req.user });
   }
 );
@@ -47,8 +49,12 @@ router.post(
 //дописать логику, если прилетает дублированный пароль
 router.post(
   "/signup",
-  passport.authenticate("local", { failureRedirect: "/" }),
+  passport.authenticate("local", {
+    failureRedirect: "/",
+    failureFlash: true,
+  }),
   (req, res) => {
+    console.log(res);
     res.json({ status: 200, user: req.user });
   }
 );

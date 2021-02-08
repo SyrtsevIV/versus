@@ -7,16 +7,16 @@ const initState = {
       lost: null,
       gold: null,
       silver: null,
-      bronze: null
+      bronze: null,
     },
     user: {
-      login: '',
-      email: '',
-      avatar: '',
+      login: "",
+      email: "",
+      avatar: "",
     },
     rating: null,
     allPlayerValue: null,
-    compare : {
+    compare: {
       mmr: 0,
       rating: 0,
       won: 0,
@@ -26,11 +26,11 @@ const initState = {
       gold: 0,
       silver: 0,
       bronze: 0,
-    }
+    },
   },
   profile: {},
   userSession: {},
-  mainPage: '',
+  mainPage: "",
   mainPageTours: [],
 };
 

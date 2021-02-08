@@ -35,11 +35,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("sessionName", "sid");
-
 app.use(
   session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -50,7 +50,6 @@ app.use(
     cookie: { secure: false },
   })
 );
-
 // Значения корс для приема фетчей с клиента.
 app.use(
   cors({

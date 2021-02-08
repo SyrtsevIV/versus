@@ -46,7 +46,8 @@ passport.use(
 const authenticateUser = async (req, email, password, done) => {
   if (/signin/.test(req.path)) {
     const user = await User.findOne({ email });
-    if (!user) return done(null, false);
+    if (!user)
+      return done(null, false);
     if (await bcrypt.compare(password, user.password)) return done(null, user);
     return done(null, false);
   }

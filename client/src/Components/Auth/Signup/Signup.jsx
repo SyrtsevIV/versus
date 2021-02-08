@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { signupUser } from "../../../redux/actionCreators/authActionCreator";
 
 const Signup = () => {
+  const [errorValue, setErrorValue] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
+  
   const [input, setInput] = useState({
     login: '',
     email: '',
@@ -29,10 +31,11 @@ const Signup = () => {
         <input onChange={inputHandler} type='password' name='passwordCheck' placeholder='Повторите пароль'></input>
         <button onClick={(e) => {
           e.preventDefault()
-          dispatch(signupUser(input, history))
+          dispatch(signupUser(input, history, setErrorValue))
         }}>Зарегистрироваться</button>
       </form>
       <a href='http://localhost:3001/auth/google'><button>Войти через Google</button></a>
+      {errorValue && errorValue ? errorValue  : null}
     </>
   );
 }
