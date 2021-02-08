@@ -9,17 +9,17 @@ const Cup = () => {
       <div className={styles.cupInfo}>
         <p>№2</p>
         <span className={styles.icon2}>&#127942;</span>
-        <p>{user.stats.gold}</p>
+        <p>{user?.stats?.gold}</p>
       </div>
       <div className={styles.cupInfo}>
         <p>№1</p>
         <span className={styles.icon1}>&#127942;</span>
-        <p>{user.stats.silver}</p>
+        <p>{user?.stats?.silver}</p>
       </div>
       <div className={styles.cupInfo}>
         <p>№3</p>
         <span className={styles.icon3}>&#127942;</span>
-        <p>{user.stats.bronze}</p>
+        <p>{user?.stats?.bronze}</p>
       </div>
     </div>
   );

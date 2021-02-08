@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.pluralize(null);
+// mongoose.pluralize(null);
 
 const Stats = mongoose.model('Stats', {
   sport: {

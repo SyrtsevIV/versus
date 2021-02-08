@@ -21,14 +21,14 @@ const TournamentList = () => {
           {tourList && tourList.past.map((el) =>(
             <li key={el._id} className={styles.listItem}>
               <span className={styles.title}>Название: {el.title}</span>
-              <span>Дата: {el.date}</span>
+              <span>Дата: {new Date(el.date).toLocaleString('RU-ru')}</span>
               <span>Описание: {el.description}</span>
               <span>Местро проведения: {el.place}</span>
               <span>Организатор: {el.creator.login}</span>
 
               
               <div className={styles.action}>
-                <Link to={`/tournamentlist/${el._id}`}><button>Подробнее</button></Link>
+                <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
               </div>
             </li>
           ))}
@@ -41,12 +41,12 @@ const TournamentList = () => {
         {tourList && tourList.current.map((el) =>(
             <li key={el._id} className={styles.listItem}>
             <span className={styles.title}>Название: {el.title}</span>
-            <span>Дата: {el.date}</span>
+            <span>Дата: {new Date(el.date).toLocaleString('RU-ru')}</span>
             <span>Описание: {el.description}</span>
             <span>Местро проведения: {el.place}</span>
             <span>Организатор: {el.creator.login}</span>
             <div className={styles.action}>
-              <Link to={`/tournamentlist/${el._id}`}><button>Подробнее</button></Link>
+              <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
               <button>Регистрация</button>
             </div>
           </li>
@@ -60,12 +60,12 @@ const TournamentList = () => {
         {tourList && tourList.future.map((el) =>(
            <li key={el._id} className={styles.listItem}>
            <span className={styles.title}>Название: {el.title}</span>
-           <span>Дата: {el.date}</span>
+           <span>Дата: {new Date(el.date).toLocaleString('RU-ru')}</span>
            <span>Описание: {el.description}</span>
            <span>Местро проведения: {el.place}</span>
            <span>Организатор: {el.creator.login}</span>
            <div className={styles.action}>
-              <Link to={`/tournamentlist/${el._id}`}><button>Подробнее</button></Link>
+              <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
               <button>Регистрация</button>
             </div>
          </li>

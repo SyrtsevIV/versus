@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.pluralize(null);
+// mongoose.pluralize(null);
 
 const Tournament = mongoose.model('tournaments', {
   title: {
@@ -10,7 +10,7 @@ const Tournament = mongoose.model('tournaments', {
   date: {
     type: Date,
     require: true,
-    default: Date.now(),
+    default: new Date(),
   },
   description: String,
   place: {

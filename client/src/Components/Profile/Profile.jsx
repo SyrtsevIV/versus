@@ -6,13 +6,12 @@ import { useParams } from 'react-router-dom'
 import { Doughnut, Radar } from 'react-chartjs-2'
 import Cup from '../Cup/Cup';
 
-
 const Profile = () => {
   const {id} = useParams()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.profileStats);
   const enemy = useSelector((state) => state.profileStats.compare)
-  
+  console.log(user);
   const [chartData, setChartData] = useState({})
   const [radarData, setRadarData] = useState({})
 
@@ -24,8 +23,8 @@ const Profile = () => {
   const [changeLogin, setChangeLogin] = useState();
   const [changeEmail, setChangeEmail] = useState();
 
-  const won = user.stats.won
-  const lost = user.stats.lost
+  const won = user?.stats?.won
+  const lost = user?.stats?.lost
   const gameValue = won + lost
   const percent = ((won / (won + lost)) * 100).toFixed(2) 
 
@@ -57,7 +56,7 @@ const Profile = () => {
   useEffect(()=> {
     chart()
     radar()
-  },[user, enemy])
+  }, [user, enemy])
 
   // Радарная диаграма сравнения с соперниками
   const radar = () => {
@@ -72,7 +71,7 @@ const Profile = () => {
           pointBorderColor: 'rgba(179,181,198,0.2)',
           pointHoverBackgroundColor: '#fff',
           pointHoverBorderColor: 'rgba(179,181,198,1)',
-          data: [user.stats.score, user.stats.won, user.stats.missed, user.stats.lost]
+          data: [user?.stats?.score, user?.stats?.won, user?.stats?.missed, user?.stats?.lost]
         },
         {
           label: 'Противник',
@@ -126,15 +125,15 @@ const Profile = () => {
             </>
           ) : (
             <>
-              <h3>{user.user.login}</h3>
-              <span>E-mail: {user.user.email}</span>
+              <h3>{user?.user.login}</h3>
+              <span>E-mail: {user?.user.email}</span>
               <button type="button" onClick={() => edithandler(user.user.login)}>Редактировать профиль</button>
             </>
           )}
         </div>
 
         <div className={styles.avatar}>
-          <img src={user.user.avatar} alt=""></img>
+          <img src={user?.user.avatar} alt=""></img>
         </div>
           
         <Cup />
@@ -143,8 +142,8 @@ const Profile = () => {
 
       <div className={styles.rankBlock}>
         <div>
-          <p>MMR: {user.stats.mmr}</p>
-          <p>Позиция в общем рейтинге: {user.rating} из {user.allPlayerValue}</p>
+          <p>MMR: {user?.stats?.mmr}</p>
+          <p>Позиция в общем рейтинге: {user?.rating} из {user?.allPlayerValue}</p>
         </div>
       </div>
 

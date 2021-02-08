@@ -92,10 +92,10 @@ function App() {
           <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route exact path="/tournamentlist">
+          <Route exact path="/tournaments">
             <TournamentList />
           </Route>
-          <Route path="/tournamentlist/:id">
+          <Route path="/tournament/:id">
             <TournamentItem />
           </Route>
           <Route>

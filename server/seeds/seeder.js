@@ -17,6 +17,7 @@ const randomNumber = () => faker.random.number();
 const randomImageUrl = () => faker.image.imageUrl();
 const randomDesc = () => faker.name.jobDescriptor();
 const randomAdress = () => faker.address.streetAddress();
+const randomFutureDate = () => faker.date.future();
 
 // Seed users
 
@@ -64,7 +65,7 @@ async function seedTournament(num) {
   for (let i = 0; i <= num; i += 1) {
     Tournament.create({
       title: randomName(),
-      date: Date.now(),
+      date: randomFutureDate(),
       description: randomDesc(),
       place: randomAdress(),
       creator: users[0],

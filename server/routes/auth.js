@@ -4,7 +4,6 @@ const User = require("../models/User");
 const router = express.Router();
 
 router.get("/in_session", async (req, res) => {
-  console.log("user", req.user);
   if (req.user) {
     const userId = req.session.passport.user;
     const user = await User.findById(userId);
