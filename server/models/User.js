@@ -22,5 +22,6 @@ const User = mongoose.model('users', {
   },
   stats: { type: mongoose.ObjectId, ref: 'stats' },
   googleId: String,
+  tournaments: [{ type: mongoose.ObjectId, ref: 'Tournament' }],
 });
 module.exports = User;

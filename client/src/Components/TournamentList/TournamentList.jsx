@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTournamentsList } from '../../redux/actionCreators/tournamentsListCreator';
 import { Link } from 'react-router-dom';
-
+import { registrationTournamnet } from '../../redux/actionCreators/tournamentActionCreator';
 const TournamentList = () => {
   const dispatch = useDispatch()
   const tourList = useSelector((state) => state.tournamentsList.tourList);
@@ -12,6 +12,8 @@ const TournamentList = () => {
     dispatch(getTournamentsList())
   }, [])
   
+ 
+
   return (
     <div className={styles.TournamentList}>
       
@@ -47,7 +49,6 @@ const TournamentList = () => {
             <span>Организатор: {el.creator.login}</span>
             <div className={styles.action}>
               <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
-              <button>Регистрация</button>
             </div>
           </li>
           ))}
@@ -66,7 +67,7 @@ const TournamentList = () => {
            <span>Организатор: {el.creator.login}</span>
            <div className={styles.action}>
               <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
-              <button>Регистрация</button>
+              <button onClick={() => dispatch(registrationTournamnet(el._id))}>Регистрация</button>
             </div>
          </li>
           ))}
