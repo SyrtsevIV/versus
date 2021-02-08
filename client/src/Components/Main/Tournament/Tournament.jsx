@@ -10,6 +10,7 @@ export default function Activtournament() {
 
   return (
     <div className={styles.center}>
+      {tours.length ?
       <Slider onSlideChange={({slideIndex})=>slideHandler(slideIndex, tours)}>
         {tours.map(el =>
           <div className={styles.center} key={el._id}>
@@ -24,7 +25,10 @@ export default function Activtournament() {
             </div>
           </div>
         )}
-      </Slider>
+        </Slider>
+        :
+        <h3>Турниров пока нет</h3>
+  }
     </div>
-  )
+    )
 }

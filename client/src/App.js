@@ -72,7 +72,7 @@ function App() {
         </div>
       </nav>
     
-      
+          <div className="main">
         <Switch>
           <Route exact path="/">
             <Main />
@@ -93,6 +93,7 @@ function App() {
             <Error />
           </Route>
         </Switch>
+    </div>
      <Footer />
      </>
     }
