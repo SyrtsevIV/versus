@@ -3,7 +3,6 @@ import "../slider-animation.css";
 import Slider from 'react-animated-slider';
 import "react-animated-slider/build/horizontal.css";
 import { useSelector } from 'react-redux';
-import slideHandler from '../../../redux/actionCreators/mainPageStatus/getTours/getTours';
 
 export default function Activtournament() {
   const tours = useSelector(state => state.mainPageTours);
@@ -11,7 +10,7 @@ export default function Activtournament() {
   return (
     <div className={styles.center}>
       {tours.length ?
-      <Slider onSlideChange={({slideIndex})=>slideHandler(slideIndex, tours)}>
+      <Slider>
           {tours.map(tour =>
           <div className={styles.center} key={tour._id}>
             <div>
