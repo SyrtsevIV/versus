@@ -1,23 +1,20 @@
-import { NavLink, Link } from 'react-router-dom';
+// import { NavLink, Link } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux'
+// import { logoutUser } from "../../../redux/actionCreators/auth";
+// import { useEffect } from "react";
 
-const Header = () => {
-  return (
-    <nav>
-    <div className="nav-wrapper">
-        <Link className="brand-logo" to='/'>Logo</Link>
-      <ul>
-        <li><Link className="brand-logo center" to='/tabletennis/tournament/new'>Создать турнир</Link></li>
-      </ul>
-      <ul id="nav-mobile" className="right">
-       <li><NavLink to='/rating'>Рейтинг</NavLink></li>
-        <li><NavLink to='/signout'>Выйти</NavLink></li>
-        <li><NavLink to='/signin'>Войти</NavLink></li>
-        <li><NavLink to='/signup'>Зарегистрироваться</NavLink></li>
-        <li><NavLink to='/profile'>Профиль</NavLink></li>
-      </ul>
-      </div>
-      </nav>
-    );
-};
 
-export default Header;
+// const Header = () => {
+//   const userSession = useSelector((store) => store.authReducer.userSession);
+//   const dispatch = useDispatch()
+
+//   useEffect(() => {
+//      dispatch(logoutUser());
+//   }, []);
+
+//   return (
+
+//   );
+// };
+
+// export default Header;
