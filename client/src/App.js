@@ -6,6 +6,9 @@ import Error from "./Components/Error/Error";
 import Signup from "./Components/Auth/Signup/Signup";
 import Signin from "./Components/Auth/Signin/Signin";
 import Ratings from './Components/Ratings/Ratings';
+import TournamentItem from "./Components/TournamentItem/TournamentItem";
+import TournamentList from "./Components/TournamentList/TournamentList";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,18 +21,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { userInSession, logoutUser } from "./redux/actionCreators/authActionCreator";
 import Preloader from "./Components/Preloader/Preloader";
 import Match from './Components/Match/Match';
-
+import Tournament from "./Components/Tournament/Tournament";
 
 function App() {
   const dispatch = useDispatch();
   const userSession = useSelector((store) => store.authReducer.userSession);
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     dispatch(userInSession());
     setLoading(false)
   }, [dispatch]);
-
+  console.log(userSession);
   return (
     <Router>
       {loading ? < Preloader /> :
@@ -49,14 +51,19 @@ function App() {
           <ul id="nav-mobile" className="right">
             <li>{userSession && `Привет, ${userSession.login}`}</li>
             <li>
-              <NavLink to="/ratings">Рейтинг</NavLink>
+              <NavLink to="/ratings">Рейтинг ТОП-20</NavLink>
             </li>
             {userSession && userSession ? (
+              <>
+              <li>
+                <NavLink to={`/profile/${userSession._id}`}>Профиль</NavLink>
+              </li>
               <li>
                 <Link to='' onClick={() => dispatch(logoutUser())}>
                   Выйти
                 </Link>
               </li>
+              </>
             ) : (
               <>
                 <li>
@@ -64,9 +71,6 @@ function App() {
                 </li>
                 <li>
                   <NavLink to="/signup">Зарегистрироваться</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/profile">Профиль</NavLink>
                 </li>
               </>
             )}
@@ -94,19 +98,29 @@ function App() {
           <Route exact path="/ratings">
             <Ratings />
           </Route>
+<<<<<<< HEAD
           <Route exact path="/tabletennis/match/:id">
             <Match />
+=======
+          <Route exact path="/tournament/new">
+            <Tournament />
+          </Route>  
+          <Route exact path="/tournaments">
+            <TournamentList />
+          </Route>
+          <Route path="/tournament/:id">
+            <TournamentItem />
+>>>>>>> c29767347a972e21e9fbebf847228495e6cdd820
           </Route>
           <Route>
             <Error />
           </Route>
         </Switch>
-    </div>
+     </div>
      <Footer />
      </>
     }
-     </Router>
+  </Router>
   );
 }
-
 export default App;

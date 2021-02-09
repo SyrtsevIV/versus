@@ -1,0 +1,23 @@
+.cupBlock {
+  display: flex;
+  justify-content: space-around;
+}
+.cupInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.icon1 {
+  font-size: 100px;
+  /* filter: grayscale(100%); */
+}
+.icon2 {
+  font-size: 85px;
+  filter: grayscale(100%);
+}
+.icon3 {
+  font-size: 85px;
+  filter: grayscale(100%);
+}

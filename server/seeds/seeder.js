@@ -15,10 +15,12 @@ const randomEmail = () => faker.internet.email();
 const randomPass = () => faker.internet.password();
 const randomNumber = () => faker.random.number();
 const randomImageUrl = () => faker.image.imageUrl();
+const randomDesc = () => faker.name.jobDescriptor();
+const randomAdress = () => faker.address.streetAddress();
+const randomFutureDate = () => faker.date.future();
 
 // Seed users
-async function seedUsers() {
-  for (let i = 0; i < 30; i+=1) {
+
 async function seedUsers(num) {
   for (let i = 0; i < num; i += 1) {
     User.create({
@@ -34,7 +36,7 @@ async function seedUsers(num) {
 // Seed stats
 async function seedStats() {
   const users = await User.find();
-  console.log('users', users);
+ 
   for (let i = 0; i < users.length; i += 1) {
     const stats = await Stats.create({
       sport: 'table tennis',
@@ -60,9 +62,19 @@ async function seedStats() {
 
 async function seedTournament(num) {
   const users = await User.find();
-  Tournament.create({
-    participants: users.slice(-num),
-  });
+  // Tournament.create({
+  //   participants: users.slice(-num),
+  // });
+  for (let i = 0; i <= num; i += 1) {
+    Tournament.create({
+      title: randomName(),
+      date: randomFutureDate(),
+      description: randomDesc(),
+      place: randomAdress(),
+      creator: users[0],
+      participants: users,
+    });
+  }
 }
 
 // seedTournament();
@@ -70,9 +82,9 @@ async function seedTournament(num) {
 // Seed Brackets
 
 const start = async () => {
-  await seedUsers(16);
-  await seedStats();
-  await seedTournament(30);
+  // await seedUsers(8);
+  // await seedStats();
+  // await seedTournament(12);
 };
 
 start();

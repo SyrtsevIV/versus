@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+
+// mongoose.pluralize(null);
+
 const User = mongoose.model('User', {
   login: {
     type: String,
@@ -19,7 +22,6 @@ const User = mongoose.model('User', {
   },
   stats: { type: mongoose.ObjectId, ref: 'Stats' },
   googleId: String,
-  avatar: String,
+  tournaments: [{ type: mongoose.ObjectId, ref: 'Tournament' }],
 });
 module.exports = User;
-
