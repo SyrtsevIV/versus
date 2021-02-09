@@ -106,8 +106,8 @@ function App() {
             <Error />
           </Route>
         </Switch>
-     <Footer />
      </div>
+     <Footer />
      </>
     }
   </Router>

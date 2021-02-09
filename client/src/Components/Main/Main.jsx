@@ -31,7 +31,7 @@ const Main = () => {
         <li onClick={() => changeHandler('future')} className="waves-effect waves-light btn-large">Будущие турниры</li>
       </div>
         <div className={styles.mainNav}>
-      {mainPage === 'current' && <h4>Активные турниры:</h4>}
+      {mainPage === 'current' && <h4>Текущие турниры:</h4>}
       {mainPage === 'future' && <h4>Будущие турниры:</h4>}
       {mainPage === 'past' && <h4>Прошедшие турниры:</h4>}
         </div>

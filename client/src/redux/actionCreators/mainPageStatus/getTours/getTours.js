@@ -10,8 +10,3 @@ const getTours = (mainPageStatus) => async (dispatch) => {
 }
 
 export default getTours;
-
-export function slideHandler (index, tours ) {
-        const tour = tours.find((el, i) => i === index);
-      window.history.replaceState({},'', `/tabletennis/tournament/${tour._id}`);
-}
