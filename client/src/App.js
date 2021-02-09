@@ -49,7 +49,7 @@ function App() {
           <ul id="nav-mobile" className="right">
             <li>{userSession && `Привет, ${userSession.login}`}</li>
             <li>
-              <NavLink to="/ratings">Рейтинг</NavLink>
+              <NavLink to="/ratings">Рейтинг ТОП-20</NavLink>
             </li>
             {userSession && userSession ? (
               <>
