@@ -3,6 +3,7 @@ import { GET_TOUR_LIST } from '../types/types'
 // Получение стастики авторизованного пользователя
 export function getTournamentsList() {
   return async (dispatch) => {
+    console.log('я тут');
     const request = await fetch(`http://localhost:3001/tournamentlist`, {
       method: 'GET',
       headers: {

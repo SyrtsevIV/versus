@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const Tournament = mongoose.model('Tournament', {
-  type: String,
+  type:  {
+    type: String,
+    default: 'Сингл'
+  },
   title: {
     type: String,
     require: true,
