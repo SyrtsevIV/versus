@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTournamentsList } from '../../redux/actionCreators/tournamentsListCreator';
 import { Link } from 'react-router-dom';
 import { registrationTournamnet } from '../../redux/actionCreators/tournamentActionCreator';
+
 const TournamentList = () => {
   const dispatch = useDispatch()
   const tourList = useSelector((state) => state.tournamentsList.tourList);
+  
   console.log(tourList, 'tourList');
   useEffect(() => {
     dispatch(getTournamentsList())
@@ -26,7 +28,7 @@ const TournamentList = () => {
               <span>Дата: {new Date(el.date).toLocaleString('RU-ru')}</span>
               <span>Описание: {el.description}</span>
               <span>Местро проведения: {el.place}</span>
-              <span>Организатор: {el.creator.login}</span>
+              <span>Организатор: {el.creator?.login}</span>
 
               
               <div className={styles.action}>
@@ -64,7 +66,7 @@ const TournamentList = () => {
            <span>Дата: {new Date(el.date).toLocaleString('RU-ru')}</span>
            <span>Описание: {el.description}</span>
            <span>Местро проведения: {el.place}</span>
-           <span>Организатор: {el.creator.login}</span>
+           <span>Организатор: {el.creator?.login}</span>
            <div className={styles.action}>
               <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
               <button onClick={() => dispatch(registrationTournamnet(el._id))}>Регистрация</button>

@@ -3,6 +3,7 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/User");
+const Stats = require("../models/Stats");
 const bcrypt = require("bcrypt");
 
 passport.serializeUser((user, done) => {
@@ -24,19 +25,20 @@ passport.use(
       callbackURL: "/auth/google/redirect",
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then((currentUser) => {
+      User.findOne({ googleId: profile.id }).then(async (currentUser) => {
         if (currentUser) {
           done(null, currentUser);
         } else {
-          new User({
+          const newUser = new User({
             googleId: profile.id,
             login: profile._json.given_name,
             avatar: profile._json.picture,
           })
-            .save()
-            .then((newUser) => {
-              done(null, newUser);
-            });
+          const stats = new Stats({ user: newUser._id });
+          await stats.save();
+          newUser.stats = stats._id;
+          await newUser.save();
+          return done(null, newUser, stats);
         }
       });
     }
@@ -46,8 +48,7 @@ passport.use(
 const authenticateUser = async (req, email, password, done) => {
   if (/signin/.test(req.path)) {
     const user = await User.findOne({ email });
-    if (!user)
-      return done(null, false);
+    if (!user) return done(null, false);
     if (await bcrypt.compare(password, user.password)) return done(null, user);
     return done(null, false);
   }
@@ -58,9 +59,12 @@ const authenticateUser = async (req, email, password, done) => {
   }
   if (login && email && password && passwordCheck) {
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = await new User({ login, email, password: hashPassword });
-    newUser.save();
-    return done(null, newUser);
+    const newUser = new User({ login, email, password: hashPassword });
+    const stats = new Stats({ user: newUser._id });
+    newUser.stats = stats._id;
+    await newUser.save();
+    await stats.save();
+    return done(null, newUser, stats);
   }
   return done(null, false);
 };
