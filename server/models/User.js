@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // mongoose.pluralize(null);
 
-const User = mongoose.model('users', {
+const User = mongoose.model('User', {
   login: {
     type: String,
     require: true,
@@ -20,7 +20,7 @@ const User = mongoose.model('users', {
     type: String,
     defaut: 'https://img.favpng.com/2/12/12/computer-icons-portable-network-graphics-user-profile-avatar-png-favpng-L1ihcbxsHbnBKBvjjfBMFGbb7.jpg',
   },
-  stats: { type: mongoose.ObjectId, ref: 'stats' },
+  stats: { type: mongoose.ObjectId, ref: 'Stats' },
   googleId: String,
   tournaments: [{ type: mongoose.ObjectId, ref: 'Tournament' }],
 });

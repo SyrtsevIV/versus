@@ -11,11 +11,11 @@ const getRatings = (type = 'mmr') => async (dispatch) => {
     return -1;
   }
   return 0;
-});
-
+  });
+  
     dispatch({
       type: GET_RATINGS,
-      payload: statistics,
+      payload: statistics.slice(0,20),
     });
 };
 

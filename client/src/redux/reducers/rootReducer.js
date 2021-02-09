@@ -4,6 +4,7 @@ import mainPageReducer from './mainPageStatus/mainPageReducer';
 import toursReducer from './mainPageStatus/toursReducer/toursReducer';
 import authReducer from "./authReducer";
 import ratingsReducer from './ratingsReducer';
+import matchReducer from './matchReducer';
 import tournamentsList from "./tournamentsListReducer";
 import tournamentItem from "./tournamentItemReducer";
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   mainPage: mainPageReducer,
   mainPageTours: toursReducer,
   ratings: ratingsReducer,
+  matchReducer,
   tournamentsList,
   tournamentItem
 });

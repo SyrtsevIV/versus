@@ -10,9 +10,9 @@ const initState = {
       bronze: null,
     },
     user: {
-      login: "",
-      email: "",
-      avatar: "",
+      login: '',
+      email: '',
+      avatar: '',
     },
     rating: null,
     allPlayerValue: null,
@@ -30,17 +30,20 @@ const initState = {
   },
   profile: {},
   userSession: {},
-  mainPage: "",
+  mainPage: '',
+  match: {},
   mainPageTours: [],
   ratings: {
-   tableTennis: [],
-  }, 
+    tableTennis: [],
+  },
+  match: {},
+  tableTennis: [],
   tourList: {
     past: [],
     current: [],
     future: [],
   },
-  tourItem: {}
+  tourItem: {},
 };
 
 export default initState;

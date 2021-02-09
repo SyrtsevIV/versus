@@ -24,9 +24,9 @@ const Tournament = mongoose.model('Tournament', {
     require: true,
     default: 'future',
   },
-  creator: { type: mongoose.ObjectId, ref: 'users' },
-  participants: [{ type: mongoose.ObjectId, ref: 'users' }],
-  bracket: { type: mongoose.ObjectId, ref: 'brackets' },
+  creator: { type: mongoose.ObjectId, ref: 'User' },
+  participants: [{ type: mongoose.ObjectId, ref: 'User' }],
+  bracket: { type: mongoose.ObjectId, ref: 'Bracket' },
 });
 
 module.exports = Tournament;

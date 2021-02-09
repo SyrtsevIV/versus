@@ -7,7 +7,7 @@ const Stats = mongoose.model('Stats', {
     type: String,
     require: true,
   },
-  user: { type: mongoose.ObjectId, ref: 'users' },
+  user: { type: mongoose.ObjectId, ref: 'User' },
   mmr: {
     type: Number,
     default: 500,
