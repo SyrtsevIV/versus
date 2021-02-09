@@ -29,7 +29,7 @@ function App() {
     dispatch(userInSession());
     setLoading(false)
   }, [dispatch]);
-  console.log(userSession);
+
   return (
     <Router>
       {loading ? < Preloader /> :
@@ -39,13 +39,9 @@ function App() {
           <Link className="brand-logo" to="/">
             Logo
           </Link>
-          <ul>
-            <li>
               <Link className="brand-logo center" to="/tournament/new">
                 Создать турнир
               </Link>
-            </li>
-          </ul>
           <ul id="nav-mobile" className="right">
             <li>{userSession && `Привет, ${userSession.login}`}</li>
             <li>

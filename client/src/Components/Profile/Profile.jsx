@@ -11,22 +11,17 @@ const Profile = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.profileStats);
   const enemy = useSelector((state) => state.profileStats.compare)
-  console.log(user);
+  // console.log(userSession, 'userSession!!!!!!!!!!!');
   const [chartData, setChartData] = useState({})
   const [radarData, setRadarData] = useState({})
 
   // State для хранения текста из инпута для сравнения игроков
   const [inputText, setInputText] = useState('');
 
-  // State для редактирования информации
-  const [editProfile, setEditProfile] = useState();
-  const [changeLogin, setChangeLogin] = useState();
-  const [changeEmail, setChangeEmail] = useState();
-
   const won = user?.stats?.won
   const lost = user?.stats?.lost
-  const gameValue = won + lost
-  const percent = ((won / (won + lost)) * 100).toFixed(2) 
+  const gameValue = won + lost || 0
+  const percent = ((won / (won + lost)) * 100).toFixed(2) || 0
 
   // Круговая диаграмма по статистике побед - поражений 
   const chart = () => {
@@ -44,6 +39,7 @@ const Profile = () => {
             'rgba(255, 32, 38, 2.5)',
           ],
           borderWidth: 4,
+          weigth: 1,
         }
       ]
     })
@@ -81,7 +77,7 @@ const Profile = () => {
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
           pointHoverBorderColor: 'rgba(255,99,132,1)',
-          data: [enemy.score , enemy.won, enemy.missed, enemy.lost]
+          data: [enemy?.score , enemy?.won, enemy?.missed, enemy?.lost]
         }
       ]
     })
@@ -95,45 +91,18 @@ const Profile = () => {
     dispatch(findUserStats(inputText))
   }
   
-
-  // Edit profile information
-  const edithandler = (name) => {
-    setEditProfile(name)
-  }
-  const changeLoginHandler = ({target}) => {
-    setChangeLogin(target.value);
-  }
-  const changeEmailHandler = ({target}) => {
-    setChangeEmail(target.value);
-  }
-  const saveChanges = () => {
-    dispatch(editUserProfile({ id, changeLogin, changeEmail }))
-  }
-  
   return (
     <div>
       
       <div className={styles.topBlock}>
         
         <div className={styles.profileBlock}>
-          {editProfile ? (
-            <>
-              <input onChange={changeLoginHandler} />
-              <input onChange={changeEmailHandler} />
-              <input type="file" placeholder="Загрузить фото"/>
-              <button type="submit" onClick={() => saveChanges()}>Сохранить</button>
-            </>
-          ) : (
-            <>
-              <h3>{user?.user.login}</h3>
-              <span>E-mail: {user?.user.email}</span>
-              <button type="button" onClick={() => edithandler(user.user.login)}>Редактировать профиль</button>
-            </>
-          )}
+          <h3>Login: {user?.user.login}</h3>
         </div>
 
         <div className={styles.avatar}>
           <img src={user?.user.avatar} alt=""></img>
+          <button>Обновить фотографию</button>
         </div>
           
         <Cup />
@@ -151,17 +120,19 @@ const Profile = () => {
       <div className={styles.statsBlock}>
         
         <div>
+          <p>История игр:</p>
+          
+        </div>
+
+        <div>
           <div className={styles.gameInfo}>
             <p>Всего игр : {gameValue}</p>
-            <p>Процент побед: {percent} %</p>
+            {percent === Number ? <p>Процент побед: {percent} %</p> : <p>Вы пока не сыграли матчей</p>}
           </div>
           <Doughnut 
             data={chartData}
-            width={380}
-            height={380}
-            options={{
-              responsive: true,
-            }}
+            width={300}
+            height={300}
           />
         </div>
 
@@ -175,8 +146,8 @@ const Profile = () => {
           </div>
           <Radar 
             data={radarData}
-            width={480}
-            height={480}
+            width={380}
+            height={380}
           />
         </div>
       </div>

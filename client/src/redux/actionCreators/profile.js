@@ -39,22 +39,22 @@ export function findUserStats(login) {
   }
 }
 
-export function editUserProfile({ id, changeLogin, changeEmail }) {
-
-  return async (dispatch) => {
-    const request = await fetch(`http://localhost:3001/profile/${id}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify({ id, changeLogin, changeEmail }),
-      credentials: 'include',
-    });
-    const result = await request.json();
+// export function getUserHistory(id) => {
+  
+//   return async (dispatch) {
+//     const request = await fetch('', {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type':'application/json'
+//       },
+//       credentials: 'include',
+//     });
     
-    dispatch({
-      type: EDIT_PROFILE,
-      payload: result
-    })
-  }
-}
+//     const result = await request.json();
+
+//     dispatch({
+//       type: COMPARE_STATS,
+//       payload: result
+//     })
+//   }
+// }
