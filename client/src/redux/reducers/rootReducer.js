@@ -5,6 +5,7 @@ import toursReducer from './mainPageStatus/toursReducer/toursReducer';
 import authReducer from "./authReducer";
 import ratingsReducer from './ratingsReducer';
 import tournamentsList from "./tournamentsListReducer";
+import tournamentItem from "./tournamentItemReducer";
 
 const rootReducer = combineReducers({
   authReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   mainPage: mainPageReducer,
   mainPageTours: toursReducer,
   ratings: ratingsReducer,
-  tournamentsList
+  tournamentsList,
+  tournamentItem
 });
 
 export default rootReducer;

@@ -29,6 +29,7 @@ function App() {
     dispatch(userInSession());
     setLoading(false)
   }, [dispatch]);
+  console.log(userSession);
   return (
     <Router>
       {loading ? < Preloader /> :
@@ -51,11 +52,16 @@ function App() {
               <NavLink to="/ratings">Рейтинг</NavLink>
             </li>
             {userSession && userSession ? (
+              <>
+              <li>
+                <NavLink to={`/profile/${userSession._id}`}>Профиль</NavLink>
+              </li>
               <li>
                 <Link to='' onClick={() => dispatch(logoutUser())}>
                   Выйти
                 </Link>
               </li>
+              </>
             ) : (
               <>
                 <li>
@@ -63,9 +69,6 @@ function App() {
                 </li>
                 <li>
                   <NavLink to="/signup">Зарегистрироваться</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/profile">Профиль</NavLink>
                 </li>
               </>
             )}
@@ -106,8 +109,8 @@ function App() {
             <Error />
           </Route>
         </Switch>
-     <Footer />
      </div>
+     <Footer />
      </>
     }
   </Router>

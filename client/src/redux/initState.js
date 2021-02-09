@@ -39,7 +39,8 @@ const initState = {
     past: [],
     current: [],
     future: [],
-  }
+  },
+  tourItem: {}
 };
 
 export default initState;

@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTournamentsList } from '../../redux/actionCreators/tournamentsListCreator';
 import { Link } from 'react-router-dom';
 import { registrationTournamnet } from '../../redux/actionCreators/tournamentActionCreator';
+
 const TournamentList = () => {
   const dispatch = useDispatch()
   const tourList = useSelector((state) => state.tournamentsList.tourList);
-  console.log(tourList, 'tourList');
+  
   useEffect(() => {
     dispatch(getTournamentsList())
   }, [])
