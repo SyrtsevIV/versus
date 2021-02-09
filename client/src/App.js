@@ -89,6 +89,9 @@ function App() {
           <Route exact path="/bracket">
             <Bracket />
           </Route>
+          <Route exact path="/tabletennis/match/:id">
+            <Match />
+          </Route>
           <Route exact path="/signin">
             <Signin />
           </Route>
@@ -98,10 +101,9 @@ function App() {
           <Route exact path="/ratings">
             <Ratings />
           </Route>
-<<<<<<< HEAD
           <Route exact path="/tabletennis/match/:id">
             <Match />
-=======
+          </Route>
           <Route exact path="/tournament/new">
             <Tournament />
           </Route>  
@@ -110,17 +112,16 @@ function App() {
           </Route>
           <Route path="/tournament/:id">
             <TournamentItem />
->>>>>>> c29767347a972e21e9fbebf847228495e6cdd820
           </Route>
           <Route>
             <Error />
           </Route>
         </Switch>
-     </div>
+    </div>
      <Footer />
      </>
     }
-  </Router>
+     </Router>
   );
 }
 export default App;

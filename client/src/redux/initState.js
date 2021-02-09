@@ -30,7 +30,8 @@ const initState = {
   },
   profile: {},
   userSession: {},
-  mainPage: "",
+  mainPage: '',
+  match: {},
   mainPageTours: [],
   ratings: {
     tableTennis: [],

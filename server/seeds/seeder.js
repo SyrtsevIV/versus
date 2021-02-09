@@ -20,7 +20,6 @@ const randomAdress = () => faker.address.streetAddress();
 const randomFutureDate = () => faker.date.future();
 
 // Seed users
-
 async function seedUsers(num) {
   for (let i = 0; i < num; i += 1) {
     User.create({
@@ -36,7 +35,6 @@ async function seedUsers(num) {
 // Seed stats
 async function seedStats() {
   const users = await User.find();
- 
   for (let i = 0; i < users.length; i += 1) {
     const stats = await Stats.create({
       sport: 'table tennis',
@@ -82,9 +80,9 @@ async function seedTournament(num) {
 // Seed Brackets
 
 const start = async () => {
-  // await seedUsers(8);
+  // await seedUsers(32);
   // await seedStats();
-  // await seedTournament(12);
+  await seedTournament(4);
 };
 
 start();

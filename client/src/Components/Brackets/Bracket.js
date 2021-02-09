@@ -7,16 +7,19 @@ import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 
 const Bracket = () => {
   const [bracket, setBracket] = useState([]);
+  const hardckoredTournamentId = '6022723954609e48f9a5472d';
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/602032e3c5f21b9d66fbcb96`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${hardckoredTournamentId}`)
       .then((res) => res.json())
-      .then((json) => setBracket(json.bracket));
+      .then((json) => {
+        return setBracket(json.bracket);
+      });
   }, []);
 
   const fetchBracket = async () => {
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/602032e3c5f21b9d66fbcb96/bracket/new`
+      `${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${hardckoredTournamentId}/bracket/new`
     );
     const resJson = await res.json();
     setBracket(resJson);
@@ -27,7 +30,6 @@ const Bracket = () => {
   };
 
   const renderSwitch = () => {
-    console.log(bracket);
     if (bracket) {
       if (bracket.oneSixteenth?.length) {
         return <ThirtytwoTeamBracket bracket={bracket} />;

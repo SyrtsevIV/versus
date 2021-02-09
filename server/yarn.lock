@@ -352,6 +352,7 @@
   "version" "1.0.10"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 "connect-flash@^0.1.1":
   "integrity" "sha1-2GMPJtlaf4UfmVax6MxnMvO2qjA="
@@ -359,6 +360,8 @@
   "version" "0.1.1"
 
 >>>>>>> c29767347a972e21e9fbebf847228495e6cdd820
+=======
+>>>>>>> ilia
 "connect-mongo@^3.2.0":
   "integrity" "sha512-0Mx88079Z20CG909wCFlR3UxhMYGg6Ibn1hkIje1hwsqOLWtL9HJV+XD0DAjUvQScK6WqY/FA8tSVQM9rR64Rw=="
   "resolved" "https://registry.npmjs.org/connect-mongo/-/connect-mongo-3.2.0.tgz"
