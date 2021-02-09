@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTournament } from '../../redux/actionCreators/tournamentActionCreator';
-import Bracket from '../Bracket/Bracket';
+import Bracket from '../Brackets/Bracket';
 
 const TournamentItem = () => {
   const { id } = useParams();
