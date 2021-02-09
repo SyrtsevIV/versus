@@ -7,6 +7,7 @@ const Match = mongoose.model('Match', {
   score: { player1: { type: Number, default: 0 }, player2: { type: Number, default: 0 } },
   ended: { type: Boolean, default: false },
   tour: String,
+  duration: String,
 });
 
 module.exports = Match;

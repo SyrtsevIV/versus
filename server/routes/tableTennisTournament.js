@@ -56,6 +56,7 @@ async function makePairs(array, num = array.length, tour) {
   return shuffle(result);
 }
 
+// в зависимости от количесва участников вызывает функцию makePairs
 function getBracket(array) {
   if (array.length < 8 && array.length > 4) return makePairs(array, 8, 'quarterfinals');
   if (array.length < 16 && array.length > 8) return makePairs(array, 16, 'oneEighth');
@@ -64,6 +65,7 @@ function getBracket(array) {
   return makePairs(array, 4, 'semifinal');
 }
 
+// для определения позиции игрока в таблице (player1 - верхняя позиция в паре, player2 - нижняя)
 function whichPlayer(index) {
   if (index % 2 === 0) {
     return 'player1';
@@ -99,6 +101,7 @@ async function setNextTour(currentTour, nextTour, nextTourName, phantom) {
   return nextTour;
 }
 
+// для записи игроков в следующий тур
 async function nextTour(
   bracket,
   bracketTour,
@@ -124,6 +127,57 @@ async function nextTour(
     }
     await bracket.markModified(nextTourName);
   }
+}
+
+// для форматирования времени из милисекунд
+function msToTime(duration) {
+  let seconds = parseInt((duration / 1000) % 60);
+  let minutes = parseInt((duration / (1000 * 60)) % 60);
+
+  minutes = minutes < 10 ? `0${minutes}` : minutes;
+  seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  return `${minutes}:${seconds}`;
+}
+
+// для получения рейтинга игроков. winnerRating - рейтинг победителя, losserRating - рейтинг проигравшего
+// верне массив [r1,r2] r1 - рейтинг победителя, r2 - рейтинг проигравшего
+function getRating(winnerRating, losserRating, tour) {
+  // 1 очко за победу, 0 за поражение
+  const realScore1 = 1;
+  const realScore2 = 0;
+  // ожидаемое количество очков, которое получит игрок 1 в партии с 2
+  function getWaitingScore(ratingA, ratingB) {
+    return 1 / (1 + 10 ** ((ratingB - ratingA) / 400));
+  }
+  // коэффициент в зависимости от рэйтинга
+  function getRatingIndex(rating) {
+    if (rating >= 2400) {
+      return 10;
+    }
+    if (rating >= 2000 && rating < 2400) {
+      return 20;
+    }
+    return 40;
+  }
+  let newWinnerRating =
+    winnerRating + getRatingIndex(winnerRating) * (realScore1 - getWaitingScore(winnerRating, losserRating));
+  let newLosserRating =
+    losserRating + getRatingIndex(losserRating) * (realScore2 - getWaitingScore(losserRating, winnerRating));
+  if (tour === 'final') {
+    // очки за 1 место
+    newWinnerRating += 50;
+    // очки за 2 место
+    newLosserRating += 40;
+  }
+  if (tour === 'thirdPlace') {
+    // очки за 3 место
+    newWinnerRating += 30;
+    // очки за 4 место
+    newLosserRating += 20;
+  }
+
+  return [newWinnerRating, newLosserRating];
 }
 
 router.get('/future', async (req, res) => {
@@ -247,20 +301,43 @@ router.get('/:tournamentId/bracket/new', async (req, res) => {
 router.put('/match/end/:id', async (req, res) => {
   const currentTourMatch = await Match.findById(req.params.id).populate('player1').populate('player2');
   currentTourMatch.ended = true;
-  let winnerId = '';
-  let losserId = '';
+  currentTourMatch.duration = msToTime(req.body.time);
+  currentTourMatch.save();
+  let winnerId;
+  let losserId;
+  let winnerScore;
+  let losserScore;
   if (currentTourMatch.score.player1 > currentTourMatch.score.player2) {
     winnerId = currentTourMatch.player1._id;
     losserId = currentTourMatch.player2._id;
+    winnerScore = currentTourMatch.score.player1;
+    losserScore = currentTourMatch.score.player2;
   } else {
     winnerId = currentTourMatch.player2._id;
     losserId = currentTourMatch.player1._id;
+    winnerScore = currentTourMatch.score.player2;
+    losserScore = currentTourMatch.score.player1;
   }
+  const winnerStats = await Stats.findOne({ user: winnerId });
+  const losserStats = await Stats.findOne({ user: losserId });
+  const newRating = getRating(winnerStats.mmr, losserStats.mmr, currentTourMatch.tour);
+  winnerStats.won += 1;
+  winnerStats.score += winnerScore;
+  winnerStats.missed += losserScore;
+  winnerStats.mmr = newRating[0];
+  losserStats.lost += 1;
+  losserStats.score += losserScore;
+  losserStats.missed += winnerScore;
+  losserStats.mmr = newRating[1];
 
   const { tour } = currentTourMatch;
-  console.log('tour', tour);
   const bracket = await Bracket.findOne({ [tour]: req.params.id });
-  const currentTourMatchIndex = bracket[tour].indexOf(req.params.id);
+  let currentTourMatchIndex;
+  let nextTourMatchIndex;
+  if (Array.isArray(bracket[tour])) {
+    currentTourMatchIndex = bracket[tour].indexOf(req.params.id);
+    nextTourMatchIndex = Math.floor(currentTourMatchIndex / 2);
+  }
   await bracket
     .populate('oneSixteenth')
     .populate('oneEighth')
@@ -269,11 +346,8 @@ router.put('/match/end/:id', async (req, res) => {
     .populate('thirdPlace')
     .populate('final')
     .execPopulate();
-  // console.log('bracket', bracket.populated());
-  const nextTourMatchIndex = Math.floor(currentTourMatchIndex / 2);
   let nextTourMatch = {};
   let thirdPlaceMatch = {};
-  // let array = [];
   const phantom = await Match.create({ phantom: '' });
 
   switch (tour) {
@@ -341,10 +415,19 @@ router.put('/match/end/:id', async (req, res) => {
         await bracket.markModified('thirdPlace');
       }
       break;
+    case 'final':
+      winnerStats.gold += 1;
+      losserStats.silver += 1;
+      break;
+    case 'thirdPlace':
+      winnerStats.bronze += 1;
+      break;
     default:
       break;
   }
   await bracket.save();
+  await winnerStats.save();
+  await losserStats.save();
   res.json({ currentTourMatch });
 });
 
