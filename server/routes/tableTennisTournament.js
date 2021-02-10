@@ -37,7 +37,9 @@ async function makePairs(array, num = array.length, tour) {
   shuffle(top);
   const topOnPair = [];
   for (let i = 0; i < top.length; i += 1) {
-    topOnPair[i] = await Match.create({ player1: top[i], tour, score: { player1: 11 }, ended: true });
+    topOnPair[i] = await Match.create({
+      player1: top[i], tour, score: { player1: 11 }, ended: true,
+    });
   }
 
   // перемешиваем и разбиваем на пары оставшихся
@@ -58,9 +60,9 @@ async function makePairs(array, num = array.length, tour) {
 
 // в зависимости от количесва участников вызывает функцию makePairs
 function getBracket(array) {
-  if (array.length < 8 && array.length > 4) return makePairs(array, 8, 'quarterfinals');
-  if (array.length < 16 && array.length > 8) return makePairs(array, 16, 'oneEighth');
-  if (array.length < 32 && array.length > 16) return makePairs(array, 32, 'oneSixteenth');
+  if (array.length <= 8 && array.length > 4) return makePairs(array, 8, 'quarterfinals');
+  if (array.length <= 16 && array.length > 8) return makePairs(array, 16, 'oneEighth');
+  if (array.length <= 32 && array.length > 16) return makePairs(array, 32, 'oneSixteenth');
   if (array.length > 32) return 'перебор';
   return makePairs(array, 4, 'semifinal');
 }
@@ -110,7 +112,7 @@ async function nextTour(
   nextTourMatch,
   winnerId,
   nextTourName,
-  phantom
+  phantom,
 ) {
   if (bracketTour[nextTourMatchIndex]?.player1 || bracketTour[nextTourMatchIndex]?.player2) {
     nextTourMatch = bracketTour[nextTourMatchIndex];
@@ -160,10 +162,8 @@ function getRating(winnerRating, losserRating, tour) {
     }
     return 40;
   }
-  let newWinnerRating =
-    winnerRating + getRatingIndex(winnerRating) * (realScore1 - getWaitingScore(winnerRating, losserRating));
-  let newLosserRating =
-    losserRating + getRatingIndex(losserRating) * (realScore2 - getWaitingScore(losserRating, winnerRating));
+  let newWinnerRating = winnerRating + getRatingIndex(winnerRating) * (realScore1 - getWaitingScore(winnerRating, losserRating));
+  let newLosserRating = losserRating + getRatingIndex(losserRating) * (realScore2 - getWaitingScore(losserRating, winnerRating));
   if (tour === 'final') {
     // очки за 1 место
     newWinnerRating += 50;
@@ -181,18 +181,30 @@ function getRating(winnerRating, losserRating, tour) {
 }
 
 router.get('/future', async (req, res) => {
-  const tournament = await Tournament.find({ status: 'future' });
-  res.json(tournament);
+  try {
+    const tournament = await Tournament.find({ status: 'future' }).populate({ path: 'participants' });
+    res.json(tournament);
+  } catch (e) {
+    res.sendStatus(500);
+  }
 });
 
 router.get('/past', async (req, res) => {
-  const tournament = await Tournament.find({ status: 'past' });
-  res.json(tournament);
+  try {
+    const tournament = await Tournament.find({ status: 'past' }).populate({ path: 'participants' });
+    res.json(tournament);
+  } catch (e) {
+    res.sendStatus(500);
+  }
 });
 
 router.get('/current', async (req, res) => {
-  const tournament = await Tournament.find({ status: 'current' });
-  res.json(tournament);
+  try {
+    const tournament = await Tournament.find({ status: 'current' }).populate({ path: 'participants' });
+    res.json(tournament);
+  } catch (e) {
+    res.sendStatus(500);
+  }
 });
 
 router.get('/:tournamentId', async (req, res) => {
@@ -360,7 +372,7 @@ router.put('/match/end/:id', async (req, res) => {
         nextTourMatch,
         winnerId,
         'oneEighth',
-        phantom
+        phantom,
       );
       break;
 
@@ -373,7 +385,7 @@ router.put('/match/end/:id', async (req, res) => {
         nextTourMatch,
         winnerId,
         'quarterfinals',
-        phantom
+        phantom,
       );
       break;
 
@@ -386,7 +398,7 @@ router.put('/match/end/:id', async (req, res) => {
         nextTourMatch,
         winnerId,
         'semifinal',
-        phantom
+        phantom,
       );
       break;
     case 'semifinal':

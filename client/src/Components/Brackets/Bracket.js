@@ -4,16 +4,17 @@ import EightTeamBracket from './EightTeamBracket/EightTeamBracket';
 import FourTeamBracket from './FourTeamBracket/FourTeamBracket';
 import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
 import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
+import styles from './bracket.module.css';
 
-const Bracket = () => {
+const Bracket = ({ tour }) => {
   const [bracket, setBracket] = useState([]);
-  const hardckoredTournamentId = '6022723954609e48f9a5472d';
+  const hardckoredTournamentId = tour._id;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${hardckoredTournamentId}`)
       .then((res) => res.json())
       .then((json) => {
-        return setBracket(json.bracket);
+        return setBracket(json?.bracket);
       });
   }, []);
 
@@ -44,12 +45,14 @@ const Bracket = () => {
         return <FourTeamBracket bracket={bracket} />;
       }
     }
-    return '...';
+    return null;
   };
 
   return (
     <>
-      <button onClick={makeBracketHandler}>render bracket</button> {renderSwitch()}
+      <div className={styles.center}>
+      <button onClick={makeBracketHandler}>Завершить запись</button> {renderSwitch()}
+      </div>
     </>
   );
 };
