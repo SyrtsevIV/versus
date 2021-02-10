@@ -45,7 +45,7 @@ export const getTournament = (id) => {
 
   return async (dispatch) => {
     try {
-      
+      console.log('redux id',id);
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/${id}`, {
         method: "GET",
         credentials: "include",

@@ -27,7 +27,7 @@ const TournamentItem = () => {
       </div>
       
       <div>
-        {tourItem?.status !== 'future' ? <Bracket /> : null }
+        {tourItem?.status !== 'future' ? <Bracket tour={id}/> : null }
       </div>
 
       <ul>

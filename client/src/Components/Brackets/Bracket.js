@@ -7,7 +7,7 @@ import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
 import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 import styles from './bracket.module.css';
 
-const Bracket = ({ tour }) => {
+const Bracket = ({ id }) => {
   const [bracket, setBracket] = useState([]);
 
   wsClient.onmessage = (message) => {
@@ -16,7 +16,7 @@ const Bracket = ({ tour }) => {
   };
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${tour._id}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id}`)
       .then((res) => res.json())
       .then((json) => {
         return setBracket(json?.bracket);
@@ -25,7 +25,7 @@ const Bracket = ({ tour }) => {
 
   const fetchBracket = async () => {
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${tour._id}/bracket/new`
+      `${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id}/bracket/new`
     );
     const resJson = await res.json();
     setBracket(resJson);

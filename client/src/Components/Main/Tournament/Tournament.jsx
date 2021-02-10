@@ -16,7 +16,7 @@ export default function Activtournament() {
             <div className={styles.center} key={tour._id}>
               <h4>Название: {tour.title}</h4>
               {tour.bracket ? 
-                <Bracket tour={tour} />
+                <Bracket id={tour._id} />
                 :
                 <div className={styles.center}>
                     <ol> Список участников:

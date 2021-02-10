@@ -28,7 +28,7 @@ const Match = () => {
   const endMatchHandler = () => {
     // dispatch(endMatch(id, timer));
     wsClient.send(JSON.stringify({ id, timer, tournamentId: hardckoredTournamentId }));
-    history.push('/bracket');
+    history.goBack();
   };
 
   const plusPointHandler = async (id, playerName) => {
