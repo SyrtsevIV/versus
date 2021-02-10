@@ -1,13 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-await-in-loop */
 const express = require('express');
-const WebSocket = require('ws');
 const Bracket = require('../models/Bracket');
 const Tournament = require('../models/Tournament');
 const Match = require('../models/Match');
 const Stats = require('../models/Stats');
-
-const wsServer = new WebSocket.Server({ port: 1234 });
+const wsServer = require('../ws');
 
 const router = express.Router();
 
@@ -397,6 +395,16 @@ wsServer.on('connection', (client) => {
       await winnerStats.save();
       await losserStats.save();
     }
+    if (playerName) {
+      const match = await Match.findById(id).populate('player1').populate('player2');
+      if (plus) {
+        match.score[playerName] += 1;
+      }
+      if (minus) {
+        if (match.score[playerName] > 0) match.score[playerName] -= 1;
+      }
+      match.save();
+    }
     const tournament = await Tournament.findById(tournamentId)
       .populate({
         path: 'bracket',
@@ -499,8 +507,8 @@ router.get('/:tournamentId/bracket/new', async (req, res) => {
   res.json(bracket);
 });
 
-// завершить матч
-router.put('/match/end/:id', async (req, res) => {
+// завершить матч (ИСПОЛЬЗУЕТСЯ В ВЭБ СОКЕТАХ)
+/* router.put('/match/end/:id', async (req, res) => {
   const currentTourMatch = await Match.findById(req.params.id).populate('player1').populate('player2');
   currentTourMatch.ended = true;
   currentTourMatch.duration = msToTime(req.body.time);
@@ -632,6 +640,7 @@ router.put('/match/end/:id', async (req, res) => {
   await losserStats.save();
   res.json({ currentTourMatch });
 });
+ */
 
 // матч
 router.get('/match/:id', async (req, res) => {
@@ -639,8 +648,8 @@ router.get('/match/:id', async (req, res) => {
   res.json({ match });
 });
 
-// изменение счета
-router.put('/match/:id', async (req, res) => {
+// изменение счета (НЕ ИСПОЛЬЗУЕТСЯ)
+/* router.put('/match/:id', async (req, res) => {
   const { playerName, plus, minus } = req.body;
   const match = await Match.findById(req.params.id).populate('player1').populate('player2');
   if (plus) {
@@ -652,5 +661,5 @@ router.put('/match/:id', async (req, res) => {
   match.save();
   res.json({ match });
 });
-
+ */
 module.exports = router;
