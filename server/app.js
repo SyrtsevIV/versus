@@ -67,8 +67,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const checkUser = (req, res, next) => {
-  if (req.session.passport) {
-    console.log(req.session.passport);
+  if (req.user) {
     next();
   } else {
     res.redirect("http://localhost:3000/auth/signup");
@@ -80,7 +79,7 @@ app.use("/tabletennis/tournament", tableTennisTournamentRouter);
 app.use("/ratings", rating);
 app.use("/tournament", tournament);
 
-app.use('/profile', profileRouter);
+app.use('/profile', checkUser, profileRouter);
 app.use('/compare', compareRouter);
 app.use('/tournamentlist', tournamentlistRoter);
 

@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { wsClient } from '../../App';
-import EightTeamBracket from './EightTeamBracket/EightTeamBracket';
-import FourTeamBracket from './FourTeamBracket/FourTeamBracket';
-import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
-import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
-import styles from './bracket.module.css';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { wsClient } from "../../App";
+import EightTeamBracket from "./EightTeamBracket/EightTeamBracket";
+import FourTeamBracket from "./FourTeamBracket/FourTeamBracket";
+import SixteenTeamBracket from "./SixteenTeamBracket/SixteenTeamBracket";
+import ThirtytwoTeamBracket from "./ThirtytwoTeamBracket/ThirtytwoTeamBracket";
+import styles from "./bracket.module.css";
 
-const Bracket = ({ id }) => {
+const Bracket = () => {
   const [bracket, setBracket] = useState([]);
-
+  const { id } = useParams();
   wsClient.onmessage = (message) => {
     console.log(JSON.parse(message.data));
     setBracket(JSON.parse(message.data).bracket);
   };
+  console.log(id);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id}`)
@@ -56,7 +57,8 @@ const Bracket = ({ id }) => {
   return (
     <>
       <div className={styles.center}>
-      <button onClick={makeBracketHandler}>Завершить запись</button> {renderSwitch()}
+        <button onClick={makeBracketHandler}>Завершить запись</button>{" "}
+        {renderSwitch()}
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { GET_TOUR } from '../types/types'
+import { GET_TOUR } from "../types/types";
 
 export const createTournament = (inputValue, history) => {
   return async (dispatch, getState) => {
@@ -14,38 +14,31 @@ export const createTournament = (inputValue, history) => {
       });
       const result = await response.json();
       history.push(`/tournament/${result}`);
-    } catch (err) {
-
-    }
+    } catch (err) {}
   };
 };
 
 export const registrationTournamnet = (id) => {
-  
   return async (dispatch) => {
     try {
-      
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/reg`, {
+        await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/reg`, {
         method: "POST",
         credentials: "include",
         headers: {
           "Content-type": "application/json",
           "Access-Control-Allow-Credentials": "true",
         },
-        body: JSON.stringify({id}),
+        body: JSON.stringify({ id }),
       });
-      const result = await response.json();
     } catch (err) {
-      console.log('ERROR');
+      console.log("ERROR FROM registrationTournamnet");
     }
   };
 };
 
 export const getTournament = (id) => {
-
   return async (dispatch) => {
     try {
-      console.log('redux id',id);
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/${id}`, {
         method: "GET",
         credentials: "include",
@@ -55,14 +48,12 @@ export const getTournament = (id) => {
         },
       });
       const result = await response.json();
-      
       dispatch({
         type: GET_TOUR,
         payload: result,
       });
-      
     } catch (err) {
-      console.log('ERROR');
+      console.log("ERROR FROM getTournament");
     }
   };
 };
