@@ -14,7 +14,8 @@ const rootReducer = combineReducers({
   mainPageTours: toursReducer,
   ratings: ratingsReducer,
   tournamentsList,
-  tournamentItem
+  tournamentItem,
+  
 });
 
 export default rootReducer;

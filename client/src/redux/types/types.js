@@ -12,3 +12,4 @@ export const SIGNIN = "SIGNUP";
 export const GET_RATINGS = "GET_RATINGS";
 export const GET_TOUR_LIST = "GET_TOUR_LIST";
 export const GET_TOUR = "GET_TOUR";
+export const USER_IN_TOUR = "USER_IN_TOUR";
