@@ -15,7 +15,7 @@ const Match = () => {
   const [timer, setTimer] = useState(0);
   const hardckoredTournamentId = '6023899d8116e350cd9b2de8';
 
-  const matchData = useSelector((state) => state.matchReducer.match);
+  const matchData = useSelector((state) => state.match.match);
 
   useEffect(() => {
     dispatch(getMatchData(id));
@@ -26,19 +26,18 @@ const Match = () => {
   };
 
   const endMatchHandler = () => {
-    // dispatch(endMatch(id, timer));
     wsClient.send(JSON.stringify({ id, timer, tournamentId: hardckoredTournamentId }));
-    history.push('/bracket');
+    history.goBack();
   };
 
-  const plusPointHandler = async (id, playerName) => {
-    await dispatch(plusPoint(id, playerName));
-    wsClient.send(JSON.stringify({ id/* , playerName, plus: true */, tournamentId: hardckoredTournamentId }));
+  const plusPointHandler = (id, playerName) => {
+    dispatch(plusPoint(id, playerName));
+    wsClient.send(JSON.stringify({ id, playerName, plus: true, tournamentId: hardckoredTournamentId }));
   };
 
-  const minusPointHandler = async (id, playerName) => {
-    await dispatch(minusPoint(id, playerName));
-    wsClient.send(JSON.stringify({ id/* , playerName, minus: true */, tournamentId: hardckoredTournamentId }));
+  const minusPointHandler = (id, playerName) => {
+    dispatch(minusPoint(id, playerName));
+    wsClient.send(JSON.stringify({ id, playerName, minus: true, tournamentId: hardckoredTournamentId }));
   };
 
   return (

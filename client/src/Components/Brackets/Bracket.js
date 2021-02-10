@@ -11,7 +11,6 @@ const Bracket = () => {
   const hardckoredTournamentId = '6023899d8116e350cd9b2de8';
 
   wsClient.onmessage = (message) => {
-    console.log(JSON.parse(message.data));
     setBracket(JSON.parse(message.data).bracket);
   };
 

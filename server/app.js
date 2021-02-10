@@ -9,11 +9,14 @@ const passport = require("passport");
 const authRouter = require("./routes/auth");
 const passportSetup = require("./config/passport");
 const tournament = require("./routes/tournament");
+const wsServer = require('./ws');
 const profileRouter = require('./routes/profile');
 const compareRouter = require('./routes/compare');
 const tournamentlistRoter = require('./routes/tournamentsList');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+
+console.log(wsServer)
 
 const app = express();
 
