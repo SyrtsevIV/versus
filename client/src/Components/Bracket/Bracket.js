@@ -7,6 +7,7 @@ const Bracket = () => {
 
   return (
     <>
+      <div className={style.center}>
       <button onClick={closeHandler}>Закрыть запись</button>
       <div className="playoff-table">
         <div className="playoff-table-content">
@@ -99,6 +100,7 @@ const Bracket = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

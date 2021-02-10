@@ -16,7 +16,7 @@
 	transition: all 0.3s ease;
 	-webkit-transform: translateY(20px);
 					transform: translateY(20px);
-	opacity: 0;
+  opacity: 0;
 }
 
 .slide section * {
@@ -38,7 +38,7 @@
 .slide section span strong {
 	-webkit-transform: translateY(10px);
 					transform: translateY(10px);
-	opacity: 0;
+  opacity: 0;
 }
 
 .slide.animateIn.previous h1,
