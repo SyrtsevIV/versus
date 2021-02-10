@@ -16,7 +16,7 @@ export default function Activtournament() {
             <div className={styles.center} key={tour._id}>
               <h4>Название: {tour.title}</h4>
               {tour.bracket ? 
-                <Bracket id={tour._id} />
+                <Bracket tourId={tour._id} />
                 :
                 <div className={styles.center}>
                     <ol> Список участников:
@@ -27,7 +27,7 @@ export default function Activtournament() {
                 </div>
               }
               <h5>Где: {tour.place}</h5>
-              <h5>Когда: {tour.date}</h5>
+              <h5>Когда: {new Date(tour.date).toLocaleString('RU-ru')}</h5>
           </div>
         )}
         </Slider>
