@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { wsClient } from '../../App';
 import EightTeamBracket from './EightTeamBracket/EightTeamBracket';
 import FourTeamBracket from './FourTeamBracket/FourTeamBracket';
 import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
@@ -8,6 +9,11 @@ import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 const Bracket = () => {
   const [bracket, setBracket] = useState([]);
   const hardckoredTournamentId = '6023899d8116e350cd9b2de8';
+
+  wsClient.onmessage = (message) => {
+    console.log(JSON.parse(message.data));
+    setBracket(JSON.parse(message.data).bracket);
+  };
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${hardckoredTournamentId}`)

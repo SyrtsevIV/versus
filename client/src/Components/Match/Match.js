@@ -6,12 +6,14 @@ import Timecode from 'react-timecode';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getMatchData, plusPoint, minusPoint, endMatch } from '../../redux/actionCreators/match';
+import { wsClient } from '../../App';
 
 const Match = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
   const [timer, setTimer] = useState(0);
+  const hardckoredTournamentId = '6023899d8116e350cd9b2de8';
 
   const matchData = useSelector((state) => state.matchReducer.match);
 
@@ -24,8 +26,19 @@ const Match = () => {
   };
 
   const endMatchHandler = () => {
-    dispatch(endMatch(id, timer));
+    // dispatch(endMatch(id, timer));
+    wsClient.send(JSON.stringify({ id, timer, tournamentId: hardckoredTournamentId }));
     history.push('/bracket');
+  };
+
+  const plusPointHandler = async (id, playerName) => {
+    await dispatch(plusPoint(id, playerName));
+    wsClient.send(JSON.stringify({ id/* , playerName, plus: true */, tournamentId: hardckoredTournamentId }));
+  };
+
+  const minusPointHandler = async (id, playerName) => {
+    await dispatch(minusPoint(id, playerName));
+    wsClient.send(JSON.stringify({ id/* , playerName, minus: true */, tournamentId: hardckoredTournamentId }));
   };
 
   return (
@@ -37,8 +50,8 @@ const Match = () => {
         <div className={style.player}>
           <h4>{matchData?.player1?.login}</h4>
           <p>Score: {matchData?.score?.player1}</p>
-          <button onClick={() => dispatch(minusPoint(matchData?._id, 'player1'))}>-</button>
-          <button onClick={() => dispatch(plusPoint(matchData?._id, 'player1'))}>+</button>
+          <button onClick={() => minusPointHandler(matchData?._id, 'player1')}>-</button>
+          <button onClick={() => plusPointHandler(matchData?._id, 'player1')}>+</button>
         </div>
         <div className={style.player}>
           <h4>vs</h4>
@@ -46,8 +59,8 @@ const Match = () => {
         <div className={style.player}>
           <h4>{matchData?.player2?.login}</h4>
           <p>Score: {matchData?.score?.player2}</p>
-          <button onClick={() => dispatch(minusPoint(matchData?._id, 'player2'))}>-</button>
-          <button onClick={() => dispatch(plusPoint(matchData?._id, 'player2'))}>+</button>
+          <button onClick={() => minusPointHandler(matchData?._id, 'player2')}>-</button>
+          <button onClick={() => plusPointHandler(matchData?._id, 'player2')}>+</button>
         </div>
       </div>
       <button onClick={() => endMatchHandler()}>Завершить матч</button>

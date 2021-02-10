@@ -23,7 +23,9 @@ import Preloader from "./Components/Preloader/Preloader";
 import Match from './Components/Match/Match';
 import Tournament from "./Components/Tournament/Tournament";
 
+export const wsClient = new WebSocket('ws://localhost:1234');
 function App() {
+
   const dispatch = useDispatch();
   const userSession = useSelector((store) => store.authReducer.userSession);
   const [loading, setLoading] = useState(true)
