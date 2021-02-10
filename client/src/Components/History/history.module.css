@@ -1,0 +1,8 @@
+.match {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: blue;
+  padding: 5px 15px;
+  color: aliceblue;
+}

@@ -31,7 +31,7 @@ function App() {
 
   const dispatch = useDispatch();
   const userSession = useSelector((store) => store.authReducer.userSession);
-  console.log(typeof userSession);
+  
   useEffect(() => {
     dispatch(userInSession());
   }, [dispatch]);
@@ -96,7 +96,7 @@ function App() {
           </Route>
 
           {userSession && userSession ? (
-            <Route path="/profile/:id">
+            <Route exact path="/profile/:id">
               <Profile />
             </Route>
           ) : null}

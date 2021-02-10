@@ -36,7 +36,6 @@ const initState = {
   ratings: {
     tableTennis: [],
   },
-  match: {},
   tableTennis: [],
   tourList: {
     past: [],
@@ -44,7 +43,17 @@ const initState = {
     future: [],
   },
   tourItem: {},
-  userInTour: []
+  userInTour: [],
+  history: {
+    player1: '',
+    player2: '',
+    duration: 0,
+    tour: '',
+    score: {
+      player1: 0,
+      player2: 0
+    }
+  }
 }
 
 export default initState;

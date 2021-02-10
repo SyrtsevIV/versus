@@ -51,6 +51,13 @@ router.post('/upload/:id', upload.single('filedata'), async (req, res) => {
   res.json(user);
 });
 
+router.get('/history/:id', async (req, res) => {
+  const { id } = req.params;
+  const matches = await Match.find().populate('player1').populate('player2');
+  const userMatches = matches.filter((el) => String(el.player1._id) === id || String(el.player2._id) === id);
+  res.json(userMatches);
+});
+
 router.post('/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -63,11 +70,5 @@ router.post('/:id', async (req, res) => {
     res.send('Что то пошло не так =(');
   }
 });
-
-router.get('/history/:id', async (req, res) => {
-  const { id } = req.params;
-
-  // const matches = await Match.find({});
-})
 
 module.exports = router;
