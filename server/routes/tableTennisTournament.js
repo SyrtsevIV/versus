@@ -58,9 +58,9 @@ async function makePairs(array, num = array.length, tour) {
 
 // в зависимости от количесва участников вызывает функцию makePairs
 function getBracket(array) {
-  if (array.length < 8 && array.length > 4) return makePairs(array, 8, 'quarterfinals');
-  if (array.length < 16 && array.length > 8) return makePairs(array, 16, 'oneEighth');
-  if (array.length < 32 && array.length > 16) return makePairs(array, 32, 'oneSixteenth');
+  if (array.length <= 8 && array.length > 4) return makePairs(array, 8, 'quarterfinals');
+  if (array.length <= 16 && array.length > 8) return makePairs(array, 16, 'oneEighth');
+  if (array.length <= 32 && array.length > 16) return makePairs(array, 32, 'oneSixteenth');
   if (array.length > 32) return 'перебор';
   return makePairs(array, 4, 'semifinal');
 }
@@ -256,6 +256,7 @@ router.get('/:tournamentId/bracket/new', async (req, res) => {
   });
 
   const firstRoundBracket = await getBracket(tournament.participants);
+  console.log('firstRoundBracket.length', firstRoundBracket.length);
 
   let semifinal = [];
   let quarterfinals = [];
