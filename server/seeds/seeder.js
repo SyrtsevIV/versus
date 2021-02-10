@@ -35,6 +35,7 @@ async function seedUsers(num) {
 // Seed stats
 async function seedStats() {
   const users = await User.find();
+  console.log(users.length);
   for (let i = 0; i < users.length; i += 1) {
     const stats = await Stats.create({
       sport: 'table tennis',
@@ -80,9 +81,9 @@ async function seedTournament(num) {
 // Seed Brackets
 
 const start = async () => {
-  // await seedUsers(32);
-  // await seedStats();
-  await seedTournament(4);
+  await seedUsers(8);
+  await seedStats();
+  await seedTournament(1);
 };
 
 start();
