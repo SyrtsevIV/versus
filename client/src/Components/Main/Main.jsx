@@ -24,17 +24,11 @@ const Main = () => {
 
   return (
     <div>
-      <h1>Main page</h1>
       <div className={styles.mainNav}>
         <li onClick={() => changeHandler('past')} className="waves-effect waves-light btn-large">Прошедшие турниры</li>
         <li onClick={() => changeHandler('current')} className="waves-effect waves-light btn-large">Текущие турниры</li>
         <li onClick={() => changeHandler('future')} className="waves-effect waves-light btn-large">Будущие турниры</li>
       </div>
-        <div className={styles.mainNav}>
-      {mainPage === 'current' && <h4>Текущие турниры:</h4>}
-      {mainPage === 'future' && <h4>Будущие турниры:</h4>}
-      {mainPage === 'past' && <h4>Прошедшие турниры:</h4>}
-        </div>
         <Activtournament />
     </div>
     );
