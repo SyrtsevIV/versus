@@ -14,16 +14,20 @@ export default function Activtournament() {
       <Slider>
           {tours.map(tour =>
             <div className={styles.center} key={tour._id}>
-              <Bracket />
-            {/* <div>
-              <span>{tour.status}</span>
-              <p>Активный {tour._id}</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                <br/>
-              <button>Нажми меня полностью</button> <button>И ещё раз нажми</button>
-            </div> */}
+              <h4>Название: {tour.title}</h4>
+              {tour.bracket ? 
+                <Bracket tour={tour} />
+                :
+                <div className={styles.center}>
+                    <ol> Список участников:
+                      {tour.participants.map(user =>
+                        <li key={user._id}>{user.login}</li>
+                        )}
+                    </ol>
+                </div>
+              }
+              <h5>Где: {tour.place}</h5>
+              <h5>Когда: {tour.date}</h5>
           </div>
         )}
         </Slider>

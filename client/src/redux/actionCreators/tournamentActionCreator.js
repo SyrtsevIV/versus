@@ -3,7 +3,7 @@ import { GET_TOUR } from '../types/types'
 export const createTournament = (inputValue, history) => {
   return async (dispatch, getState) => {
     try {
-      const response = await fetch("http://localhost:3001/tournament/new", {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/new`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -25,7 +25,7 @@ export const registrationTournamnet = (id) => {
   return async (dispatch) => {
     try {
       
-      const response = await fetch("http://localhost:3001/tournament/reg", {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/reg`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -46,7 +46,7 @@ export const getTournament = (id) => {
   return async (dispatch) => {
     try {
       
-      const response = await fetch(`http://localhost:3001/tournament/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/${id}`, {
         method: "GET",
         credentials: "include",
         headers: {

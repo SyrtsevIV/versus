@@ -3,7 +3,7 @@ import { GET_STATS, COMPARE_STATS, EDIT_PROFILE } from '../types/types'
 // Получение стастики авторизованного пользователя
 export function getUserProfile(id) {
   return async (dispatch) => {
-    const request = await fetch(`http://localhost:3001/profile/${id}`, {
+    const request = await fetch(`${process.env.REACT_APP_SERVER_URL}/profile/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type':'application/json'
@@ -23,7 +23,7 @@ export function getUserProfile(id) {
 export function findUserStats(login) {
   
   return async (dispatch) => {
-    const request = await fetch(`http://localhost:3001/compare/${login}`, {
+    const request = await fetch(`${process.env.REACT_APP_SERVER_URL}/compare/${login}`, {
       method: 'GET',
       headers: {
         'Content-Type':'application/json'

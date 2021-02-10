@@ -4,7 +4,7 @@ import { GET_TOUR_LIST } from '../types/types'
 export function getTournamentsList() {
   return async (dispatch) => {
     console.log('я тут');
-    const request = await fetch(`http://localhost:3001/tournamentlist`, {
+    const request = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournamentlist`, {
       method: 'GET',
       headers: {
         'Content-Type':'application/json'

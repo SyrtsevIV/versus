@@ -30,7 +30,7 @@ const Signin = () => {
         </div>
         <button className='btn col s2 offset-s5' onClick={() => dispatch(signinUser(input, history, setErrorValue))}>Войти</button>
       </div>
-      <a href='http://localhost:3001/auth/google'><button>Войти через Google</button></a>
+      <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}><button>Войти через Google</button></a>
       {errorValue && errorValue ? errorValue : null}
     </>
   );

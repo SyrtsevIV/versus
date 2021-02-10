@@ -33,7 +33,7 @@ const Signup = () => {
           dispatch(signupUser(input, history, setErrorValue))
         }}>Зарегистрироваться</button>
       </form>
-      <a href='http://localhost:3001/auth/google'><button>Войти через Google</button></a>
+      <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}><button>Войти через Google</button></a>
       {errorValue && errorValue ? errorValue  : null}
     </>
   );

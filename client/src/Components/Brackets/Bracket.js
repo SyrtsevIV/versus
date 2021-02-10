@@ -4,13 +4,13 @@ import EightTeamBracket from './EightTeamBracket/EightTeamBracket';
 import FourTeamBracket from './FourTeamBracket/FourTeamBracket';
 import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
 import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
+import styles from './bracket.module.css';
 
-const Bracket = () => {
+const Bracket = ({ tour }) => {
   const [bracket, setBracket] = useState([]);
-  const hardckoredTournamentId = '6023899d8116e350cd9b2de8';
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${hardckoredTournamentId}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${tour._id}`)
       .then((res) => res.json())
       .then((json) => {
         return setBracket(json?.bracket);
@@ -19,7 +19,7 @@ const Bracket = () => {
 
   const fetchBracket = async () => {
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${hardckoredTournamentId}/bracket/new`
+      `${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${tour._id}/bracket/new`
     );
     const resJson = await res.json();
     setBracket(resJson);
@@ -44,12 +44,14 @@ const Bracket = () => {
         return <FourTeamBracket bracket={bracket} />;
       }
     }
-    return '...';
+    return null;
   };
 
   return (
     <>
-      <button onClick={makeBracketHandler}>render bracket</button> {renderSwitch()}
+      <div className={styles.center}>
+      <button onClick={makeBracketHandler}>Завершить запись</button> {renderSwitch()}
+      </div>
     </>
   );
 };
