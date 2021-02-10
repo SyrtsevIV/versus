@@ -1,9 +1,11 @@
+import styles from './footer.module.css';
+
 const Footer = () => {
   return (
-    <footer className="page-footer">
-          <div className="container">
+    <footer className={styles.center}>
+
             © 2021 Copyright
-          </div>
+
         </footer>
   );
 };
