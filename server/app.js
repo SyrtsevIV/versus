@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const multer = require('multer');
 const cors = require("cors");
 const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -14,6 +15,7 @@ const compareRouter = require('./routes/compare');
 const tournamentlistRoter = require('./routes/tournamentsList');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+
 
 const app = express();
 
@@ -36,13 +38,13 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
-
-app.use(passport.initialize());
-app.use(passport.session());
-
+app.use(express.static('public'));
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true,
+}));
+
 app.set("sessionName", "sid");
 app.use(
   session({
@@ -52,14 +54,6 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },
-  })
-);
-// Значения корс для приема фетчей с клиента.
-app.use(
-  cors({
-    credentials: true,
-    origin: "http://localhost:3000",
-    // optionsSuccessStatus: 200,
   })
 );
 

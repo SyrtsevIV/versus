@@ -13,3 +13,5 @@ export const GET_RATINGS = "GET_RATINGS";
 export const GET_TOUR_LIST = "GET_TOUR_LIST";
 export const GET_TOUR = "GET_TOUR";
 export const USER_IN_TOUR = "USER_IN_TOUR";
+export const EDIT_AVATAR = "EDIT_AVATAR";
+export const GET_HISTORY = "GET_HISTORY";

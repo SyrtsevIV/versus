@@ -36,8 +36,8 @@ const Ratings = () => {
 
               <div className={styles.stats}>
                 <li className={`collection-item avatar ${styles.li}`}>
-                    <img src={stats.avatar} alt="" className="circle" />
-                    <span className="title">{stats.user.login}</span>
+                    <img src={`http://localhost:3001/images/${stats?.user?.avatar}`} alt="" className="circle" />
+                    <span className="title">{stats?.user?.login}</span>
                     <p>
                       <br />
                         Рейтинг MMR: <b>{stats.mmr}</b>

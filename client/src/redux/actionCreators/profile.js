@@ -1,4 +1,4 @@
-import { GET_STATS, COMPARE_STATS, EDIT_PROFILE } from '../types/types'
+import { GET_STATS, COMPARE_STATS, EDIT_PROFILE, EDIT_AVATAR, GET_HISTORY } from '../types/types'
 
 // Получение стастики авторизованного пользователя
 export function getUserProfile(id) {
@@ -39,22 +39,50 @@ export function findUserStats(login) {
   }
 }
 
-// export function getUserHistory(id) => {
-  
-//   return async (dispatch) {
-//     const request = await fetch('', {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type':'application/json'
-//       },
-//       credentials: 'include',
-//     });
-    
-//     const result = await request.json();
+// Обновление аватарки
+export function editAvatar(file, id) {
 
-//     dispatch({
-//       type: COMPARE_STATS,
-//       payload: result
-//     })
-//   }
-// }
+  return async (dispatch) => {
+    console.log(file, 'file V CREATOR');
+    const data = new FormData()
+    data.append("filedata", file)
+
+    console.log(data, 'DATA!!!!!')
+
+    const response = await fetch(`http://localhost:3001/profile/upload/${id}`, {
+      method: "POST",
+      body: data,
+      credentials: 'include'
+    })
+
+    const result = await response.json();
+
+    console.log(result)
+
+    dispatch({
+      type: EDIT_AVATAR,
+      payload: result
+    })
+  }
+}
+
+
+export function getUserHistory(id) {
+  
+  return async (dispatch) => {
+    const request = await fetch(`http://localhost:3001/profile/history/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type':'application/json'
+      },
+      credentials: 'include',
+    });
+    
+    const result = await request.json();
+    
+    dispatch({
+      type: GET_HISTORY,
+      payload: result
+    })
+  }
+}

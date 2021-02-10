@@ -18,7 +18,7 @@ const User = mongoose.model('User', {
   },
   avatar: {
     type: String,
-    defaut: 'https://img.favpng.com/2/12/12/computer-icons-portable-network-graphics-user-profile-avatar-png-favpng-L1ihcbxsHbnBKBvjjfBMFGbb7.jpg',
+    default: '/default-user.jpg',
   },
   stats: { type: mongoose.ObjectId, ref: 'Stats' },
   googleId: String,
