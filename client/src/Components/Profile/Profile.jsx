@@ -5,6 +5,7 @@ import styles from '../Profile/profile.module.css'
 import { useParams } from 'react-router-dom'
 import { Doughnut, Radar } from 'react-chartjs-2'
 import Cup from '../Cup/Cup';
+import History from '../History/History';
 
 const Profile = () => {
   const {id} = useParams()
@@ -141,7 +142,7 @@ const Profile = () => {
         
         <div className={styles.history}>
           <p>История игр:</p>
-          
+          <History />
         </div>
 
         <div className={styles.doughnut}>

@@ -79,7 +79,7 @@ export function getUserHistory(id) {
     });
     
     const result = await request.json();
-    
+
     dispatch({
       type: GET_HISTORY,
       payload: result
