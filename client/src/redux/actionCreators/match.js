@@ -45,14 +45,14 @@ export function minusPoint(id, playerName) {
   };
 }
 
-export function endMatch(id, time) {
+export function endMatch(id, timer) {
   return async (dispatch) => {
     const req = await fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/match/end/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ time }),
+      body: JSON.stringify({ timer }),
     });
     const res = await req.json();
     dispatch({

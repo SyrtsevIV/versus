@@ -1,10 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-await-in-loop */
 const express = require('express');
+const WebSocket = require('ws');
 const Bracket = require('../models/Bracket');
 const Tournament = require('../models/Tournament');
 const Match = require('../models/Match');
 const Stats = require('../models/Stats');
+
+const wsServer = new WebSocket.Server({ port: 1234 });
 
 const router = express.Router();
 
@@ -260,6 +263,193 @@ router.get('/:tournamentId', async (req, res) => {
   res.json(tournament);
 });
 
+wsServer.on('connection', (client) => {
+  client.on('message', async (data) => {
+    const { id, timer, tournamentId, playerName, plus, minus } = JSON.parse(data);
+    if (timer) {
+      const currentTourMatch = await Match.findById(id).populate('player1').populate('player2');
+      currentTourMatch.ended = true;
+      currentTourMatch.duration = msToTime(timer);
+      currentTourMatch.save();
+      let winnerId;
+      let losserId;
+      let winnerScore;
+      let losserScore;
+      if (currentTourMatch.score.player1 > currentTourMatch.score.player2) {
+        winnerId = currentTourMatch.player1._id;
+        losserId = currentTourMatch.player2._id;
+        winnerScore = currentTourMatch.score.player1;
+        losserScore = currentTourMatch.score.player2;
+      } else {
+        winnerId = currentTourMatch.player2._id;
+        losserId = currentTourMatch.player1._id;
+        winnerScore = currentTourMatch.score.player2;
+        losserScore = currentTourMatch.score.player1;
+      }
+      const winnerStats = await Stats.findOne({ user: winnerId });
+      const losserStats = await Stats.findOne({ user: losserId });
+      const newRating = getRating(winnerStats.mmr, losserStats.mmr, currentTourMatch.tour);
+      winnerStats.won += 1;
+      winnerStats.score += winnerScore;
+      winnerStats.missed += losserScore;
+      winnerStats.mmr = newRating[0];
+      losserStats.lost += 1;
+      losserStats.score += losserScore;
+      losserStats.missed += winnerScore;
+      losserStats.mmr = newRating[1];
+
+      const { tour } = currentTourMatch;
+      const bracket = await Bracket.findOne({ [tour]: id });
+      let currentTourMatchIndex;
+      let nextTourMatchIndex;
+      if (Array.isArray(bracket[tour])) {
+        currentTourMatchIndex = bracket[tour].indexOf(id);
+        nextTourMatchIndex = Math.floor(currentTourMatchIndex / 2);
+      }
+      await bracket
+        .populate('oneSixteenth')
+        .populate('oneEighth')
+        .populate('quarterfinals')
+        .populate('semifinal')
+        .populate('thirdPlace')
+        .populate('final')
+        .execPopulate();
+      let nextTourMatch = {};
+      let thirdPlaceMatch = {};
+      const phantom = await Match.create({ phantom: '' });
+
+      switch (tour) {
+        case 'oneSixteenth':
+          await nextTour(
+            bracket,
+            bracket.oneEighth,
+            currentTourMatchIndex,
+            nextTourMatchIndex,
+            nextTourMatch,
+            winnerId,
+            'oneEighth',
+            phantom
+          );
+          break;
+
+        case 'oneEighth':
+          await nextTour(
+            bracket,
+            bracket.quarterfinals,
+            currentTourMatchIndex,
+            nextTourMatchIndex,
+            nextTourMatch,
+            winnerId,
+            'quarterfinals',
+            phantom
+          );
+          break;
+
+        case 'quarterfinals':
+          await nextTour(
+            bracket,
+            bracket.semifinal,
+            currentTourMatchIndex,
+            nextTourMatchIndex,
+            nextTourMatch,
+            winnerId,
+            'semifinal',
+            phantom
+          );
+          break;
+        case 'semifinal':
+          if (bracket.final?.player1 || bracket.final?.player2) {
+            nextTourMatch = bracket.final;
+            nextTourMatch[whichPlayer(currentTourMatchIndex)] = winnerId;
+            nextTourMatch.save();
+          } else {
+            nextTourMatch = await Match.create({
+              [whichPlayer(currentTourMatchIndex)]: winnerId,
+              tour: 'final',
+            });
+            bracket.final = nextTourMatch._id;
+            await bracket.markModified('final');
+          }
+          if (bracket.thirdPlace?.player1 || bracket.thirdPlace?.player2) {
+            thirdPlaceMatch = bracket.thirdPlace;
+            thirdPlaceMatch[whichPlayer(currentTourMatchIndex)] = losserId;
+            thirdPlaceMatch.save();
+          } else {
+            thirdPlaceMatch = await Match.create({
+              [whichPlayer(currentTourMatchIndex)]: losserId,
+              tour: 'thirdPlace',
+            });
+            bracket.thirdPlace = thirdPlaceMatch._id;
+            await bracket.markModified('thirdPlace');
+          }
+          break;
+        case 'final':
+          winnerStats.gold += 1;
+          losserStats.silver += 1;
+          break;
+        case 'thirdPlace':
+          winnerStats.bronze += 1;
+          break;
+        default:
+          break;
+      }
+      await bracket.save();
+      await winnerStats.save();
+      await losserStats.save();
+    }
+    const tournament = await Tournament.findById(tournamentId)
+      .populate({
+        path: 'bracket',
+        populate: { path: 'oneSixteenth', populate: { path: 'player1' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'oneSixteenth', populate: { path: 'player2' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'oneEighth', populate: { path: 'player1' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'oneEighth', populate: { path: 'player2' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'quarterfinals', populate: { path: 'player1' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'quarterfinals', populate: { path: 'player2' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'semifinal', populate: { path: 'player1' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'semifinal', populate: { path: 'player2' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'thirdPlace', populate: { path: 'player1' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'thirdPlace', populate: { path: 'player2' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'final', populate: { path: 'player1' } },
+      })
+      .populate({
+        path: 'bracket',
+        populate: { path: 'final', populate: { path: 'player2' } },
+      });
+    wsServer.clients.forEach((thisClient) => thisClient.send(JSON.stringify(tournament)));
+  });
+});
+
 // создание турнирной сетки
 router.get('/:tournamentId/bracket/new', async (req, res) => {
   const tournament = await Tournament.findById(req.params.tournamentId).populate({
@@ -268,7 +458,6 @@ router.get('/:tournamentId/bracket/new', async (req, res) => {
   });
 
   const firstRoundBracket = await getBracket(tournament.participants);
-  console.log('firstRoundBracket.length', firstRoundBracket.length);
 
   let semifinal = [];
   let quarterfinals = [];
@@ -310,7 +499,7 @@ router.get('/:tournamentId/bracket/new', async (req, res) => {
   res.json(bracket);
 });
 
-// завершить регистрацию на турнир
+// завершить матч
 router.put('/match/end/:id', async (req, res) => {
   const currentTourMatch = await Match.findById(req.params.id).populate('player1').populate('player2');
   currentTourMatch.ended = true;
