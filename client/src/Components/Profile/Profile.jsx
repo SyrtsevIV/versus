@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserProfile, findUserStats, editUserProfile } from '../../redux/actionCreators/profile';
+import { getUserProfile, findUserStats, editAvatar } from '../../redux/actionCreators/profile';
 import styles from '../Profile/profile.module.css'
 import { useParams } from 'react-router-dom'
 import { Doughnut, Radar } from 'react-chartjs-2'
@@ -11,12 +11,14 @@ const Profile = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.profileStats);
   const enemy = useSelector((state) => state.profileStats.compare)
-  // console.log(userSession, 'userSession!!!!!!!!!!!');
+  
   const [chartData, setChartData] = useState({})
   const [radarData, setRadarData] = useState({})
 
   // State для хранения текста из инпута для сравнения игроков
   const [inputText, setInputText] = useState('');
+  // State для хранения пользовательской аватарки
+  const [file, setFile] = useState()
 
   const won = user?.stats?.won
   const lost = user?.stats?.lost
@@ -91,52 +93,74 @@ const Profile = () => {
     dispatch(findUserStats(inputText))
   }
   
+  // Добавление пользовательской аватарки
+  const sendAvatar = (e) => {
+    e.preventDefault();
+    const data = new FormData()
+    data.append("file", file)
+    console.log(file);
+    dispatch(editAvatar(file, id))
+  };
+  
+
   return (
     <div>
       
       <div className={styles.topBlock}>
         
         <div className={styles.profileBlock}>
-          <h3>Login: {user?.user.login}</h3>
+          <h4>Login: {user?.user.login}</h4>
+        
+          <img src={`http://localhost:3001/images/${user?.user?.avatar}`} alt="" />
+
+          <div className={styles.changeAvatar}>
+            
+            <form action="#" method="POST" encType="multipart/form-data" className={styles.form}>
+              <input type="file" id="file" name="filedata" accept=".jpg" onChange={(event) => {
+                const file = event.target.files[0];
+                setFile(file)
+              }}/>
+              <button onClick={(event) => sendAvatar(event)}>Обновить фотографию</button>
+            </form>
+          </div>
         </div>
 
-        <div className={styles.avatar}>
-          <img src={user?.user.avatar} alt=""></img>
-          <button>Обновить фотографию</button>
-        </div>
+        <div className={styles.rankBlock}>
+          <div>
+            <p>MMR: {user?.stats?.mmr}</p>
+            <p>Позиция в общем рейтинге: {user?.rating} из {user?.allPlayerValue}</p>
+          </div>
+        </div>  
           
         <Cup />
 
       </div>
 
-      <div className={styles.rankBlock}>
-        <div>
-          <p>MMR: {user?.stats?.mmr}</p>
-          <p>Позиция в общем рейтинге: {user?.rating} из {user?.allPlayerValue}</p>
-        </div>
-      </div>
-
       
       <div className={styles.statsBlock}>
         
-        <div>
+        <div className={styles.history}>
           <p>История игр:</p>
           
         </div>
 
-        <div>
+        <div className={styles.doughnut}>
           <div className={styles.gameInfo}>
             <p>Всего игр : {gameValue}</p>
             {percent === Number ? <p>Процент побед: {percent} %</p> : <p>Вы пока не сыграли матчей</p>}
           </div>
-          <Doughnut 
-            data={chartData}
-            width={300}
-            height={300}
-          />
+         
+         <div className={styles.doughnutDiagram}>
+          <Doughnut
+              data={chartData}
+              width={300}
+              height={300}
+            />
+         </div>
+          
         </div>
 
-        <div>
+        <div className={styles.radar}>
           <div className={styles.gameInfo}>
             <p>Сравнить статистику</p>
             <div className={styles.statsBlock}>
@@ -144,11 +168,13 @@ const Profile = () => {
               <button type="submit" onClick={() => {compareStats(inputText)}}>Сравнить</button>
             </div>
           </div>
-          <Radar 
-            data={radarData}
-            width={380}
-            height={380}
-          />
+          <div className={styles.radarDiagram}>
+            <Radar
+              data={radarData}
+              width={300}
+              height={300}
+            />
+          </div>
         </div>
       </div>
 

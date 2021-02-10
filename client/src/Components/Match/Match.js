@@ -25,7 +25,7 @@ const Match = () => {
 
   const endMatchHandler = () => {
     dispatch(endMatch(id, timer));
-    history.push('/bracket');
+    history.goBack();
   };
 
   return (

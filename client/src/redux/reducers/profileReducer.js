@@ -1,4 +1,4 @@
-import { GET_STATS, COMPARE_STATS, EDIT_PROFILE } from '../types/types';
+import { GET_STATS, COMPARE_STATS, EDIT_PROFILE, EDIT_AVATAR } from '../types/types';
 
 export default function profileStats(state = {}, action) {
   switch (action.type) {
@@ -11,6 +11,8 @@ export default function profileStats(state = {}, action) {
       };
     case COMPARE_STATS:
       return {...state, compare: action.payload};
+    case EDIT_AVATAR:
+      return {...state, user: action.payload }
     case EDIT_PROFILE:
       return {...state, user: action.payload }
     default:

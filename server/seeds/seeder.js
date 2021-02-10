@@ -80,9 +80,9 @@ async function seedTournament(num) {
 // Seed Brackets
 
 const start = async () => {
-  // await seedUsers(32);
-  // await seedStats();
-  await seedTournament(4);
+  await seedUsers(10);
+  await seedStats(10);
+  await seedTournament(10);
 };
 
 start();

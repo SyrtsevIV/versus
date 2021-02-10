@@ -7,7 +7,7 @@ import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 
 const Bracket = () => {
   const [bracket, setBracket] = useState([]);
-  const hardckoredTournamentId = '6022723954609e48f9a5472d';
+  const hardckoredTournamentId = '60227c8e1e1a608af8b7ba49';
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${hardckoredTournamentId}`)

@@ -47,7 +47,7 @@ const TournamentList = () => {
             <span>Дата: {new Date(el.date).toLocaleString('RU-ru')}</span>
             <span>Описание: {el.description}</span>
             <span>Местро проведения: {el.place}</span>
-            <span>Организатор: {el.creator.login}</span>
+            <span>Организатор: {el.creator?.login}</span>
             <div className={styles.action}>
               <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
             </div>
