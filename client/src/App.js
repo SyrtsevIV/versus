@@ -101,10 +101,7 @@ function App() {
             </Route>
           ) : null}
 
-          <Route exact path="/bracket">
-            <Bracket />
-          </Route>
-          <Route exact path="/tabletennis/match/:id">
+          <Route exact path="/tabletennis/match/:id/:tourId">
             <Match />
           </Route>
           <Route exact path="/signin">

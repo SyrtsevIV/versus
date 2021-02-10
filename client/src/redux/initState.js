@@ -31,12 +31,16 @@ const initState = {
   profile: {},
   userSession: {},
   mainPage: '',
-  match: {},
+  match: {
+    score: {
+      player1: 0,
+      player2: 0,
+    },
+  },
   mainPageTours: [],
   ratings: {
     tableTennis: [],
   },
-  match: {},
   tableTennis: [],
   tourList: {
     past: [],

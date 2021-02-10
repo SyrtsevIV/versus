@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   mainPage: mainPageReducer,
   mainPageTours: toursReducer,
   ratings: ratingsReducer,
-  matchReducer,
+  match: matchReducer,
   tournamentsList,
   tournamentItem,
   

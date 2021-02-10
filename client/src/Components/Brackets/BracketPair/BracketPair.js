@@ -2,11 +2,11 @@ import style from '../bracket.module.css';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-const BracketPair = ({ match }) => {
+const BracketPair = ({ match, tourId }) => {
   const history = useHistory();
 
   const startMatchHandler = (id) => {
-    history.push(`/tabletennis/match/${id}`);
+    history.push(`/tabletennis/match/${id}/${tourId}`);
   };
 
   return (
