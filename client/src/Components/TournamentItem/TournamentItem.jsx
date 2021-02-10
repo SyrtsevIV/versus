@@ -19,22 +19,25 @@ const TournamentItem = () => {
     <>
       <div className={styles.titleBlock}>
         <h1>{tourItem.title}</h1>
-        <span>Место проведения: {tourItem.place}</span>
-        <span>Организатор: {tourItem.creator?.login}</span>
+        <p>Место проведения: {tourItem.place}</p>
+        <p>Организатор: {tourItem.creator?.login}</p>
         <div>
-          <span>Описание: {tourItem.description}</span>
+          <p>Описание: {tourItem.description}</p>
         </div>
       </div>
       
       <div>
-        {tourItem?.status !== 'future' ? <Bracket tour={id}/> : null }
+        {tourItem?.bracket ? <Bracket tourCreatorId={tourItem.creator?._id} />
+          : 
+          <div className={styles.titleBlock}>
+            <ol> <b>Список участников:</b>
+              {tourItem.participants && tourItem.participants.map((user) => (
+                <li key={user._id}>{user.login}</li>
+              ))}
+            </ol>
+          </div>
+          }
       </div>
-
-      <ul>
-        {tourItem.participants && tourItem.participants.map((el) => (
-          <li key={el._id}>{el.login}</li>
-        ))}
-      </ul>
     </>
   );
 };
