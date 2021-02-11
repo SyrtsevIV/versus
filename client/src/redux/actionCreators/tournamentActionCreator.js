@@ -59,3 +59,25 @@ export const getTournament = (id) => {
     }
   };
 };
+
+export const changeTournamentStatus = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournament/status/${id}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      });
+      const result = await response.json();
+      dispatch({
+        type: GET_TOUR,
+        payload: result,
+      });
+    } catch (err) {
+      console.log("ERROR FROM getTournament");
+    }
+  };
+};
