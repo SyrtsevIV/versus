@@ -8,6 +8,7 @@ const FourTeamBracket = ({ bracket, tourId }) => {
   useEffect(() => {
     // Select the node that will be observed for mutations
     const targetNode = refBracketWr.current;
+    console.log(targetNode);
 
     // Options for the observer (which mutations to observe)
     const config = { attributes: true, childList: true, subtree: true, characterData: true };
@@ -41,7 +42,7 @@ const FourTeamBracket = ({ bracket, tourId }) => {
   }, []);
 
   return (
-    <div className={`${style['playoff-table']} ${style['height-250']}`}>
+    <div ref={refBracketWr} className={`${style['playoff-table']} ${style['height-250']}`}>
       <div className={`${style['playoff-table-content']}`}>
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>

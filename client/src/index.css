@@ -49,3 +49,15 @@ a {
 a:hover {
   color: unset;
 }
+
+.btn-outline-primary {
+  color: tomato;
+  border-color: tomato;
+  outline: none;
+}
+
+.btn-outline-primary:hover {
+  background-color: tomato;
+  border-color: tomato;
+}
+

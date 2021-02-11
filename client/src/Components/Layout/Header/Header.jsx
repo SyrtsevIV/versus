@@ -24,7 +24,7 @@ const Header = () => {
               Создать турнир
         </Link>
           ) : (
-            <Link className="navbar-brand" to="/signup">
+            <Link className="navbar-brand" to="/tournament/new">
               Создать турнир
             </Link>
           )}

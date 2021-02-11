@@ -1,0 +1,13 @@
+.container {
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px;
+}
