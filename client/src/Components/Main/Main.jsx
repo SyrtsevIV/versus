@@ -25,7 +25,7 @@ const Main = () => {
   return (
     <div>
       <div className={styles.mainNav}>
-        <div className="btn-group p-2" role="group" aria-label="Basic outlined example">
+        <div className="btn-group p-4" role="group" aria-label="Basic outlined example">
           <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off"  />
           <label onClick={() => changeHandler('past')} className="btn btn-outline-primary" htmlFor="btnradio1">Прошедшие турниры</label>
 

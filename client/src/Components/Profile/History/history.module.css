@@ -13,6 +13,12 @@
   text-align: center;
 }
 .score {
-  padding: 3px 3px;
+  padding: 3px 7px;
   background-color: grey;
+}
+.list {
+  list-style-type: none;
+}
+.listBlock {
+  padding: 0;
 }

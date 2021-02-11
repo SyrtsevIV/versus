@@ -2,6 +2,7 @@ import { GET_STATS, COMPARE_STATS, EDIT_PROFILE, EDIT_AVATAR, GET_HISTORY } from
 
 // Получение стастики авторизованного пользователя
 export function getUserProfile(id) {
+ 
   return async (dispatch) => {
     const request = await fetch(`${process.env.REACT_APP_SERVER_URL}/profile/${id}`, {
       method: 'GET',
@@ -11,6 +12,7 @@ export function getUserProfile(id) {
       credentials: 'include',
     });
     const result = await request.json();
+    
     dispatch({
       type: GET_STATS,
       payload: result,
@@ -42,11 +44,8 @@ export function findUserStats(login) {
 export function editAvatar(file, id) {
 
   return async (dispatch) => {
-    console.log(file, 'file V CREATOR');
     const data = new FormData()
     data.append("filedata", file)
-
-    console.log(data, 'DATA!!!!!')
 
     const response = await fetch(`http://localhost:3001/profile/upload/${id}`, {
       method: "POST",
@@ -55,8 +54,6 @@ export function editAvatar(file, id) {
     })
 
     const result = await response.json();
-
-    console.log(result)
 
     dispatch({
       type: EDIT_AVATAR,
@@ -69,6 +66,7 @@ export function editAvatar(file, id) {
 export function getUserHistory(id) {
   
   return async (dispatch) => {
+  
     const request = await fetch(`http://localhost:3001/profile/history/${id}`, {
       method: 'GET',
       headers: {
@@ -78,7 +76,7 @@ export function getUserHistory(id) {
     });
     
     const result = await request.json();
-
+    
     dispatch({
       type: GET_HISTORY,
       payload: result

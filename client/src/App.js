@@ -37,7 +37,7 @@ function App() {
           </Route>
 
           {userSession && userSession ? (
-            <Route exact path="/profile/:id">
+            <Route exact path="/profile/:userId">
               <Profile />
             </Route>
           ) : null}
@@ -66,7 +66,7 @@ function App() {
           <Route path="/tournament/:id">
             <TournamentItem />
           </Route>
-          <Route>
+          <Route exact path='*'>
             <Error />
           </Route>
         </Switch>

@@ -16,4 +16,9 @@
   width: 100px;
   height: 100px;
 }
-
+.characters {
+  display: flex;
+}
+.characters  > li {
+  list-style: none;
+}

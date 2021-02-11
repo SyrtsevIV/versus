@@ -38,59 +38,73 @@ const TournamentItem = () => {
   
   return (
     <>
-      <div className={styles.titleBlock}>        
-        <h4>Турнир: {tourItem.title}</h4>
-              <h5>Место проведения: {tourItem.place}</h5>
-              <h5>Когда: {new Date(tourItem.date).toLocaleString('RU-ru')}</h5>
-              <p>Организатор: {tourItem.creator?.login}</p>
-              <p>Описание:</p>
-              <p>{tourItem.description}</p>
-              {tourItem.bracket?.length ? 
-                <>
+      <div className={styles.titleBlock}>    
+        <h1>Подробная информация</h1>
+        <div className="card w-50 p-3 m-3 ">
+          <div className="card-body d-flex align-items-center flex-column">
+            <h5 className="card-title"><h1>{tourItem.title}</h1></h5>
+            <p className="card-text">Описание: {tourItem.description}</p>
+          </div>
+          
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item d-flex justify-content-center">Место проведения: {tourItem.place}</li>
+            <li className="list-group-item d-flex justify-content-center">Когда: {new Date(tourItem.date).toLocaleString('RU-ru')}</li>
+            <li className="list-group-item d-flex justify-content-center">Организатор: {tourItem.creator?.login}</li>
+          </ul>
+          
+          <div className="card-body">
+            {tourItem.bracket?.length ? 
+              <>
                 <Bracket tourId={tourItem?._id} creator={tourItem.creator?._id} />
-                  </>
-                :
-                <div className={styles.center}>
-                  {
-                    buttons.includes(tourItem._id)
-                    ? <button className="waves-effect waves-light btn-small" onClick={async() => {
+              </>
+            
+              :
+              <>
+              <div className="d-flex justify-content-between">
+                {buttons.includes(tourItem._id)
+                  ?
+                    <button className="btn btn-danger" onClick={async() => {
                       await dispatch(registrationTournamnet(tourItem._id))
                       await setCounter(prev => prev + 1)
-                      }}>Отписаться</button>
-                      
-                      : userSession && userSession ?
-                        <button className="waves-effect waves-light btn-small" onClick={async () => {
+                    }}>Отписаться</button>
+                     
+                  : userSession && userSession
+                    ?
+                      <button className="btn btn-success" onClick={async () => {
                         await dispatch(registrationTournamnet(tourItem._id))
                         await setCounter(prev => prev + 1)
-                        }}>Записаться</button>
-                        :
-                        <Link to={'/signup'}><button className="waves-effect waves-light btn-small">Записаться</button></Link>
+                      }}>Записаться</button>
+                    :
+                      <Link to={'/signup'}><button className="btn btn-success">Записаться</button></Link>
+                }
 
-                  }
-                 <p />
-                  {userSession && userSession._id === tourItem?.creator?._id && tourItem.participants.length > 3 ?
-                     <>
-                    <div className={styles.center}>
-                      <button className="waves-effect waves-light btn-small" onClick={ () => {
+
+
+                  {userSession && userSession._id === tourItem?.creator?._id && tourItem.participants.length > 3
+                  
+                  ?
+                      <button className="btn btn-warning" onClick={ () => {
                          makeBracketHandler(tourItem?._id, tourItem?._id)
                       }}>Завершить запись</button>
-                    <br />
-                    </div>
-                    </>
-                    :
+                  :
                     null
-                  }
-                    <ol> <h5><b>Список участников:</b></h5>
-                      {tourItem.participants?.map(user =>
-                        <li key={user._id}>{user.login}</li>
-                    )}
-                    </ol>
-                </div>
-              }
-      </div>
+                  } 
+                  </div>
+                    <div  className="d-flex justify-content-center">
+                      <ol className="list-group list-group-flush"> <h5><b>Список участников:</b></h5>
+                        {tourItem?.participants?.map((user, i) =>
+                          <li className="list-group-item rounded-pill" key={user._id}>{`${i+1}. ${user.login}`}</li>
+                        )}
+                      </ol>
+                    </div>
+                </>
+            }
+          
+        </div>
+        </div>
+        </div>
     </>
-  );
-};
+)};
 
 export default TournamentItem;
 
