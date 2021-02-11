@@ -1,4 +1,4 @@
-import { IN_SESSION, LOGOUT, SIGNUP, SIGNIN } from "../types/types";
+import { IN_SESSION, LOGOUT, SIGNUP, SIGNIN, USER_IN_TOUR } from "../types/types";
 
 export const userInSession = () => {
   return async (dispatch, getState) => {
@@ -26,6 +26,7 @@ export const logoutUser = () => {
       },
     });
     dispatch({ type: LOGOUT, payload: null });
+    dispatch({type: USER_IN_TOUR, payload: []})
   };
 };
 

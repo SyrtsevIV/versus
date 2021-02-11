@@ -49,6 +49,16 @@ const initState = {
   },
   tourItem: {},
   userInTour: [],
+  history: {
+    player1: '',
+    player2: '',
+    duration: 0,
+    tour: '',
+    score: {
+      player1: 0,
+      player2: 0
+    }
+  },
   bracket: [],
 };
 

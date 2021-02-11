@@ -4,7 +4,6 @@ import { GET_TOUR_LIST, USER_IN_TOUR } from "../types/types";
 export function getTournamentsList() {
   return async (dispatch) => {
     try {
-      console.log("я тут");
       const request = await fetch(`${process.env.REACT_APP_SERVER_URL}/tournamentlist`, {
         method: "GET",
         headers: {
@@ -12,29 +11,24 @@ export function getTournamentsList() {
         },
         credentials: "include",
       });
-
       const result = await request.json();
-      console.log(result);
       const past = result.tournamentsList.filter((el) => el.status === "past");
-
       const current = result.tournamentsList.filter(
         (el) => el.status === "current"
       );
-
       const future = result.tournamentsList.filter(
         (el) => el.status === "future"
       );
-
-      dispatch({
-        type: USER_IN_TOUR,
-        payload: result.userInTournaments,
-      });
-
+        if (result.userInTournaments) {
+          dispatch({
+            type: USER_IN_TOUR,
+            payload: result.userInTournaments,
+          });
+        }
       dispatch({
         type: GET_TOUR_LIST,
         payload: { past, current, future },
       });
-      
     } catch (error) {
       console.log("Блядская ошибка", error);
     }

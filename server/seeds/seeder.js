@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Stats = require('../models/Stats');
 const faker = require('faker');
 const Tournament = require('../models/Tournament');
+const Match = require('../models/Match');
 mongoose.connect('mongodb://localhost:27017/Versus', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -76,14 +77,30 @@ async function seedTournament(num) {
   }
 }
 
-// seedTournament();
+// Seed Mathes
+async function seedMatches(num) {
+  const users = await User.find();
 
-// Seed Brackets
+  for (let i = 0; i < num; i += 1) {
+    Match.create({
+      player1: users[i].id,
+      player2: users[i+1].id,
+      score: {
+        player1: Math.round(0 + Math.random() * (11 - 0)),
+        player2: Math.round(0 + Math.random() * (11 - 0)),
+      },
+      tour: randomName(),
+      duration: randomFutureDate(),
+    });
+  }
+}
+
 
 const start = async () => {
-  await seedUsers(14);
-  await seedStats();
-  await seedTournament(3);
+  // await seedUsers(10);
+  // await seedStats(10);
+  // await seedTournament(10);
+  await seedMatches(20);
 };
 
 start();

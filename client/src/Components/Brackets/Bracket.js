@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { wsClient } from '../../App';
 import EightTeamBracket from './EightTeamBracket/EightTeamBracket';
@@ -46,9 +46,7 @@ const Bracket = ({ tourId }) => {
 
   return (
     <>
-      <div className={styles.center}>
-        <button onClick={makeBracketHandler}>Завершить запись</button> {renderSwitch()}
-      </div>
+      <div className={styles.center}>{renderSwitch()}</div>
     </>
   );
 };

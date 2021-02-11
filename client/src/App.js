@@ -37,7 +37,7 @@ function App() {
           </Route>
 
           {userSession && userSession ? (
-            <Route path="/profile/:id">
+            <Route exact path="/profile/:id">
               <Profile />
             </Route>
           ) : null}

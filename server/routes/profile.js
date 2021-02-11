@@ -8,6 +8,7 @@ const appDir = path.dirname(require.main.filename);
 const User = require('../models/User');
 const Stats = require('../models/Stats');
 const Match = require('../models/Match');
+const Bracket = require('../models/Bracket');
 
 const router = express.Router();
 
@@ -47,8 +48,15 @@ var upload = multer({ storage })
 
 router.post('/upload/:id', upload.single('filedata'), async (req, res) => {
   const { id } = req.params;
-  const user = await User.findByIdAndUpdate(id, { avatar: req.file.filename }, {new: true})
+  const user = await User.findByIdAndUpdate(id, { avatar: req.file.filename }, { new: true });
   res.json(user);
+});
+
+router.get('/history/:id', async (req, res) => {
+  const { id } = req.params;
+  const matches = await Match.find().populate('player1').populate('player2');
+  const userMatches = matches.filter((el) => String(el.player1._id) === id || String(el.player2._id) === id);
+  res.json(userMatches);
 });
 
 router.post('/:id', async (req, res) => {
@@ -63,11 +71,5 @@ router.post('/:id', async (req, res) => {
     res.send('Что то пошло не так =(');
   }
 });
-
-router.get('/history/:id', async (req, res) => {
-  const { id } = req.params;
-
-  // const matches = await Match.find({});
-})
 
 module.exports = router;

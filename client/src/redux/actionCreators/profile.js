@@ -11,7 +11,6 @@ export function getUserProfile(id) {
       credentials: 'include',
     });
     const result = await request.json();
-    
     dispatch({
       type: GET_STATS,
       payload: result,
@@ -79,7 +78,7 @@ export function getUserHistory(id) {
     });
     
     const result = await request.json();
-    
+
     dispatch({
       type: GET_HISTORY,
       payload: result
