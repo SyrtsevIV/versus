@@ -41,7 +41,7 @@ const ThirtytwoTeamBracket = ({ bracket, tourId }) => {
   }, []);
   
   return (
-    <div className={`${style['playoff-table']}`}>
+    <div ref={refBracketWr} className={`${style['playoff-table']}`}>
       <div className={`${style['playoff-table-content']}`}>
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
