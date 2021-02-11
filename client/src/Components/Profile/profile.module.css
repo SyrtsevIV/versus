@@ -2,23 +2,17 @@
   width: 80%;
   margin: auto;
 }
-.topBlock {
-  margin-top: 25px;
-  display: flex;
-  justify-content: space-around;
-}
-.statsBlock {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 50px;
-}
-.diagram {
-  width: 100px;
-  height: 100px;
-}
 .characters {
+  padding: 0;
   display: flex;
+  justify-content: space-between;
 }
 .characters  > li {
   list-style: none;
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  width: 33%;
 }
+
+

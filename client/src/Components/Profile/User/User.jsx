@@ -27,7 +27,7 @@ const User = () => {
   
   return (
     <div className={styles.profileBlock}>
-      <h4>Login: {user?.user.login}</h4>
+      <h4>{user?.user.login}</h4>
     
       <img src={`http://localhost:3001/images/${user?.user?.avatar}`} alt="" />
 
