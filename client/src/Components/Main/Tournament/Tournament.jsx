@@ -39,56 +39,62 @@ export default function Activtournament() {
       <Slider>
           {tours.map(tour =>
             <div className={styles.center} key={tour._id}>
-
-              <h4>Турнир: {tour.title}</h4>
-              <h5>Место проведения: {tour.place}</h5>
-              <h5>Когда: {new Date(tour.date).toLocaleString('RU-ru')}</h5>
-              <p>Организатор: {tour.creator?.login}</p>
-              <p>Описание:</p>
-              <p>{tour.description}</p>
+              <div class="card w-75 p-3">
+                <div class="card-body">
+                  <h5 class="card-title">Турнир: {tour.title}</h5>
+                  <p class="card-text">{tour.description}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Место проведения: {tour.place}</li>
+                  <li class="list-group-item">Когда: {new Date(tour.date).toLocaleString('RU-ru')}</li>
+                  <li class="list-group-item">Организатор: {tour.creator?.login}</li>
+                </ul>
+                <div class="card-body">
               {tour.bracket?.length ? 
                 <>
-                <Bracket tourId={tour?._id} />
+                <Bracket tourId={tour?._id} creator={tour.creator?._id} />
                   </>
-                :
-                <div className={styles.center}>
+                    :
+                    <>
+                <div className="d-flex justify-content-between">
                   {
                     buttons.includes(tour._id)
-                    ? <button className="waves-effect waves-light btn-small" onClick={async() => {
+                    ? <button className="btn btn-danger" onClick={async() => {
                       await dispatch(registrationTournamnet(tour._id))
                       await setCounter(prev => prev + 1)
                       }}>Отписаться</button>
                       
                       : userSession && userSession ?
-                        <button className="waves-effect waves-light btn-small" onClick={async () => {
+                        <button className="btn btn-success" onClick={async () => {
                         await dispatch(registrationTournamnet(tour._id))
                         await setCounter(prev => prev + 1)
                         }}>Записаться</button>
                         :
-                        <Link to={'/signup'}><button className="waves-effect waves-light btn-small">Записаться</button></Link>
+                        <Link to={'/signup'}><button className="btn btn-success">Записаться</button></Link>
 
                   }
-                 <p />
                   {userSession?._id === tour.creator._id && tour.participants.length > 3 ?
                      <>
-                    <div className={styles.center}>
-                      <button className="waves-effect waves-light btn-small" onClick={ () => {
+                      <button className="btn btn-warning" onClick={ () => {
                          makeBracketHandler(tour?._id, tour?._id)
                       }}>Завершить запись</button>
                     <p />
-                    </div>
                     </>
                     :
                     null
                   }
-                    <ol> <h5><b>Список участников:</b></h5>
-                      {tour.participants.map(user =>
-                        <li key={user._id}>{user.login}</li>
-                    )}
-                    </ol>
 
         </div>
+                    <ol className="list-group list-group-flush"> <h5><b>Список участников:</b></h5>
+                      {tour.participants.map((user, i) =>
+                        <li className="list-group-item rounded-pill" key={user._id}>{`${i+1}. ${user.login}`}</li>
+                    )}
+                  </ol>
+                    </>
       }
+                </div>
+          </div>
+                
           </div>
         )}
         </Slider>

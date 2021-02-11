@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import style from '../bracket.module.css';
 import BracketPair from '../BracketPair/BracketPair';
 
-const SixteenTeamBracket = ({ bracket, tourId }) => {
+const SixteenTeamBracket = ({ bracket, tourId, creator }) => {
   const refBracketWr = useRef(null);
 
   useEffect(() => {
@@ -46,73 +46,73 @@ const SixteenTeamBracket = ({ bracket, tourId }) => {
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[0]} />
+              <BracketPair tourId={tourId} match={bracket.oneEighth[0]} creator={creator}  />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[1]} />
-            </div>
-          </div>
-          <div className={`${style['playoff-table-group']}`}>
-            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[2]} />
-            </div>
-            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[3]} />
+              <BracketPair tourId={tourId} match={bracket.oneEighth[1]} creator={creator}  />
             </div>
           </div>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[4]} />
+              <BracketPair tourId={tourId} match={bracket.oneEighth[2]} creator={creator}  />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[5]} />
-            </div>
-          </div>
-          <div className={`${style['playoff-table-group']}`}>
-            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[6]} />
-            </div>
-            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.oneEighth[7]} />
-            </div>
-          </div>
-        </div>
-        <div className={`${style['playoff-table-tour']}`}>
-          <div className={`${style['playoff-table-group']}`}>
-            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[0]} />
-            </div>
-            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[1]} />
+              <BracketPair tourId={tourId} match={bracket.oneEighth[3]} creator={creator}  />
             </div>
           </div>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[2]} />
+              <BracketPair tourId={tourId} match={bracket.oneEighth[4]} creator={creator}  />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[3]} />
+              <BracketPair tourId={tourId} match={bracket.oneEighth[5]} creator={creator}  />
+            </div>
+          </div>
+          <div className={`${style['playoff-table-group']}`}>
+            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
+              <BracketPair tourId={tourId} match={bracket.oneEighth[6]} creator={creator}  />
+            </div>
+            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
+              <BracketPair tourId={tourId} match={bracket.oneEighth[7]} creator={creator}  />
             </div>
           </div>
         </div>
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[0]} />
+              <BracketPair tourId={tourId} match={bracket.quarterfinals[0]} creator={creator}  />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[1]} />
+              <BracketPair tourId={tourId} match={bracket.quarterfinals[1]} creator={creator}  />
+            </div>
+          </div>
+          <div className={`${style['playoff-table-group']}`}>
+            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
+              <BracketPair tourId={tourId} match={bracket.quarterfinals[2]} creator={creator}  />
+            </div>
+            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
+              <BracketPair tourId={tourId} match={bracket.quarterfinals[3]} creator={creator}  />
             </div>
           </div>
         </div>
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.final} />
+              <BracketPair tourId={tourId} match={bracket.semifinal[0]} creator={creator}  />
+            </div>
+            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
+              <BracketPair tourId={tourId} match={bracket.semifinal[1]} creator={creator}  />
+            </div>
+          </div>
+        </div>
+        <div className={`${style['playoff-table-tour']}`}>
+          <div className={`${style['playoff-table-group']}`}>
+            <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
+              <BracketPair tourId={tourId} match={bracket.final} creator={creator}  />
             </div>
           </div>
           <div className={`${style['playoff-table-third-place']} ${style['playoff-table-pair-style']}`}>
-            <BracketPair tourId={tourId} match={bracket.thirdPlace} />
+            <BracketPair tourId={tourId} match={bracket.thirdPlace} creator={creator}  />
           </div>
         </div>
       </div>

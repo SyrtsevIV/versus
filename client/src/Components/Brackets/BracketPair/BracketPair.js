@@ -1,16 +1,17 @@
 import style from '../bracket.module.css';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-const BracketPair = ({ match, tourId }) => {
+const BracketPair = ({ match, tourId, creator }) => {
+  const userSession = useSelector((store) => store.authReducer.userSession);
   const history = useHistory();
 
   const startMatchHandler = (id) => {
     history.push(`/tabletennis/match/${id}/${tourId}`);
   };
-
   return (
-    <div onClick={match?.player1 && match?.player2 ? () => startMatchHandler(match._id) : null}>
+    <div onClick={match?.player1 && match?.player2 && userSession?._id === creator ? () => startMatchHandler(match._id) : null}>
       <div className={`${style['playoff-table-left-player']} ${style['flex-row-sb']}`}>
         <span>{match?.player1?.login ? match?.player1?.login : match?.phantom}</span>
         <span>{match?.player1?.login ? match?.score.player1 : null}</span>

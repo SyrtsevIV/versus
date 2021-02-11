@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { getBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
 import { useDispatch } from 'react-redux';
 
-const Bracket = ({ tourId }) => {
+const Bracket = ({ tourId, creator }) => {
   const bracket = useSelector((state) => state.bracket.bracket);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -25,16 +25,16 @@ const Bracket = ({ tourId }) => {
   const renderSwitch = () => {
     if (bracket) {
       if (bracket.oneSixteenth?.length) {
-        return <ThirtytwoTeamBracket bracket={bracket} tourId={tourId} />;
+        return <ThirtytwoTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
       if (bracket.oneEighth?.length) {
-        return <SixteenTeamBracket bracket={bracket} tourId={tourId} />;
+        return <SixteenTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
       if (bracket.quarterfinals?.length) {
-        return <EightTeamBracket bracket={bracket} tourId={tourId} />;
+        return <EightTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
       if (bracket.semifinal?.length) {
-        return <FourTeamBracket bracket={bracket} tourId={tourId} />;
+        return <FourTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
     }
     return null;
