@@ -9,7 +9,7 @@ const Header = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
   }, [dispatch]);
 
   return (

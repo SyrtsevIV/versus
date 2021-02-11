@@ -16,6 +16,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 const Profile = () => {
   const {userId} = useParams()
+  console.log(userId, 'userId');
   const dispatch = useDispatch()
 
   const [arr, setArr] = useState([
@@ -54,7 +55,7 @@ const Profile = () => {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId='menu'>
           {(provided) => (
-            <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+            <ul className={styles.characters} {...provided.droppableProps} ref={provided.innerRef}>
               {arr.map(({id, comp}, index) => {
                 return (
                   <Draggable key={id} draggableId={id} index={index}>
