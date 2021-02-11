@@ -48,7 +48,8 @@ const initState = {
     future: [],
   },
   tourItem: {},
-  userInTour: []
-}
+  userInTour: [],
+  bracket: [],
+};
 
 export default initState;

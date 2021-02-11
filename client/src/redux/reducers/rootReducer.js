@@ -7,6 +7,7 @@ import ratingsReducer from './ratingsReducer';
 import matchReducer from './matchReducer';
 import tournamentsList from "./tournamentsListReducer";
 import tournamentItem from "./tournamentItemReducer";
+import bracketReducer from './bracketReducer';
 
 const rootReducer = combineReducers({
   authReducer,
@@ -17,7 +18,7 @@ const rootReducer = combineReducers({
   match: matchReducer,
   tournamentsList,
   tournamentItem,
-  
+  bracket: bracketReducer,
 });
 
 export default rootReducer;
