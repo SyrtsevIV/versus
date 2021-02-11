@@ -7,7 +7,7 @@ import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
 import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 import styles from './bracket.module.css';
 import { useSelector } from 'react-redux';
-import { getBracket, makeBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
+import { getBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
 import { useDispatch } from 'react-redux';
 
 const Bracket = ({ tourId }) => {
@@ -21,10 +21,6 @@ const Bracket = ({ tourId }) => {
   useEffect(() => {
     dispatch(getBracket(id, tourId));
   }, []);
-
-  const makeBracketHandler = () => {
-    dispatch(makeBracket(id, tourId));
-  };
 
   const renderSwitch = () => {
     if (bracket) {
