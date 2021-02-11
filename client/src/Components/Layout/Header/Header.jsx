@@ -1,7 +1,6 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from "../../../redux/actionCreators/authActionCreator";
-import { useEffect } from "react";
 import style from './header.module.css';
 
 const Header = () => {
