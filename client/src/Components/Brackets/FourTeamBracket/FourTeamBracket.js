@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import style from '../bracket.module.css';
 import BracketPair from '../BracketPair/BracketPair';
 
-const FourTeamBracket = ({ bracket, tourId }) => {
+const FourTeamBracket = ({ bracket, tourId, creator }) => {
   const refBracketWr = useRef(null);
 
   useEffect(() => {
@@ -46,21 +46,21 @@ const FourTeamBracket = ({ bracket, tourId }) => {
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[0]} />
+              <BracketPair tourId={tourId} match={bracket.semifinal[0]} creator={creator}  />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[1]} />
+              <BracketPair tourId={tourId} match={bracket.semifinal[1]} creator={creator}  />
             </div>
           </div>
         </div>
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.final} />
+              <BracketPair tourId={tourId} match={bracket.final} creator={creator}  />
             </div>
           </div>
           <div className={`${style['playoff-table-third-place']} ${style['playoff-table-pair-style']}`}>
-            <BracketPair tourId={tourId} match={bracket.thirdPlace} />
+            <BracketPair tourId={tourId} match={bracket.thirdPlace} creator={creator}  />
           </div>
         </div>
       </div>

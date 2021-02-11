@@ -47,7 +47,7 @@ const TournamentItem = () => {
               <p>{tourItem.description}</p>
               {tourItem.bracket?.length ? 
                 <>
-                <Bracket tourId={tourItem?._id} />
+                <Bracket tourId={tourItem?._id} creator={tourItem.creator?._id} />
                   </>
                 :
                 <div className={styles.center}>
