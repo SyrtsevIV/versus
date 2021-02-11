@@ -51,7 +51,7 @@ export default function Activtournament() {
                     }}>Записаться</button>
                   }
                  <hr />
-                  {userSession._id === tour.creator &&
+                  {userSession?._id === tour.creator &&
                     <button className="waves-effect waves-light btn-small">Завершить запись</button>
                   }
                     <ol> <h5><b>Список участников:</b></h5>
