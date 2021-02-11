@@ -35,11 +35,12 @@ const User = () => {
       <div className={styles.changeAvatar}>
         
         <form action="#" method="POST" encType="multipart/form-data" className={styles.form}>
-          <input type="file" id="file" name="filedata" accept=".jpg" onChange={(event) => {
+        
+          <input class={`btn btn-primary ${styles.button}`}  type="file" id="file" name="filedata" accept=".jpg" placeholder="HELLOOOOOO" onChange={(event) => {
             const file = event.target.files[0];
             setFile(file)
-          }}/>
-          <button onClick={(event) => sendAvatar(event)}>Обновить фотографию</button>
+          }} />
+          <button type="button" class="btn btn-primary" onClick={(event) => sendAvatar(event)}>Обновить фотографию</button>
         </form>
       </div>
   </div>

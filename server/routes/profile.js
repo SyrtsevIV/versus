@@ -48,15 +48,23 @@ var upload = multer({ storage })
 
 router.post('/upload/:id', upload.single('filedata'), async (req, res) => {
   const { id } = req.params;
-  const user = await User.findByIdAndUpdate(id, { avatar: req.file.filename }, { new: true });
-  res.json(user);
+  try {
+    const user = await User.findByIdAndUpdate(id, { avatar: req.file.filename }, { new: true });
+    res.json(user);
+  } catch (error) {
+    console.log('Что то пошло не так');
+  }
 });
 
 router.get('/history/:id', async (req, res) => {
   const { id } = req.params;
-  const matches = await Match.find().populate('player1').populate('player2');
-  const userMatches = matches.filter((el) => String(el.player1._id) === id || String(el.player2._id) === id);
-  res.json(userMatches);
+  try {
+    const matches = await Match.find().populate('player1').populate('player2');
+    const userMatches = matches.filter((el) => String(el.player1._id) === id || String(el.player2._id) === id);
+    res.json(userMatches);
+  } catch (error) {
+    console.log('Что то пошло не так');
+  }
 });
 
 router.post('/:id', async (req, res) => {
