@@ -39,17 +39,17 @@ export default function Activtournament() {
       <Slider>
           {tours.map(tour =>
             <div className={styles.center} key={tour._id}>
-              <div class="card w-75 p-3">
-                <div class="card-body">
-                  <h5 class="card-title">Турнир: {tour.title}</h5>
-                  <p class="card-text">{tour.description}</p>
+              <div className="card w-75 p-3">
+                <div className="card-body">
+                  <h5 className="card-title">Турнир: {tour.title}</h5>
+                  <p className="card-text">{tour.description}</p>
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Место проведения: {tour.place}</li>
-                  <li class="list-group-item">Когда: {new Date(tour.date).toLocaleString('RU-ru')}</li>
-                  <li class="list-group-item">Организатор: {tour.creator?.login}</li>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">Место проведения: {tour.place}</li>
+                  <li className="list-group-item">Когда: {new Date(tour.date).toLocaleString('RU-ru')}</li>
+                  <li className="list-group-item">Организатор: {tour.creator?.login}</li>
                 </ul>
-                <div class="card-body">
+                <div className="card-body">
               {tour.bracket?.length ? 
                 <>
                 <Bracket tourId={tour?._id} creator={tour.creator?._id} />

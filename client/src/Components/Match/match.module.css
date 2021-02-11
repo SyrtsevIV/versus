@@ -1,4 +1,4 @@
-.match {
+.versus {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -8,6 +8,7 @@
 .player {
   margin: 20px;
   min-width: 100px;
+  text-align: center;
 }
 
 .player h4 {
@@ -18,13 +19,21 @@
   font-size: 30px;
 }
 
-.container {
+.match {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 20px;
+  padding: 20px;
+  width: 600px;
 }
 
 .header {
   text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

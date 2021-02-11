@@ -9,17 +9,17 @@ const Header = () => {
 
   return (
 
-<nav className="navbar navbar-expand-lg navbar-light header ">
+<nav className="navbar navbar-expand-lg navbar-light header" style={{color: 'white'}}>
   <div className="container-fluid justify-content-between px-5 p-2">
-      <Link className="navbar-brand" to="/">
+      <Link className="navbar-brand" to="/" style={{color: 'white'}}>
        Versus
       </Link>
         {userSession && userSession ? (
-        <Link className="navbar-brand" to="/tournament/new">
+          <Link className="navbar-brand" to="/tournament/new" style={{color: 'white'}}>
               Создать турнир
         </Link>
           ) : (
-            <Link className="navbar-brand" to="/signup">
+            <Link className="navbar-brand" to="/tournament/new" style={{color: 'white'}}>
               Создать турнир
             </Link>
           )}
@@ -54,16 +54,6 @@ const Header = () => {
             </li>
           </>
         )}
-        {/* <li className="nav-item">
-          <a className="nav-link">
-          <NavLink to="/signin">Войти</NavLink>
-            </a>
-        </li>
-        <li className="nav-item">
-         <a className="nav-link">
-          <NavLink to="/signup">Зарегистрироваться</NavLink>
-            </a>
-        </li> */}
       </ul>
   </div>
 </nav>

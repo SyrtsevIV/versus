@@ -3,6 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 20px;
+}
+
+.center h1 {
+  text-align: center;
+  margin: 20px;
 }
 
 .ul {
@@ -44,4 +50,8 @@
 
 .stats {
   flex-grow: 2;
+}
+
+.circle {
+  width: 100px;
 }
