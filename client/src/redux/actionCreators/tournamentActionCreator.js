@@ -14,7 +14,9 @@ export const createTournament = (inputValue, history) => {
       });
       const result = await response.json();
       history.push(`/tournament/${result}`);
-    } catch (err) {}
+    } catch (err) {
+      console.log('from createTournament', err);
+    }
   };
 };
 

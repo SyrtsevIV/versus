@@ -11,7 +11,6 @@ export function getUserProfile(id) {
       credentials: 'include',
     });
     const result = await request.json();
-    
     dispatch({
       type: GET_STATS,
       payload: result,
