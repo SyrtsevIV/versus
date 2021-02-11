@@ -10,7 +10,7 @@ const Stats = mongoose.model('Stats', {
   user: { type: mongoose.ObjectId, ref: 'User' },
   mmr: {
     type: Number,
-    default: 500,
+    default: 1000,
   },
   rating: {
     type: Number,
