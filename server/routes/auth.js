@@ -28,15 +28,19 @@ router.get(
   })
 );
 
-router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  res.redirect("http://localhost:3000/");
-});
+router.get(
+  "/google/redirect",
+  passport.authenticate("google", { failureRedirect: "/signup" }),
+  (req, res) => {
+    res.redirect("http://localhost:3000/");
+  }
+);
 
 //дописать логику, если прилетает дублированный пароль
 router.post(
   "/signin",
   passport.authenticate("local", {
-    failureRedirect: "/",
+    failureRedirect: "/signup",
   }),
   (req, res) => {
     res.json({ status: 200, user: req.user });
@@ -47,7 +51,7 @@ router.post(
 router.post(
   "/signup",
   passport.authenticate("local", {
-    failureRedirect: "/",
+    failureRedirect: "/signup",
   }),
   (req, res) => {
     res.json({ status: 200, user: req.user });
