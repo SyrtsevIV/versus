@@ -183,7 +183,7 @@ function getRating(winnerRating, losserRating, tour) {
 
 router.get('/future', async (req, res) => {
   try {
-    const tournament = await Tournament.find({ status: 'future' }).populate({ path: 'participants' });
+    const tournament = await Tournament.find({ status: 'future' }).populate({ path: 'participants' }).populate({ path: 'creator' });
     res.json(tournament);
   } catch (e) {
     res.sendStatus(500);
@@ -192,7 +192,7 @@ router.get('/future', async (req, res) => {
 
 router.get('/past', async (req, res) => {
   try {
-    const tournament = await Tournament.find({ status: 'past' }).populate({ path: 'participants' });
+    const tournament = await Tournament.find({ status: 'past' }).populate({ path: 'participants' }).populate({ path: 'creator' });
     res.json(tournament);
   } catch (e) {
     res.sendStatus(500);
@@ -201,7 +201,7 @@ router.get('/past', async (req, res) => {
 
 router.get('/current', async (req, res) => {
   try {
-    const tournament = await Tournament.find({ status: 'current' }).populate({ path: 'participants' });
+    const tournament = await Tournament.find({ status: 'current' }).populate({ path: 'participants' }).populate({ path: 'creator' });
     res.json(tournament);
   } catch (e) {
     res.sendStatus(500);
@@ -263,7 +263,9 @@ router.get('/:tournamentId', async (req, res) => {
 
 wsServer.on('connection', (client) => {
   client.on('message', async (data) => {
-    const { id, timer, tournamentId, playerName, plus, minus } = JSON.parse(data);
+    const {
+      id, timer, tournamentId, playerName, plus, minus,
+    } = JSON.parse(data);
     if (timer) {
       const currentTourMatch = await Match.findById(id).populate('player1').populate('player2');
       currentTourMatch.ended = true;
@@ -326,7 +328,7 @@ wsServer.on('connection', (client) => {
             nextTourMatch,
             winnerId,
             'oneEighth',
-            phantom
+            phantom,
           );
           break;
 
@@ -339,7 +341,7 @@ wsServer.on('connection', (client) => {
             nextTourMatch,
             winnerId,
             'quarterfinals',
-            phantom
+            phantom,
           );
           break;
 
@@ -352,7 +354,7 @@ wsServer.on('connection', (client) => {
             nextTourMatch,
             winnerId,
             'semifinal',
-            phantom
+            phantom,
           );
           break;
         case 'semifinal':

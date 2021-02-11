@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { wsClient } from '../../App';
 import EightTeamBracket from './EightTeamBracket/EightTeamBracket';
@@ -7,7 +7,7 @@ import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
 import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 import styles from './bracket.module.css';
 import { useSelector } from 'react-redux';
-import { getBracket, makeBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
+import { getBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
 import { useDispatch } from 'react-redux';
 
 const Bracket = ({ tourId }) => {
@@ -37,11 +37,6 @@ const Bracket = ({ tourId }) => {
   // setBracket(resJson);
   // };
 
-  const makeBracketHandler = () => {
-    // fetchBracket();
-    dispatch(makeBracket(id, tourId));
-  };
-
   const renderSwitch = () => {
     if (bracket) {
       if (bracket.oneSixteenth?.length) {
@@ -63,7 +58,7 @@ const Bracket = ({ tourId }) => {
   return (
     <>
       <div className={styles.center}>
-        <button onClick={makeBracketHandler}>Завершить запись</button> {renderSwitch()}
+        {renderSwitch()}
       </div>
     </>
   );
