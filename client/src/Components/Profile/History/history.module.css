@@ -5,4 +5,14 @@
   background-color: blue;
   padding: 5px 15px;
   color: aliceblue;
+  margin: 5px 0;
+}
+.history {
+  width: 33%;
+  margin: 0 auto;
+  text-align: center;
+}
+.score {
+  padding: 3px 3px;
+  background-color: grey;
 }

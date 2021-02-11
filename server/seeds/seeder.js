@@ -97,10 +97,10 @@ async function seedMatches(num) {
 
 
 const start = async () => {
-  await seedUsers(10);
-  await seedStats(10);
-  await seedTournament(10);
-  await seedMatches(10);
+  // await seedUsers(10);
+  // await seedStats(10);
+  // await seedTournament(10);
+  await seedMatches(20);
 };
 
 start();
