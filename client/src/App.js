@@ -60,9 +60,6 @@ function App() {
           <Route exact path="/tournaments">
             <TournamentList />
           </Route>
-          <Route exact path="/bracket">
-            <Bracket tourId="6024c543814df23763aa4099" />
-          </Route>
           <Route path="/tournament/:id">
             <TournamentItem />
           </Route>
