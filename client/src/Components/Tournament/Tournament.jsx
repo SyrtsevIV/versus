@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { createTournament } from "../../redux/actionCreators/tournamentActionCreator";
+import style from './style.module.css'
 
 const Tournament = () => {
   const dispatch = useDispatch()
@@ -21,7 +22,9 @@ const Tournament = () => {
   }
   console.log(input);
   return (
-    <>
+      <div className={style.flex}>
+        <h1>Создание турнира</h1>
+      <div className={style.container}>
       <select onChange={inputHandler} name='type' className="form-select" aria-label="Default select example">
         <option disabled selected='selected'>Выберите тип турнира</option>
         <option>Сингл</option>
@@ -38,7 +41,8 @@ const Tournament = () => {
         e.preventDefault()
         dispatch(createTournament(input, history))
       }} className='btn btn-primary'>Создать</button>
-    </>
+      </div>
+    </div>
   );
 }
 

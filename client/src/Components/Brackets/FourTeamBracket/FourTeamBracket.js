@@ -8,6 +8,7 @@ const FourTeamBracket = ({ bracket, tourId, creator }) => {
   useEffect(() => {
     // Select the node that will be observed for mutations
     const targetNode = refBracketWr.current;
+    console.log(targetNode);
 
     // Options for the observer (which mutations to observe)
     const config = { attributes: true, childList: true, subtree: true, characterData: true };
