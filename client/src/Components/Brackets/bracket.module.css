@@ -112,12 +112,12 @@
 }
 
 .change {
-  animation: changeCell .5s linear;
+  animation: changeCell .7s linear;
 }
 
 @keyframes changeCell {
   from {
-    background: rgba(255, 0, 0, 1);
+    background: tomato;
   }
 
   to {

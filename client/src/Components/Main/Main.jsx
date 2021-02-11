@@ -25,15 +25,15 @@ const Main = () => {
   return (
     <div>
       <div className={styles.mainNav}>
-        <div className="btn-group p-2" role="group" aria-label="Basic outlined example">
-          <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autocomplete="off"  />
-          <label onClick={() => changeHandler('past')} className="btn btn-outline-primary" for="btnradio1">Прошедшие турниры</label>
+        <div className="btn-group p-4" role="group" aria-label="Basic outlined example">
+          <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off"  />
+          <label onClick={() => changeHandler('past')} className="btn btn-outline-primary" htmlFor="btnradio1">Прошедшие турниры</label>
 
-          <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
-          <label onClick={() => changeHandler('current')} className="btn btn-outline-primary" for="btnradio2">Текущие турниры</label>
+          <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off" />
+          <label onClick={() => changeHandler('current')} className="btn btn-outline-primary" htmlFor="btnradio2">Текущие турниры</label>
 
-          <input type="radio" className="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
-          <label onClick={() => changeHandler('future')} className="btn btn-outline-primary" for="btnradio3">Будущие турниры</label>
+          <input type="radio" className="btn-check" name="btnradio" id="btnradio3" autoComplete="off" />
+          <label onClick={() => changeHandler('future')} className="btn btn-outline-primary" htmlFor="btnradio3">Будущие турниры</label>
         </div>
       </div>
         <Activtournament />

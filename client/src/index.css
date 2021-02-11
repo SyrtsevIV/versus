@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-size: 14px;
+  font-size: 20px;
   background-color: #f5f5f5;
   font-family: 'Oswald', sans-serif;
 }
@@ -49,3 +49,27 @@ a {
 a:hover {
   color: unset;
 }
+
+.btn-outline-primary {
+  color: tomato !important;
+  border-color: tomato !important;
+  outline: none;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:focus {
+  background-color: tomato !important;
+  border-color: tomato !important;
+  color: white !important;
+  box-shadow: none;
+  outline: none;
+}
+
+.btn-check:checked + .btn-outline-primary {
+  background-color: tomato !important;
+  color: white !important;
+  box-shadow: none;
+  outline: none;
+}
+

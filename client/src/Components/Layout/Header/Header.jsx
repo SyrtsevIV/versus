@@ -1,30 +1,25 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from "../../../redux/actionCreators/authActionCreator";
-import { useEffect } from "react";
 import style from './header.module.css';
 
 const Header = () => {
   const userSession = useSelector((store) => store.authReducer.userSession);
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    // dispatch(logoutUser());
-  }, [dispatch]);
-
   return (
 
-<nav className="navbar navbar-expand-lg navbar-light header ">
+<nav className="navbar navbar-expand-lg navbar-light header" style={{color: 'white'}}>
   <div className="container-fluid justify-content-between px-5 p-2">
-      <Link className="navbar-brand" to="/">
+      <Link className="navbar-brand" to="/" style={{color: 'white'}}>
        Versus
       </Link>
         {userSession && userSession ? (
-        <Link className="navbar-brand" to="/tournament/new">
+          <Link className="navbar-brand" to="/tournament/new" style={{color: 'white'}}>
               Создать турнир
         </Link>
           ) : (
-            <Link className="navbar-brand" to="/signup">
+            <Link className="navbar-brand" to="/tournament/new" style={{color: 'white'}}>
               Создать турнир
             </Link>
           )}
@@ -59,16 +54,6 @@ const Header = () => {
             </li>
           </>
         )}
-        {/* <li className="nav-item">
-          <a className="nav-link">
-          <NavLink to="/signin">Войти</NavLink>
-            </a>
-        </li>
-        <li className="nav-item">
-         <a className="nav-link">
-          <NavLink to="/signup">Зарегистрироваться</NavLink>
-            </a>
-        </li> */}
       </ul>
   </div>
 </nav>
