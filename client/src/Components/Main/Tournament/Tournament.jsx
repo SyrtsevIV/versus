@@ -23,7 +23,7 @@ export default function Activtournament() {
 
   useEffect(() => {
     dispatch(getTours(mainPage));
-  }, [buttons])
+  }, [counter])
 
   return (
     <div className={styles.center}>
@@ -41,13 +41,13 @@ export default function Activtournament() {
                 <div className={styles.center}>
                   {
                     buttons.includes(tour._id)
-                    ? <button className="waves-effect waves-light btn-small" onClick={() => {
-                      setCounter(prev => prev + 1)
-                      dispatch(registrationTournamnet(tour._id))
+                    ? <button className="waves-effect waves-light btn-small" onClick={async() => {
+                      await dispatch(registrationTournamnet(tour._id))
+                      await setCounter(prev => prev + 1)
                     }}>Отписаться</button>
-                    : <button className="waves-effect waves-light btn-small" onClick={() => {
-                      setCounter(prev => prev + 1)
-                      dispatch(registrationTournamnet(tour._id))
+                    : <button className="waves-effect waves-light btn-small" onClick={async() => {
+                      await dispatch(registrationTournamnet(tour._id))
+                      await setCounter(prev => prev + 1)
                     }}>Записаться</button>
                   }
                  <hr />
@@ -57,7 +57,7 @@ export default function Activtournament() {
                     <ol> <h5><b>Список участников:</b></h5>
                       {tour.participants.map(user =>
                         <li key={user._id}>{user.login}</li>
-                        )}
+                    )}
                     </ol>
 
         </div>
