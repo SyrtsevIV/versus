@@ -17,12 +17,15 @@ const TournamentItem = () => {
   console.log(tourItem, 'tourItem!!!!!');
   return (
     <>
-      <div className={styles.titleBlock}>
-        <h1>{tourItem.title}</h1>
-        <p>Место проведения: {tourItem.place}</p>
-        <p>Организатор: {tourItem.creator?.login}</p>
-        <div>
-          <p>Описание: {tourItem.description}</p>
+      <div className={styles.topBlock}>
+
+        <div className={styles.titleBlock}>
+          <h1>{tourItem.title}</h1>
+          <span>Место проведения: {tourItem.place}</span>
+          <span>Организатор: {tourItem.creator?.login}</span>
+          <div>
+            <span>Описание: {tourItem.description}</span>
+          </div>
         </div>
       </div>
       
@@ -32,7 +35,7 @@ const TournamentItem = () => {
           <div className={styles.titleBlock}>
             <ol> <b>Список участников:</b>
               {tourItem.participants && tourItem.participants.map((user) => (
-                <li key={user._id}>{user.login}</li>
+                <li key={user._id} className={styles.card}>{user.login}</li>
               ))}
             </ol>
           </div>

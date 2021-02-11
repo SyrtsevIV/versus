@@ -13,6 +13,11 @@ import RadarDiagram from './RadarDiagram/RadarDiagram';
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
+
+
+
+
+
 const Profile = () => {
   const {id} = useParams()
   const dispatch = useDispatch()
@@ -26,22 +31,34 @@ const Profile = () => {
       
       <DragDropContext>
        
-            <div className={styles.topBlock}>
-                      
-              <User /> 
-              <Rank />
-              <Cup />
+        <div className={styles.topBlock}>
+          
+          {/* <Droppable droppableId="1">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+                {...provided.droppableProps}
+              >
+                {provided.placeholder}
+              </div>
+            )} */}
 
-            </div>
+    
+            <User /> 
+            <Rank />
+            <Cup />
+          {/* </Droppable>         */}
 
-            <div className={styles.statsBlock}>
+        </div>
 
-              <History />
-              <Circular />
-              <RadarDiagram />
+        <div className={styles.statsBlock}>
 
-            </div>
-            
+          <History />
+          <Circular />
+          <RadarDiagram />
+
+        </div>
 
       </DragDropContext>
 
