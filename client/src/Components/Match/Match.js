@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getMatchData, plusPoint, minusPoint, endMatch } from '../../redux/actionCreators/match';
 import { wsClient } from '../../App';
+import { getTournament } from '../../redux/actionCreators/tournamentActionCreator';
 
 const Match = () => {
   const { id, tourId } = useParams();
@@ -15,9 +16,11 @@ const Match = () => {
   const [timer, setTimer] = useState(0);
 
   const matchData = useSelector((state) => state.match.match);
+  const tournamentData = useSelector((state) => state.tournamentItem.tourItem);
 
   useEffect(() => {
     dispatch(getMatchData(id));
+    dispatch(getTournament(tourId));
   }, []);
 
   const onTimerUpdate = ({ time, duration }) => {
@@ -41,22 +44,27 @@ const Match = () => {
 
   return (
     <div className={style.container}>
-      <Timer active duration={null} onTimeUpdate={onTimerUpdate}>
-        <Timecode className={style.timer} />
-      </Timer>
+      <div className={style.header}>
+        <h2>Турнир: "{tournamentData?.title}"</h2>
+        {/* <p>{tournamentData.date.toLacaleString('ru-Ru')}</p> */}
+        <Timer active duration={null} onTimeUpdate={onTimerUpdate}>
+          <Timecode className={style.timer} />
+        </Timer>
+      </div>
       <div className={style.match}>
         <div className={style.player}>
           <h4>{matchData?.player1?.login}</h4>
-          <p>Score: {matchData?.score?.player1}</p>
           <button onClick={() => minusPointHandler(matchData?._id, 'player1')}>-</button>
           <button onClick={() => plusPointHandler(matchData?._id, 'player1')}>+</button>
         </div>
         <div className={style.player}>
           <h4>vs</h4>
+          <h4>
+            {matchData?.score?.player1} : {matchData?.score?.player2}
+          </h4>
         </div>
         <div className={style.player}>
           <h4>{matchData?.player2?.login}</h4>
-          <p>Score: {matchData?.score?.player2}</p>
           <button onClick={() => minusPointHandler(matchData?._id, 'player2')}>-</button>
           <button onClick={() => plusPointHandler(matchData?._id, 'player2')}>+</button>
         </div>

@@ -2,9 +2,9 @@
   box-sizing: border-box;
 }
 .playoff-table {
-  font-family: sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.42857143;
+  letter-spacing: .5px;
   font-weight: 400;
   width: 100%;
   overflow-x: auto;
@@ -44,7 +44,7 @@
   right: -12px;
   width: 12px;
   height: 1px;
-  background-color: red;
+  background-color: tomato;
 }
 .playoff-table .playoff-table-pair:after {
   content: '';
@@ -99,7 +99,7 @@
   bottom: 29px;
   right: 0px;
   width: 1px;
-  background-color: red;
+  background-color: tomato;
 }
 .playoff-table .playoff-table-group:last-child {
   margin-bottom: 0;
@@ -108,6 +108,21 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+}
+
+.change {
+  animation: changeCell .5s linear;
+}
+
+@keyframes changeCell {
+  from {
+    background: rgba(255, 0, 0, 1);
+  }
+
+  to {
+    background: rgba(255, 0, 0, 0);
+  }
 }
 .playoff-table .playoff-table-left-player,
 .playoff-table .playoff-table-right-player {
@@ -124,7 +139,7 @@
   left: -12px;
   width: 12px;
   height: 1px;
-  background-color: red;
+  background-color: tomato;
 }
 .playoff-table .playoff-table-right-player {
   margin-top: -1px;
