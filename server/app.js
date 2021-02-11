@@ -1,11 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const multer = require('multer');
 const cors = require("cors");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const Stats = require("./models/Stats");
-const User = require("./models/User");
 const passport = require("passport");
 const authRouter = require("./routes/auth");
 const passportSetup = require("./config/passport");
@@ -38,12 +35,14 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: true,
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 app.set("sessionName", "sid");
 app.use(
@@ -73,9 +72,9 @@ app.use("/tabletennis/tournament", tableTennisTournamentRouter);
 app.use("/ratings", rating);
 app.use("/tournament", tournament);
 
-app.use('/profile', checkUser, profileRouter);
-app.use('/compare', compareRouter);
-app.use('/tournamentlist', tournamentlistRoter);
+app.use("/profile", checkUser, profileRouter);
+app.use("/compare", compareRouter);
+app.use("/tournamentlist", tournamentlistRoter);
 
 app.listen(PORT, () => {
   console.log("Server has been started on port: ", PORT);

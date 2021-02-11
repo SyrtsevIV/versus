@@ -9,6 +9,7 @@ const TournamentList = () => {
   const dispatch = useDispatch()
   const tourList = useSelector((state) => state.tournamentsList.tourList);
   const buttons = useSelector((state) => state.tournamentsList.userInTour);
+  const userSession = useSelector((store) => store.authReducer.userSession);
   const [counter, setCounter] = useState(0)
 
   useEffect(() => {
@@ -69,17 +70,23 @@ const TournamentList = () => {
               <span>Организатор: {el.creator?.login}</span>
               <div className={styles.action}>
                 <Link to={`/tournament/${el._id}`}><button>Подробнее</button></Link>
+
                 {
                   buttons.includes(el._id)
-                    ? <button onClick={() => {
+                    ?
+                    <button onClick={async () => {
+                      await dispatch(registrationTournamnet(el._id))
                       setCounter(prev => prev + 1)
-                      dispatch(registrationTournamnet(el._id))
                     }}>Отписаться</button>
-                    : <button onClick={() => {
-                      setCounter(prev => prev + 1)
-                      dispatch(registrationTournamnet(el._id))
-                    }}>Записаться</button>
+                    : userSession && userSession ?
+                      <button onClick={async () => {
+                        await dispatch(registrationTournamnet(el._id))
+                        setCounter(prev => prev + 1)
+                      }}>Записаться</button>
+                      :
+                      <Link to={'/signup'}><button>Записаться</button></Link>
                 }
+
               </div>
             </li>
           ))}
