@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { signinUser } from "../../../redux/actionCreators/authActionCreator";
+import { Button } from 'reactstrap';
 
 const Signin = () => {
   const [errorValue, setErrorValue] = useState('')
@@ -21,6 +22,8 @@ const Signin = () => {
 
   return (
     <>
+        <Button color="danger">Danger!</Button>
+
       <div className="row container ">
         <div className="input-field col s6 offset-s3">
           <input id="email" type="email" placeholder='Email' className="validate" name='email' onChange={inputHandler} />
