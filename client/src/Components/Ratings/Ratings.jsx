@@ -28,7 +28,7 @@ const Ratings = () => {
         </div>
       </div>
         {/* <ul className={`collection ${styles.ul}`}>  */}
-        <table class="table table-hover">
+        <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -40,16 +40,7 @@ const Ratings = () => {
         </thead>
 
         {ratings.tableTennis.map((stats, index) => 
-          <>
-            {/* <div className={styles.row}>
-
-<div className={styles.center}>
-<img className={styles.img} src="http://pngimg.com/uploads/star/star_PNG1584.png" alt="Звезда" />
-<p className={styles.rating}>{index+1}</p>
-</div>
-
-<div className={styles.stats}> */}
-                 <tbody>
+                 <tbody key={stats._id}>
                     <tr>
                       <th scope="row">{index + 1}</th>
                       <td>{stats?.user?.login}</td>
@@ -58,12 +49,8 @@ const Ratings = () => {
                       <td>{stats.won}</td>
                     </tr>
                   </tbody>
-              {/* </div>
-            </div> */}
-          </>
         )}
       </table>
-      {/* </ul> */}
             </div>
       </div>
     );

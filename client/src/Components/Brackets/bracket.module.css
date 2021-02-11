@@ -112,7 +112,7 @@
 }
 
 .change {
-  animation: changeCell .5s linear;
+  animation: changeCell .7s linear;
 }
 
 @keyframes changeCell {

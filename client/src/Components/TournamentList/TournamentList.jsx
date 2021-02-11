@@ -62,7 +62,7 @@ const TournamentList = () => {
                   <li className="list-group-item">Организатор: {el.creator?.login}</li>
                 </ul>
                 <div className="card-body">
-                  <Link to={`/tournament/${el._id}`}><button type="button" class="btn btn-primary">Подробнее</button></Link>
+                  <Link to={`/tournament/${el._id}`}><button type="button" className="btn btn-primary">Подробнее</button></Link>
                 </div>
               </div>
 
@@ -91,21 +91,21 @@ const TournamentList = () => {
                 <div className="card-body">
                 
                   <div className={styles.buttonsBlock}>
-                  <Link to={`/tournament/${el._id}`}><button type="button" class="btn btn-primary">Подробнее</button></Link>
+                  <Link to={`/tournament/${el._id}`}><button type="button" className="btn btn-primary">Подробнее</button></Link>
                     {
                       buttons.includes(el._id)
                         ?
-                        <button type="button" class="btn btn-danger" onClick={async () => {
+                        <button type="button" className="btn btn-danger" onClick={async () => {
                           await dispatch(registrationTournamnet(el._id))
                           setCounter(prev => prev + 1)
                         }}>Отписаться</button>
                         : userSession && userSession ?
-                          <button type="button" class="btn btn-success" onClick={async () => {
+                          <button type="button" className="btn btn-success" onClick={async () => {
                             await dispatch(registrationTournamnet(el._id))
                             setCounter(prev => prev + 1)
                           }}>Записаться</button>
                           :
-                          <Link to={'/signup'}><button type="button" class="btn btn-success">Записаться</button></Link>
+                          <Link to={'/signup'}><button type="button" className="btn btn-success">Записаться</button></Link>
                     }
                     </div>
                   </div>

@@ -26,12 +26,12 @@ const Signin = () => {
       <div>
       </div>
       <div className="mb-3">
-        <label for="exampleInputEmail1" className="form-label">Введите Email</label>
-        <input id="email" type="email" placeholder='Email' class="form-control" name='email' onChange={inputHandler}/>
+        <label htmlFor="exampleInputEmail1" className="form-label">Введите Email</label>
+        <input id="email" type="email" placeholder='Email' className="form-control" name='email' onChange={inputHandler}/>
       </div>
       <div className="mb-3">
-        <label for="exampleInputPassword1" className="form-label">Введите пароль</label>
-        <input id="password" placeholder='Пароль' type="password" class="form-control" name='password' onChange={inputHandler}/>
+        <label htmlFor="exampleInputPassword1" className="form-label">Введите пароль</label>
+        <input id="password" placeholder='Пароль' type="password" className="form-control" name='password' onChange={inputHandler}/>
       </div>
       {errorValue && errorValue ? errorValue : null}
       <div className="d-flex justify-content-md-evenly">
