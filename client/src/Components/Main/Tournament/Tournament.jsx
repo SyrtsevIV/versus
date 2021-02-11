@@ -41,8 +41,8 @@ export default function Activtournament() {
             <div className={styles.center} key={tour._id}>
               <div className="card w-75 p-3 ">
                 <div className="card-body d-flex align-items-center flex-column">
-                  <h5 className="card-title">Турнир: {tour.title}</h5>
-                  <p className="card-text">{tour.description}</p>
+                  <h5 className="card-title"><h1>{tour.title}</h1></h5>
+                  <p className="card-text">Описание: {tour.description}</p>
                 </div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item d-flex justify-content-center">Место проведения: {tour.place}</li>
