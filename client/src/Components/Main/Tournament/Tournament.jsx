@@ -1,7 +1,7 @@
 import styles from "../main.module.css";
 import "../slider-animation.css";
 import Slider from 'react-animated-slider';
-import "react-animated-slider/build/horizontal.css";
+import "../horizontal.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
