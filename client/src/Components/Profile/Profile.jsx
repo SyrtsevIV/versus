@@ -17,11 +17,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 const Profile = () => {
   const {userId} = useParams()
   const dispatch = useDispatch()
-
   const [arr, setArr] = useState([
     {
       id: '1',
-      comp: <User />
+      comp:  <History />
     },
     {
       id: '2',
@@ -30,13 +29,10 @@ const Profile = () => {
     {
       id: '3',
       comp: <RadarDiagram />
-    }, 
-  ])
-
-  const [arr2, serArr2] = useState([
+    },
     {
       id: '4',
-      comp:  <History />
+      comp: <User />
     },
     {
       id: '5',
@@ -45,9 +41,9 @@ const Profile = () => {
     {
       id: '6',
       comp:  <Cup />
-    },
+    }, 
   ])
-
+  
   useEffect(() => {
     dispatch(getUserProfile(userId))
   }, [])
@@ -58,18 +54,8 @@ const Profile = () => {
     const items = Array.from(arr);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-
+    console.log(items);
     setArr(items);
-  }
-
-  function handleOnDragEndOne(result) {
-    if (!result.destination) return;
-
-    const items = Array.from(arr2);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    serArr2(items);
   }
   
   return (
@@ -97,30 +83,6 @@ const Profile = () => {
           </Droppable>
         </DragDropContext>          
       </div>
-
-      <div className={styles.statsBlock}>
-        <DragDropContext onDragEnd={handleOnDragEndOne}>
-          <Droppable droppableId='stats'>
-            {(provided) => (
-              <ul className={styles.characters} {...provided.droppableProps} ref={provided.innerRef}>
-                {arr2.map(({id, comp}, index) => {
-                  return (
-                    <Draggable key={id} draggableId={id} index={index}>
-                      {(provided) => (
-                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                          {comp}
-                        </li>
-                      )}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </ul>
-            )}  
-          </Droppable>
-        </DragDropContext>          
-      </div>
-
     </div>
   );
 };
