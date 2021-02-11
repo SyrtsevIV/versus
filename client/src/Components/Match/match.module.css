@@ -7,10 +7,11 @@
 
 .player {
   margin: 20px;
+  min-width: 100px;
 }
 
-.player p{
-  
+.player h4 {
+  text-align: center;
 }
 
 .timer {
@@ -24,3 +25,6 @@
   margin: 20px;
 }
 
+.header {
+  text-align: center;
+}
