@@ -17,6 +17,15 @@ router.post('/new', async (req, res) => {
   res.json(newTournament._id);
 });
 
+router.get('/status/:id', async (req, res) => {
+  try {
+    const tournament = await Tournament.findOneAndUpdate({ _id: req.params.id }, { status: 'past' });
+    res.json(tournament);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.post('/reg', async (req, res) => {
   try {
     const userId = req.user._id;

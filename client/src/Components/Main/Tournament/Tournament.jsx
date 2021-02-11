@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Bracket from '../../Brackets/Bracket';
 import { getTournamentsList } from '../../../redux/actionCreators/tournamentsListCreator';
-import { registrationTournamnet } from '../../../redux/actionCreators/tournamentActionCreator';
+import { changeTournamentStatus, registrationTournamnet } from '../../../redux/actionCreators/tournamentActionCreator';
 import getTours from '../../../redux/actionCreators/mainPageStatus/getTours/getTours';
 import { getBracket, makeBracket } from '../../../redux/actionCreators/bracket';
 
@@ -33,6 +33,10 @@ export default function Activtournament() {
    dispatch(makeBracket(id, tourId));
   };
 
+  const endTournamentHandler = async(tourId) =>{
+    dispatch(changeTournamentStatus(tourId))
+  }
+
   return (
     <div className={styles.center}>
       {tours.length ?
@@ -50,6 +54,14 @@ export default function Activtournament() {
                   <li className="list-group-item d-flex justify-content-center">Организатор: {tour.creator?.login}</li>
                 </ul>
                 <div className="card-body">
+                {userSession?._id === tour.creator._id && tour.status === 'current' ?
+                      <button className="btn btn-warning" onClick={ async() => {
+                         await endTournamentHandler(tour?._id)
+                         await setCounter(prev => prev + 1)
+                      }}>Завершить турнир</button>
+                    :
+                    null
+                }
               {tour.bracket?.length ? 
                 <>
                 <Bracket tourId={tour?._id} creator={tour.creator?._id} />
@@ -82,6 +94,7 @@ export default function Activtournament() {
                     :
                     null
                   }
+
                       </div>
                       <div  className="d-flex justify-content-center">
                         <ol className="list-group list-group-flush"> <h5><b>Список участников:</b></h5>

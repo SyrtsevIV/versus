@@ -46,6 +46,7 @@ export function endMatch(id, timer) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        "Access-Control-Allow-Credentials": "true",
       },
       body: JSON.stringify({ timer }),
     });
