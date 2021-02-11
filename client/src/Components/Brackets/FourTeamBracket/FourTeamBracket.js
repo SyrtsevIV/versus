@@ -8,7 +8,6 @@ const FourTeamBracket = ({ bracket, tourId, creator }) => {
   useEffect(() => {
     // Select the node that will be observed for mutations
     const targetNode = refBracketWr.current;
-    console.log(targetNode);
 
     // Options for the observer (which mutations to observe)
     const config = { attributes: true, childList: true, subtree: true, characterData: true };
@@ -18,9 +17,9 @@ const FourTeamBracket = ({ bracket, tourId, creator }) => {
       // Use traditional 'for loops' for IE 11
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
-          mutation.target.offsetParent.classList.add(style.change);
+          mutation.target.offsetParent?.classList.add(style.change);
           setTimeout(() => {
-            mutation.target.offsetParent.classList.remove(style.change);
+            mutation.target.offsetParent?.classList.remove(style.change);
           }, 600);
         } else if (mutation.type === 'attributes') {
         } else if (mutation.type === 'characterData') {
