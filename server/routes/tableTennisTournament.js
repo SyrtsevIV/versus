@@ -39,7 +39,10 @@ async function makePairs(array, num = array.length, tour) {
   const topOnPair = [];
   for (let i = 0; i < top.length; i += 1) {
     topOnPair[i] = await Match.create({
-      player1: top[i], tour, score: { player1: 11 }, ended: true,
+      player1: top[i],
+      tour,
+      score: { player1: 11 },
+      ended: true,
     });
   }
 
@@ -113,7 +116,7 @@ async function nextTour(
   nextTourMatch,
   winnerId,
   nextTourName,
-  phantom,
+  phantom
 ) {
   if (bracketTour[nextTourMatchIndex]?.player1 || bracketTour[nextTourMatchIndex]?.player2) {
     nextTourMatch = bracketTour[nextTourMatchIndex];
@@ -163,8 +166,10 @@ function getRating(winnerRating, losserRating, tour) {
     }
     return 40;
   }
-  let newWinnerRating = winnerRating + getRatingIndex(winnerRating) * (realScore1 - getWaitingScore(winnerRating, losserRating));
-  let newLosserRating = losserRating + getRatingIndex(losserRating) * (realScore2 - getWaitingScore(losserRating, winnerRating));
+  let newWinnerRating =
+    winnerRating + getRatingIndex(winnerRating) * (realScore1 - getWaitingScore(winnerRating, losserRating));
+  let newLosserRating =
+    losserRating + getRatingIndex(losserRating) * (realScore2 - getWaitingScore(losserRating, winnerRating));
   if (tour === 'final') {
     // очки за 1 место
     newWinnerRating += 50;
@@ -178,12 +183,14 @@ function getRating(winnerRating, losserRating, tour) {
     newLosserRating += 20;
   }
 
-  return [newWinnerRating, newLosserRating];
+  return [Math.round(newWinnerRating), Math.round(newLosserRating)];
 }
 
 router.get('/future', async (req, res) => {
   try {
-    const tournament = await Tournament.find({ status: 'future' }).populate({ path: 'participants' });
+    const tournament = await Tournament.find({ status: 'future' })
+      .populate({ path: 'participants' })
+      .populate({ path: 'creator' });
     res.json(tournament);
   } catch (e) {
     res.sendStatus(500);
@@ -192,7 +199,9 @@ router.get('/future', async (req, res) => {
 
 router.get('/past', async (req, res) => {
   try {
-    const tournament = await Tournament.find({ status: 'past' }).populate({ path: 'participants' });
+    const tournament = await Tournament.find({ status: 'past' })
+      .populate({ path: 'participants' })
+      .populate({ path: 'creator' });
     res.json(tournament);
   } catch (e) {
     res.sendStatus(500);
@@ -201,7 +210,9 @@ router.get('/past', async (req, res) => {
 
 router.get('/current', async (req, res) => {
   try {
-    const tournament = await Tournament.find({ status: 'current' }).populate({ path: 'participants' });
+    const tournament = await Tournament.find({ status: 'current' })
+      .populate({ path: 'participants' })
+      .populate({ path: 'creator' });
     res.json(tournament);
   } catch (e) {
     res.sendStatus(500);
@@ -290,11 +301,11 @@ wsServer.on('connection', (client) => {
       winnerStats.won += 1;
       winnerStats.score += winnerScore;
       winnerStats.missed += losserScore;
-      winnerStats.mmr = newRating[0];
+      winnerStats.mmr = Math.round(newRating[0]);
       losserStats.lost += 1;
       losserStats.score += losserScore;
       losserStats.missed += winnerScore;
-      losserStats.mmr = newRating[1];
+      losserStats.mmr = Math.round(newRating[1]);
 
       const { tour } = currentTourMatch;
       const bracket = await Bracket.findOne({ [tour]: id });
@@ -644,7 +655,9 @@ router.get('/:tournamentId/bracket/new', async (req, res) => {
 
 // матч
 router.get('/match/:id', async (req, res) => {
-  const match = await Match.findById(req.params.id).populate('player1').populate('player2');
+  const match = await Match.findById(req.params.id)
+    .populate({ path: 'player1', populate: { path: 'stats' } })
+    .populate({ path: 'player2', populate: { path: 'stats' } });
   res.json({ match });
 });
 

@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { editAvatar } from '../../../redux/actionCreators/profile';
 
 const User = () => {
-  const {id} = useParams()
+  const {userId} = useParams()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.profileStats);
 
@@ -14,7 +14,7 @@ const User = () => {
 
 
   useEffect(() => {
-    dispatch(getUserHistory(id))
+    dispatch(getUserHistory(userId))
   }, [])
 
   // Добавление пользовательской аватарки
@@ -22,8 +22,7 @@ const User = () => {
     e.preventDefault();
     const data = new FormData()
     data.append("file", file)
-    console.log(file);
-    dispatch(editAvatar(file, id))
+    dispatch(editAvatar(file, userId))
   };
   
   return (
@@ -35,11 +34,12 @@ const User = () => {
       <div className={styles.changeAvatar}>
         
         <form action="#" method="POST" encType="multipart/form-data" className={styles.form}>
-          <input type="file" id="file" name="filedata" accept=".jpg" onChange={(event) => {
+        
+          <input className={`btn btn-primary ${styles.button}`}  type="file" id="file" name="filedata" accept=".jpg" placeholder="HELLOOOOOO" onChange={(event) => {
             const file = event.target.files[0];
             setFile(file)
-          }}/>
-          <button onClick={(event) => sendAvatar(event)}>Обновить фотографию</button>
+          }} />
+          <button type="button" className="btn btn-primary" onClick={(event) => sendAvatar(event)}>Обновить фотографию</button>
         </form>
       </div>
   </div>

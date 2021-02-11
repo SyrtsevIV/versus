@@ -59,7 +59,7 @@ const Circular = () => {
         <h5>Сравнить статистику</h5>
         <div className={styles.statsBlock}>
           <input type="text" placeholder="Введите логин" onChange={textInput}/>
-          <button type="submit" onClick={() => {compareStats(inputText)}}>Сравнить</button>
+          <button type="button" className="btn btn-primary" onClick={() => {compareStats(inputText)}}>Сравнить</button>
         </div>
       </div>
       <div className={styles.radarDiagram}>

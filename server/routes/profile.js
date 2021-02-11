@@ -20,14 +20,12 @@ router.get('/:id', async (req, res) => {
     const allPlayerValue = await allPlayerRanks.length;
     allPlayerRanks.sort((a, b) => b.mmr - a.mmr);
     const user = await User.findById(id);
-    console.log(user);
     let rating = allPlayerRanks.findIndex((el) => {
       return String(el.user) == id
     });
     rating += 1;
     res.json({ stats, rating, user, allPlayerValue });
   } catch (error) {
-    // Что отправить в качестве ошибки?
     res.send('Не нашел такого юзера =(');
   }
 });
@@ -38,7 +36,6 @@ const storage = multer.diskStorage({
     cb(null, appDir + '/public/images')
   },
   filename: function (req, file, cb) {
-    console.log(file)
     cb(null, 'image-' + Date.now() + path.extname(file.originalname)
     )
   }
@@ -48,15 +45,25 @@ var upload = multer({ storage })
 
 router.post('/upload/:id', upload.single('filedata'), async (req, res) => {
   const { id } = req.params;
-  const user = await User.findByIdAndUpdate(id, { avatar: req.file.filename }, { new: true });
-  res.json(user);
+  try {
+    const user = await User.findByIdAndUpdate(id, { avatar: req.file.filename }, { new: true });
+    res.json(user);
+  } catch (error) {
+    console.log('Что то пошло не так, upload');
+  }
 });
 
 router.get('/history/:id', async (req, res) => {
   const { id } = req.params;
-  const matches = await Match.find().populate('player1').populate('player2');
-  const userMatches = matches.filter((el) => String(el.player1._id) === id || String(el.player2._id) === id);
-  res.json(userMatches);
+  try {
+    const matches = await Match.find({ ended: true }).populate('player1').populate('player2');
+    const userMatches = matches.filter((el) => { 
+      return String(el.player1?._id) === id || String(el.player2?._id) === id
+    });
+    res.json(userMatches.slice(0,5));
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.post('/:id', async (req, res) => {
@@ -68,7 +75,7 @@ router.post('/:id', async (req, res) => {
     res.json(user);
   } catch (error) {
     // Что отправить в качестве ошибки?
-    res.send('Что то пошло не так =(');
+    res.send('Что то пошло не так, id');
   }
 });
 

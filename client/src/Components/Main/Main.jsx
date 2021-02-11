@@ -25,9 +25,16 @@ const Main = () => {
   return (
     <div>
       <div className={styles.mainNav}>
-        <li onClick={() => changeHandler('past')} className="waves-effect waves-light btn-large">Прошедшие турниры</li>
-        <li onClick={() => changeHandler('current')} className="waves-effect waves-light btn-large">Текущие турниры</li>
-        <li onClick={() => changeHandler('future')} className="waves-effect waves-light btn-large">Будущие турниры</li>
+        <div className="btn-group p-4" role="group" aria-label="Basic outlined example">
+          <input type="radio" className="btn-check" name="btnradio" id="btnradio1" autoComplete="off"  />
+          <label onClick={() => changeHandler('past')} className="btn btn-outline-primary" htmlFor="btnradio1">Прошедшие турниры</label>
+
+          <input type="radio" className="btn-check" name="btnradio" id="btnradio2" autoComplete="off" />
+          <label onClick={() => changeHandler('current')} className="btn btn-outline-primary" htmlFor="btnradio2">Текущие турниры</label>
+
+          <input type="radio" className="btn-check" name="btnradio" id="btnradio3" autoComplete="off" />
+          <label onClick={() => changeHandler('future')} className="btn btn-outline-primary" htmlFor="btnradio3">Будущие турниры</label>
+        </div>
       </div>
         <Activtournament />
     </div>

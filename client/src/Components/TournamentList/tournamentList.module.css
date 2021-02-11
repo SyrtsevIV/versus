@@ -1,3 +1,7 @@
+.body {
+  /* background-color: #f5f5f5;
+  font-family: 'Oswald', sans-serif; */
+}
 .TournamentList {
   display: flex;
   justify-content: space-around;
@@ -6,15 +10,11 @@
   text-align: center;
 }
 .listItem {
+  width: 350px;
   display: flex;
   flex-direction: column;
-  background-color: grey;
   margin: 5px 0;
   padding: 10px 5px;
-}
-.listItem:hover {
-  cursor: pointer;
-
 }
 .title {
   text-align: center;
@@ -23,3 +23,14 @@
   display: flex;
   justify-content: space-between;
 }
+.buttonsBlock {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+

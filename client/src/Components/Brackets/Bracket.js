@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { wsClient } from '../../App';
 import EightTeamBracket from './EightTeamBracket/EightTeamBracket';
@@ -7,54 +7,34 @@ import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
 import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 import styles from './bracket.module.css';
 import { useSelector } from 'react-redux';
-import { getBracket, makeBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
+import { getBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
 import { useDispatch } from 'react-redux';
 
-const Bracket = ({ tourId }) => {
-  // const [bracket, setBracket] = useState([]);
+const Bracket = ({ tourId, creator }) => {
   const bracket = useSelector((state) => state.bracket.bracket);
   const dispatch = useDispatch();
   const { id } = useParams();
   wsClient.onmessage = (message) => {
-    // setBracket(JSON.parse(message.data).bracket);
     dispatch(wsSetBracket(JSON.parse(message.data).bracket));
   };
 
   useEffect(() => {
-    // fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id || tourId}`)
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     return setBracket(json?.bracket);
-    //   });
     dispatch(getBracket(id, tourId));
   }, []);
-
-  // const fetchBracket = async () => {
-  // const res = await fetch(
-  //   `${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id || tourId}/bracket/new`
-  // );
-  // const resJson = await res.json();
-  // setBracket(resJson);
-  // };
-
-  const makeBracketHandler = () => {
-    // fetchBracket();
-    dispatch(makeBracket(id, tourId));
-  };
 
   const renderSwitch = () => {
     if (bracket) {
       if (bracket.oneSixteenth?.length) {
-        return <ThirtytwoTeamBracket bracket={bracket} tourId={tourId} />;
+        return <ThirtytwoTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
       if (bracket.oneEighth?.length) {
-        return <SixteenTeamBracket bracket={bracket} tourId={tourId} />;
+        return <SixteenTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
       if (bracket.quarterfinals?.length) {
-        return <EightTeamBracket bracket={bracket} tourId={tourId} />;
+        return <EightTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
       if (bracket.semifinal?.length) {
-        return <FourTeamBracket bracket={bracket} tourId={tourId} />;
+        return <FourTeamBracket bracket={bracket} tourId={tourId} creator={creator} />;
       }
     }
     return null;
@@ -62,9 +42,7 @@ const Bracket = ({ tourId }) => {
 
   return (
     <>
-      <div className={styles.center}>
-        <button onClick={makeBracketHandler}>Завершить запись</button> {renderSwitch()}
-      </div>
+      <div className={styles.center}>{renderSwitch()}</div>
     </>
   );
 };
