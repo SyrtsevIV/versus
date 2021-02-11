@@ -13,6 +13,7 @@ const History = () => {
     dispatch(getUserHistory(userId))
   }, [])
   
+
   return (
     <div className={styles.history}>
       <h5>История игр:</h5>
@@ -29,7 +30,7 @@ const History = () => {
         <div class="card-body">
           <h5 class="card-title">
             <span>{el.player1?.login}
-            <span className={styles.score}>{el.score?.player1}</span> : <span className={styles.score}>{el.score?.player1}</span> {el.player2?.login}</span></h5>
+            <span className={styles.score}>{el.score?.player1}</span> : <span className={styles.score}>{el.score?.player2}</span> {el.player2?.login}</span></h5>
         </div>
         <div class="card-footer text-muted">
           Стадия турнира: {el.tour}

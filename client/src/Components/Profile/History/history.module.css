@@ -3,18 +3,18 @@
   flex-direction: column;
   text-align: center;
   background-color: blue;
-  padding: 5px 15px;
+  padding: 0 15px;
   color: aliceblue;
-  margin: 5px 0;
 }
 .history {
-  width: 33%;
   margin: 0 auto;
   text-align: center;
 }
 .score {
   padding: 3px 7px;
-  background-color: grey;
+  background-color: #0d6efd;
+  color: white;
+  margin: 0 15px;
 }
 .list {
   list-style-type: none;

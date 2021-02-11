@@ -9,12 +9,16 @@ const Circular = () => {
 
   const won = user?.stats?.won
   const lost = user?.stats?.lost
+  console.log(won, lost);
   const gameValue = won + lost || 0
-  const percent = ((won / (won + lost)) * 100).toFixed(2) || 0
+  const percent = Number(((won / (won + lost)) * 100).toFixed(2)) || 0
+  console.log(typeof percent);
+
+
 
   useEffect(()=> {
     chart()
-  }, [user])
+  }, [user, percent])
 
   const chart = () => {
     setChartData({
@@ -42,7 +46,7 @@ const Circular = () => {
     <div className={styles.doughnut}>
       <div className={styles.gameInfo}>
         <h5>Всего игр : {gameValue}</h5>
-        {percent === Number ? <p>Процент побед: {percent} %</p> : <p>Вы пока не сыграли матчей</p>}
+        {typeof percent !== String ? <p>Процент побед: {percent} %</p> : <p>Вы пока не сыграли матчей</p>}
       </div>
     
     <div className={styles.doughnutDiagram}>

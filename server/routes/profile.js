@@ -60,7 +60,7 @@ router.get('/history/:id', async (req, res) => {
     const userMatches = matches.filter((el) => { 
       return String(el.player1?._id) === id || String(el.player2?._id) === id
     });
-    res.json(userMatches.slice(0,5));
+    res.json(userMatches.slice(-3).reverse());
   } catch (error) {
     console.log(error);
   }
