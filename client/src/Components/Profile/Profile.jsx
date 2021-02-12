@@ -47,7 +47,7 @@ const Profile = () => {
   const [arr, setArr] = useState([])
   let customProfile = useSelector(state => state.profileStats.customProfile)
   useEffect(() => {
-    console.log('>>>>>>>>>>>>>', customProfile)
+    
     setArr(prev => {
       if (customProfile?.length) {
         return customProfile.map(number => defaultLayoutProfile[number])
@@ -93,12 +93,11 @@ const Profile = () => {
     const items = Array.from(arr);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    console.log();
+    
     dispatch(setCustomProfileDB(items.map(el => el.id), userId))
     // setArr(items);
   }
 
-  console.log(arr)
   
   return (
     <div className={styles.content}>

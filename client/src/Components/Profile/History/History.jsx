@@ -22,7 +22,7 @@ const History = () => {
       
       <ul className={styles.listBlock}>
       {matches && matches.map((el) => (
-        <li className={styles.list}>
+        <li className={styles.list} key={el._id}>
           <div class="card text-center">
         <div class="card-header">
           Длительность матча: {el.duration}
