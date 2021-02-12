@@ -9,7 +9,7 @@ const Header = () => {
 
   return (
 
-    <nav className="navbar navbar-expand-lg navbar-light header" style={{ color: 'white' }}>
+    <nav className="navbar navbar-expand-lg navbar-light header fixed-top" style={{ color: 'white' }}>
       <div className="container-fluid justify-content-between ">
         <Link className="navbar-brand" to="/" style={{ color: 'white' }}>
           Versus
@@ -23,22 +23,21 @@ const Header = () => {
               <span id='buttonCreateTournament'>Создать турнир</span>
             </Link>
           )}
-
-        <ul className="navbar-nav mb-2 mb-lg-0">
-          <li className="nav-item px-3">
-            <NavLink to="/tournaments">Все турниры</NavLink>
-          </li>
-          <li className="nav-item px-3">
-            <NavLink to="/ratings">Рейтинг</NavLink>
-          </li>
-          {userSession && userSession ? (
-            <>
-              <li className="nav-item px-3">
-                <NavLink to={`/profile/${userSession._id}`}>Профиль</NavLink>
-              </li>
-              <li className="nav-item px-3">
-                <Link to="" onClick={() => dispatch(logoutUser())}>
-                  Выйти
+      <ul className="navbar-nav mb-2 mb-lg-0">
+        <li className="nav-item px-3">
+          <NavLink to="/tournaments">Все турниры</NavLink>
+        </li>
+        <li className="nav-item px-3">
+          <NavLink to="/ratings">Рейтинг</NavLink>
+        </li>
+        {userSession && userSession ? (
+          <>
+            <li className="nav-item px-3">
+              <NavLink to={`/profile/${userSession._id}`}>Профиль</NavLink>
+            </li>
+            <li className="nav-item px-3">
+              <Link to="" onClick={() => dispatch(logoutUser())}>
+                Выйти
               </Link>
               </li>
             </>

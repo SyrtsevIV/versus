@@ -54,17 +54,9 @@ export default function Activtournament() {
                   <li className="list-group-item d-flex justify-content-center">Организатор: {tour.creator?.login}</li>
                 </ul>
                 <div className="card-body">
-                {userSession?._id === tour.creator._id && tour.status === 'current' ?
-                      <button className="btn btn-warning" onClick={ async() => {
-                         await endTournamentHandler(tour?._id)
-                         await setCounter(prev => prev + 1)
-                      }}>Завершить турнир</button>
-                    :
-                    null
-                }
               {tour.bracket?.length ? 
                 <>
-                <Bracket tourId={tour?._id} creator={tour.creator?._id} />
+                <Bracket tourId={tour?._id} creator={tour.creator?._id} tourStatus={tour.status} />
                   </>
                     :
                     <>

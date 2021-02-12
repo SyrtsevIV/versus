@@ -25,6 +25,7 @@ const Ratings = () => {
           <button type="button" className="btn btn-outline-primary" onClick={()=>changeRating('mmr')}>По MMR</button>
           <button type="button" className="btn btn-outline-primary" onClick={()=>changeRating('won')}>По количеству побед</button>
           <button type="button" className="btn btn-outline-primary" onClick={()=>changeRating('gold')}>По количеству золотых кубков</button>
+          <button type="button" className="btn btn-outline-primary" onClick={()=>changeRating('score')}>По набранным очкам</button>
         </div>
       </div>
         {/* <ul className={`collection ${styles.ul}`}>  */}
@@ -36,6 +37,8 @@ const Ratings = () => {
             <th scope="col">MMR</th>
             <th scope="col">Выиграл золотых кубков</th>
             <th scope="col">Число побед</th>
+            <th scope="col">Набранные очки</th>
+            <th scope="col">Процент побед</th>
           </tr>
         </thead>
 
@@ -47,6 +50,8 @@ const Ratings = () => {
                       <td>{Math.round(stats.mmr)}</td>
                       <td>{stats.gold}</td>
                       <td>{stats.won}</td>
+                      <td>{stats.score}</td>
+                      <td>{isNaN(Math.round(((stats.won / (stats.won + stats.lost)) * 100).toFixed(2) || 0)) ? 0 : Math.round(((stats.won / (stats.won + stats.lost)) * 100).toFixed(2) || 0) } %</td>
                     </tr>
                   </tbody>
         )}
