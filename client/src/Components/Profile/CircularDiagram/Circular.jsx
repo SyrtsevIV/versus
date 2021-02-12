@@ -9,10 +9,10 @@ const Circular = () => {
 
   const won = user?.stats?.won
   const lost = user?.stats?.lost
-  console.log(won, lost);
+  
   const gameValue = won + lost || 0
   const percent = Number(((won / (won + lost)) * 100).toFixed(2)) || 0
-  console.log(typeof percent);
+
 
 
 
