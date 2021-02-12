@@ -1,7 +1,7 @@
 import styles from '../Profile/profile.module.css'
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getUserProfile } from '../../redux/actionCreators/profile';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserProfile, setCustomProfileDB } from '../../redux/actionCreators/profile';
 import { useParams } from 'react-router-dom'
 
 import Cup from './Cup/Cup';
@@ -14,40 +14,75 @@ import RadarDiagram from './RadarDiagram/RadarDiagram';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 
+const defaultLayoutProfile = {
+    '1': {
+      id: '1',
+      comp: <History />,
+    },
+    '2': {
+      id: '2',
+      comp: <Rank />,
+    },
+    '3': {
+      id: '3',
+      comp: <RadarDiagram />,
+    },
+    '4': {
+      id: '4',
+      comp: <User />,
+    },
+    '5': {
+      id: '5',
+      comp: <Circular />,
+    },
+    '6': {
+      id: '6',
+      comp: <Cup />,
+    },
+}
+
 const Profile = () => {
   const {userId} = useParams()
   const dispatch = useDispatch()
-
-  const [arr, setArr] = useState([
-    {
-      id: '1',
-      comp: <User />
-    },
-    {
-      id: '2',
-      comp: <Rank />
-    },
-    {
-      id: '3',
-      comp: <RadarDiagram />
-    }, 
-  ])
-
-  const [arr2, serArr2] = useState([
-    {
-      id: '4',
-      comp:  <History />
-    },
-    {
-      id: '5',
-      comp:  <Circular />
-    },
-    {
-      id: '6',
-      comp:  <Cup />
-    },
-  ])
-
+  const [arr, setArr] = useState([])
+  let customProfile = useSelector(state => state.profileStats.customProfile)
+  useEffect(() => {
+    console.log('>>>>>>>>>>>>>', customProfile)
+    setArr(prev => {
+      if (customProfile?.length) {
+        return customProfile.map(number => defaultLayoutProfile[number])
+      } else {
+        return [1,2,3,4,5,6].map(number => defaultLayoutProfile[number])
+      }
+    })
+  }, [customProfile])
+  // const [arr, setArr] = useState([
+  //   {
+  //     id: '1',
+  //     comp:  <History />
+  //   },
+  //   {
+  //     id: '2',
+  //     comp: <Rank />
+  //   },
+  //   {
+  //     id: '3',
+  //     comp: <RadarDiagram />
+  //   },
+  //   {
+  //     id: '4',
+  //     comp: <User />
+  //   },
+  //   {
+  //     id: '5',
+  //     comp:  <Circular />
+  //   },
+  //   {
+  //     id: '6',
+  //     comp:  <Cup />
+  //   }, 
+  // ])
+  
   useEffect(() => {
     dispatch(getUserProfile(userId))
   }, [])
@@ -58,19 +93,12 @@ const Profile = () => {
     const items = Array.from(arr);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-
-    setArr(items);
+    console.log();
+    dispatch(setCustomProfileDB(items.map(el => el.id), userId))
+    // setArr(items);
   }
 
-  function handleOnDragEndOne(result) {
-    if (!result.destination) return;
-
-    const items = Array.from(arr2);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    serArr2(items);
-  }
+  console.log(arr)
   
   return (
     <div className={styles.content}>
@@ -97,30 +125,6 @@ const Profile = () => {
           </Droppable>
         </DragDropContext>          
       </div>
-
-      <div className={styles.statsBlock}>
-        <DragDropContext onDragEnd={handleOnDragEndOne}>
-          <Droppable droppableId='stats'>
-            {(provided) => (
-              <ul className={styles.characters} {...provided.droppableProps} ref={provided.innerRef}>
-                {arr2.map(({id, comp}, index) => {
-                  return (
-                    <Draggable key={id} draggableId={id} index={index}>
-                      {(provided) => (
-                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                          {comp}
-                        </li>
-                      )}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </ul>
-            )}  
-          </Droppable>
-        </DragDropContext>          
-      </div>
-
     </div>
   );
 };

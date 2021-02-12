@@ -1,4 +1,4 @@
-import { GET_STATS, COMPARE_STATS, EDIT_PROFILE, EDIT_AVATAR, GET_HISTORY } from '../types/types'
+import { GET_STATS, COMPARE_STATS, EDIT_PROFILE, EDIT_AVATAR, GET_HISTORY, CUSTOM_PROFILE } from '../types/types'
 
 // Получение стастики авторизованного пользователя
 export function getUserProfile(id) {
@@ -81,5 +81,23 @@ export function getUserHistory(id) {
       type: GET_HISTORY,
       payload: result
     })
+  }
+}
+
+export function setCustomProfileDB(uniqArr, id) {
+  return async function(dispatch) {
+    let res = await fetch(`${process.env.REACT_APP_SERVER_URL}/profile/customProfile/${id}`, {
+      method: "POST",
+      headers: {
+        'Content-Type':'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({uniqArr})
+    })
+    const result = await res.json();
+    dispatch({
+      type: CUSTOM_PROFILE,
+      payload: result.customProfile,
+    });
   }
 }

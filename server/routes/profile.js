@@ -79,4 +79,18 @@ router.post('/:id', async (req, res) => {
   }
 });
 
+router.post('/customProfile/:id', async (req, res) => {
+  const {id} = req.params
+  try {
+    const {uniqArr} = req.body;
+    console.log({uniqArr})
+    const user = await User.findByIdAndUpdate(id, { customProfile: uniqArr }, {new: true});
+    console.log(user)
+    res.json({customProfile: user.customProfile});
+  } catch (error) {
+    // Что отправить в качестве ошибки?
+    res.send('Что то пошло не так, id');
+  }
+})
+
 module.exports = router;

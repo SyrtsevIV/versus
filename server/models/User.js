@@ -23,6 +23,7 @@ const User = mongoose.model('User', {
   stats: { type: mongoose.ObjectId, ref: 'Stats' },
   googleId: String,
   tournaments: [{ type: mongoose.ObjectId, ref: 'Tournament' }],
+  customProfile: [],
 });
 
 module.exports = User;

@@ -16,3 +16,4 @@ export const USER_IN_TOUR = 'USER_IN_TOUR';
 export const EDIT_AVATAR = 'EDIT_AVATAR';
 export const GET_HISTORY = 'GET_HISTORY';
 export const SET_BRACKET = 'SET_BRACKET';
+export const CUSTOM_PROFILE = 'CUSTOM_PROFILE';

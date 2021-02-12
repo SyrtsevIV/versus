@@ -28,8 +28,10 @@ const User = () => {
   return (
     <div className={styles.profileBlock}>
       <h4>{user?.user.login}</h4>
-    
+      {user?.user?.googleId? 
+      <img src={`${user?.user?.avatar}`} alt="" /> :  
       <img src={`http://localhost:3001/images/${user?.user?.avatar}`} alt="" />
+      }
 
       <div className={styles.changeAvatar}>
         
