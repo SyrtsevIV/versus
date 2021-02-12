@@ -1,4 +1,4 @@
-import { GET_STATS, COMPARE_STATS, GET_HISTORY, EDIT_AVATAR, EDIT_PROFILE } from '../types/types';
+import { GET_STATS, COMPARE_STATS, GET_HISTORY, CUSTOM_PROFILE, EDIT_AVATAR, EDIT_PROFILE } from '../types/types';
 
 export default function profileStats(state = {}, action) {
   switch (action.type) {
@@ -7,7 +7,8 @@ export default function profileStats(state = {}, action) {
         stats:action.payload.stats, 
         user: action.payload.user, 
         rating: action.payload.rating,  
-        allPlayerValue:  action.payload.allPlayerValue
+        allPlayerValue:  action.payload.allPlayerValue,
+        customProfile: action.payload.user.customProfile
       };
     case COMPARE_STATS:
       return {...state, compare: action.payload};
@@ -17,6 +18,8 @@ export default function profileStats(state = {}, action) {
       return {...state, user: action.payload }
     case GET_HISTORY:
       return {...state, history: action.payload }
+    case CUSTOM_PROFILE:
+      return {...state, customProfile: action.payload}
     default:
       return state;
   }

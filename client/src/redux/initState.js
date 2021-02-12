@@ -27,6 +27,7 @@ const initState = {
       silver: 0,
       bronze: 0,
     },
+    customProfile: []
   },
   profile: {},
   userSession: {},
@@ -60,6 +61,7 @@ const initState = {
     }
   },
   bracket: [],
+  
 };
 
 export default initState;
