@@ -5,30 +5,40 @@ import { getUserHistory } from '../../../redux/actionCreators/profile';
 import { useParams } from 'react-router-dom'
 
 const History = () => {
-  const {id} = useParams()
+  const {userId} = useParams()
   const dispatch = useDispatch()
   const matches = useSelector((state) => state.profileStats.history);
 
   useEffect(() => {
-    dispatch(getUserHistory(id))
+    dispatch(getUserHistory(userId))
   }, [])
   
+
   return (
     <div className={styles.history}>
       <h5>История игр:</h5>
       
       {matches?.length > 0 ? 
       
-      <ul>
+      <ul className={styles.listBlock}>
       {matches && matches.map((el) => (
-        <li className={styles.match}>
-          <span>Матч длился: {el.duration}</span>
-          <span>{el.player1.login} <span className={styles.score}>{el.score.player1}</span> : <span className={styles.score}>{el.score.player1}</span> {el.player2.login}</span>
-          <span>Стадия турнира: {el.tour} </span>
+        <li className={styles.list}>
+          <div class="card text-center">
+        <div class="card-header">
+          Длительность матча: {el.duration}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <span>{el.player1?.login}
+            <span className={styles.score}>{el.score?.player1}</span> : <span className={styles.score}>{el.score?.player2}</span> {el.player2?.login}</span></h5>
+        </div>
+        <div class="card-footer text-muted">
+          Стадия турнира: {el.tour}
+        </div>
+      </div>
         </li>
       ))}
     </ul> : <p>Участвуй в турнирах и увидишь здесь историю своих матчей!</p>
-    
     
       }
     </div>

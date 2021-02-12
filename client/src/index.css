@@ -1,9 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  font-size: 20px;
-  background-color: #f5f5f5;
-  font-family: 'Oswald', sans-serif;
+  font-size: 17px;
+  background-color: #f5f5f5 !important;
+  font-family: 'Oswald', sans-serif !important;
+  letter-spacing: 0.2px;
 }
 
 #root {
@@ -15,6 +16,7 @@ body {
 .main {
   flex: 1 0 auto;
   height: 100%;
+  margin-top: 4em;
 }
 
 #createTournament {
@@ -42,8 +44,8 @@ body {
 }
 
 a {
-  text-decoration: none;
-  color: unset;
+  text-decoration: none !important;
+  color: unset !important;
 }
 
 a:hover {
@@ -53,6 +55,7 @@ a:hover {
 .btn-outline-primary {
   color: tomato !important;
   border-color: tomato !important;
+  box-shadow: none;
   outline: none;
 }
 
@@ -62,8 +65,8 @@ a:hover {
   background-color: tomato !important;
   border-color: tomato !important;
   color: white !important;
-  box-shadow: none;
-  outline: none;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .btn-check:checked + .btn-outline-primary {
@@ -79,4 +82,20 @@ a:hover {
 
 td{
   text-align: center;
+}
+
+#buttonCreateTournament {
+  border: 1px solid black;
+  padding: .3em 1em;
+  transform: skewX(-15deg);
+  background-color: brown;
+}
+
+.btn-primary{
+  background-color: tomato !important;
+  border-color: tomato !important;
+}
+
+.btn-primary:hover{
+  background-color: rgb(146, 39, 1) !important;
 }

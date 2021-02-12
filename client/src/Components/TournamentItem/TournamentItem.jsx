@@ -39,10 +39,11 @@ const TournamentItem = () => {
   return (
     <>
       <div className={styles.titleBlock}>    
-        <div className="card w-75 p-3 ">
+        <h1>Подробная информация</h1>
+        <div className="card p-3 m-3 w-75">
           <div className="card-body d-flex align-items-center flex-column">
-            <h5 className="card-title">Турнир: {tourItem.title}</h5>
-            <p className="card-text">{tourItem.description}</p>
+            <h5 className="card-title"><h1>{tourItem.title}</h1></h5>
+            <p className="card-text">Описание: {tourItem.description}</p>
           </div>
           
           <ul className="list-group list-group-flush">

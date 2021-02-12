@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 
 const Rank = () => {
   const user = useSelector((state) => state.profileStats);
+  
+  
   return (
     <div className={styles.rankBlock}>
       <div>

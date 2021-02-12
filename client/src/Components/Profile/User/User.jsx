@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { editAvatar } from '../../../redux/actionCreators/profile';
 
 const User = () => {
-  const {id} = useParams()
+  const {userId} = useParams()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.profileStats);
 
@@ -14,7 +14,7 @@ const User = () => {
 
 
   useEffect(() => {
-    dispatch(getUserHistory(id))
+    dispatch(getUserHistory(userId))
   }, [])
 
   // Добавление пользовательской аватарки
@@ -22,13 +22,12 @@ const User = () => {
     e.preventDefault();
     const data = new FormData()
     data.append("file", file)
-    console.log(file);
-    dispatch(editAvatar(file, id))
+    dispatch(editAvatar(file, userId))
   };
   
   return (
     <div className={styles.profileBlock}>
-      <h4>Login: {user?.user.login}</h4>
+      <h4>{user?.user.login}</h4>
     
       <img src={`http://localhost:3001/images/${user?.user?.avatar}`} alt="" />
 

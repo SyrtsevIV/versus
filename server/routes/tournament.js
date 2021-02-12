@@ -19,7 +19,9 @@ router.post('/new', async (req, res) => {
 
 router.get('/status/:id', async (req, res) => {
   try {
-    const tournament = await Tournament.findOneAndUpdate({ _id: req.params.id }, { status: 'past' });
+    const tournament = await Tournament.findById(req.params.id);
+    tournament.status = 'past'
+    await tournament.save()
     res.json(tournament);
   } catch (err) {
     console.log(err);

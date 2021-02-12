@@ -29,8 +29,23 @@ const Profile = () => {
     },
     {
       id: '3',
-      comp: <Cup />
+      comp: <RadarDiagram />
     }, 
+  ])
+
+  const [arr2, serArr2] = useState([
+    {
+      id: '4',
+      comp:  <History />
+    },
+    {
+      id: '5',
+      comp:  <Circular />
+    },
+    {
+      id: '6',
+      comp:  <Cup />
+    },
   ])
 
   useEffect(() => {
@@ -47,38 +62,65 @@ const Profile = () => {
     setArr(items);
   }
 
+  function handleOnDragEndOne(result) {
+    if (!result.destination) return;
+
+    const items = Array.from(arr2);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    serArr2(items);
+  }
   
   return (
     <div className={styles.content}>
       
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId='menu'>
-          {(provided) => (
-            <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-              {arr.map(({id, comp}, index) => {
-                return (
-                  <Draggable key={id} draggableId={id} index={index}>
-                    {(provided) => (
-                      <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        {comp}
-                      </li>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
-            </ul>
-          )}  
-        </Droppable>
-      </DragDropContext>          
+      <div className={styles.leftBlock}>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId='menu'>
+            {(provided) => (
+              <ul className={styles.characters} {...provided.droppableProps} ref={provided.innerRef}>
+                {arr.map(({id, comp}, index) => {
+                  return (
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {(provided) => (
+                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          {comp}
+                        </li>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </ul>
+            )}  
+          </Droppable>
+        </DragDropContext>          
+      </div>
 
-        <div className={styles.statsBlock}>
+      <div className={styles.statsBlock}>
+        <DragDropContext onDragEnd={handleOnDragEndOne}>
+          <Droppable droppableId='stats'>
+            {(provided) => (
+              <ul className={styles.characters} {...provided.droppableProps} ref={provided.innerRef}>
+                {arr2.map(({id, comp}, index) => {
+                  return (
+                    <Draggable key={id} draggableId={id} index={index}>
+                      {(provided) => (
+                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                          {comp}
+                        </li>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </ul>
+            )}  
+          </Droppable>
+        </DragDropContext>          
+      </div>
 
-          <History />
-          <Circular />
-          <RadarDiagram />
-
-        </div>
     </div>
   );
 };
