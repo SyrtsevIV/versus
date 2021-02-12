@@ -23,9 +23,6 @@ const Header = () => {
               Создать турнир
             </Link>
           )}
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
       <ul className="navbar-nav mb-2 mb-lg-0">
         <li className="nav-item px-3">
           <NavLink to="/tournaments">Все турниры</NavLink>

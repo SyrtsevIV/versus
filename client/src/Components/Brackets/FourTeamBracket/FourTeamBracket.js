@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import style from '../bracket.module.css';
 import BracketPair from '../BracketPair/BracketPair';
 
-const FourTeamBracket = ({ bracket, tourId, creator }) => {
+const FourTeamBracket = ({ bracket, tourId, creator, tourStatus }) => {
   const refBracketWr = useRef(null);
 
   useEffect(() => {
@@ -46,21 +46,21 @@ const FourTeamBracket = ({ bracket, tourId, creator }) => {
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[0]} creator={creator}  />
+              <BracketPair tourId={tourId} match={bracket.semifinal[0]} creator={creator} tourStatus={tourStatus}  />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[1]} creator={creator}  />
+              <BracketPair tourId={tourId} match={bracket.semifinal[1]} creator={creator} tourStatus={tourStatus}  />
             </div>
           </div>
         </div>
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.final} creator={creator}  />
+              <BracketPair tourId={tourId} match={bracket.final} creator={creator} tourStatus={tourStatus}  />
             </div>
           </div>
           <div className={`${style['playoff-table-third-place']} ${style['playoff-table-pair-style']}`}>
-            <BracketPair tourId={tourId} match={bracket.thirdPlace} creator={creator}  />
+            <BracketPair tourId={tourId} match={bracket.thirdPlace} creator={creator} tourStatus={tourStatus}  />
           </div>
         </div>
       </div>

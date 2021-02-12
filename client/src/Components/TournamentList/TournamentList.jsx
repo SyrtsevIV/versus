@@ -32,11 +32,14 @@ const TournamentList = () => {
                   <p className="card-text">{el.description}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">Дата:{new Date(el.date).toLocaleString('RU-ru')}</li>
+                  <li className="list-group-item">Дата: {new Date(el.date).toLocaleString('RU-ru')}</li>
                   <li className="list-group-item">Местро проведения: {el.place}</li>
                   <li className="list-group-item">Количество участников: {el.participants.length}</li>
                   <li className="list-group-item">Организатор: {el.creator?.login}</li>
                 </ul>
+                <div className="card-body">
+                  <Link to={`/tournament/${el._id}`}><button type="button" className="btn btn-primary">Подробнее</button></Link>
+                </div>
               </div>
 
             </li>
@@ -56,7 +59,7 @@ const TournamentList = () => {
                   <p className="card-text">{el.description}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item">Дата:{new Date(el.date).toLocaleString('RU-ru')}</li>
+                  <li className="list-group-item">Дата: {new Date(el.date).toLocaleString('RU-ru')}</li>
                   <li className="list-group-item">Местро проведения: {el.place}</li>
                   <li className="list-group-item">Количество участников: {el.participants.length}</li>
                   <li className="list-group-item">Организатор: {el.creator?.login}</li>

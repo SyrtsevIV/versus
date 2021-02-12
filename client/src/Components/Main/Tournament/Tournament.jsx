@@ -43,6 +43,7 @@ export default function Activtournament() {
       <Slider>
           {tours.map(tour =>
             <div className={styles.center} key={tour._id}>
+              {console.log(tour._id)}
               <div className="card w-75 p-3 ">
                 <div className="card-body d-flex align-items-center flex-column">
                   <h5 className="card-title">Турнир: {tour.title}</h5>
@@ -54,17 +55,9 @@ export default function Activtournament() {
                   <li className="list-group-item d-flex justify-content-center">Организатор: {tour.creator?.login}</li>
                 </ul>
                 <div className="card-body">
-                {userSession?._id === tour.creator._id && tour.status === 'current' ?
-                      <button className="btn btn-warning" onClick={ async() => {
-                         await endTournamentHandler(tour?._id)
-                         await setCounter(prev => prev + 1)
-                      }}>Завершить турнир</button>
-                    :
-                    null
-                }
               {tour.bracket?.length ? 
                 <>
-                <Bracket tourId={tour?._id} creator={tour.creator?._id} />
+                <Bracket tourId={tour?._id} creator={tour.creator?._id} tourStatus={tour.status} />
                   </>
                     :
                     <>
