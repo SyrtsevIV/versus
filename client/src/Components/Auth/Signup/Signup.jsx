@@ -43,12 +43,12 @@ const Signup = () => {
         <input onChange={inputHandler} type='password' name='passwordCheck' placeholder='Повторите пароль' className="form-control"/>
       </div>
           {errorValue && errorValue ? errorValue  : null}
-        <div className="d-flex justify-content-md-evenly">
-       <button className='btn btn-primary' onClick={(e) => {
+        <div className="d-flex">
+       <button className='btn btn-primary mx-3' onClick={(e) => {
           e.preventDefault()
           dispatch(signupUser(input, history, setErrorValue))}}>Зарегистрироваться</button><br/>
         <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}>
-        <button className='btn btn-danger'>Google</button>
+        <button className='btn btn-dark'>Google</button>
       </a>
       </div>
 {/*         <input onChange={inputHandler} type='text' name='login' placeholder='Ваше имя'></input>

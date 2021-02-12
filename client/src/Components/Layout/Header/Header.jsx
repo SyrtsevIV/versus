@@ -14,6 +14,7 @@ const Header = () => {
         <Link className="navbar-brand" to="/" style={{ color: 'white' }}>
           Versus
       </Link>
+      <ul className="navbar-nav mb-2 mb-lg-0">
         {userSession && userSession ? (
           <Link className="navbar-brand" to="/tournament/new" style={{ color: 'white' }}>
             <span id='buttonCreateTournament'>Создать турнир</span>
@@ -23,7 +24,6 @@ const Header = () => {
               <span id='buttonCreateTournament'>Создать турнир</span>
             </Link>
           )}
-      <ul className="navbar-nav mb-2 mb-lg-0">
         <li className="nav-item px-3">
           <NavLink to="/tournaments">Все турниры</NavLink>
         </li>

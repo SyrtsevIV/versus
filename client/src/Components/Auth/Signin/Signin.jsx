@@ -34,12 +34,12 @@ const Signin = () => {
         <input id="password" placeholder='Пароль' type="password" className="form-control" name='password' onChange={inputHandler}/>
       </div>
       {errorValue && errorValue ? errorValue : null}
-      <div className="d-flex justify-content-md-evenly">
-       <button className='btn btn-primary' onClick={(e) => {
+      <div className="d-flex">
+       <button className='btn btn-primary mx-3' onClick={(e) => {
          e.preventDefault()
          dispatch(signinUser(input, history, setErrorValue))}}>Войти</button><br/>
         <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}>
-        <button className='btn btn-danger' >Google</button>
+        <button className='btn btn-dark' >Google</button>
       </a>
       </div>
     </div>

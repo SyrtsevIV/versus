@@ -6,7 +6,7 @@ const getTours = (mainPageStatus) => async (dispatch) => {
     const result = await response.json();
     dispatch({
       type: GET_MAIN_PAGE_TOURS,
-      payload: result,
+      payload: result.reverse(),
    });
   }
 }

@@ -465,7 +465,7 @@ wsServer.on('connection', (client) => {
         path: 'bracket',
         populate: { path: 'final', populate: { path: 'player2' } },
       });
-    if (tournament.bracket.final.ended && tournament.bracket.thirdPlace.ended) {
+    if (tournament.bracket.final?.ended && tournament.bracket.thirdPlace?.ended) {
       tournament.status = 'past';
       await tournament.save();
     }
