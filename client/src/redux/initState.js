@@ -61,7 +61,7 @@ const initState = {
     }
   },
   bracket: [],
-  
+  error: '',
 };
 
 export default initState;

@@ -1,4 +1,4 @@
-import { IN_SESSION, LOGOUT, SIGNUP, SIGNIN } from "../../redux/types/types";
+import { IN_SESSION, LOGOUT, SIGNUP, SIGNIN, ERROR } from "../../redux/types/types";
 
 export default function authReducer(state = "", { type, payload }) {
   switch (type) {
@@ -10,6 +10,8 @@ export default function authReducer(state = "", { type, payload }) {
       return { ...state, userSession: payload };
     case SIGNIN:
       return { ...state, userSession: payload };
+    case ERROR:
+      return { ...state, error: payload };
     default:
       return state;
   }

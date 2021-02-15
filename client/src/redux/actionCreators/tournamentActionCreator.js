@@ -1,4 +1,4 @@
-import { GET_TOUR } from "../types/types";
+import { GET_TOUR, ERROR } from "../types/types";
 
 export const createTournament = (inputValue, history) => {
   return async (dispatch, getState) => {
@@ -15,7 +15,10 @@ export const createTournament = (inputValue, history) => {
       const result = await response.json();
       history.push(`/tournament/${result}`);
     } catch (err) {
-      console.log('from createTournament', err);
+      dispatch({
+        type: ERROR,
+        payload: 'Упс, что то пошло не так, попробуйте снова или повторите позже',
+      });
     }
   };
 };
@@ -33,7 +36,10 @@ export const registrationTournamnet = (id) => {
         body: JSON.stringify({ id }),
       });
     } catch (err) {
-      console.log("ERROR FROM registrationTournamnet");
+      dispatch({
+        type: ERROR,
+        payload: 'Упс, что то пошло не так, попробуйте снова или повторите позже',
+      });
     }
   };
 };
@@ -55,7 +61,10 @@ export const getTournament = (id) => {
         payload: result,
       });
     } catch (err) {
-      console.log("ERROR FROM getTournament");
+      dispatch({
+        type: ERROR,
+        payload: 'Упс, что то пошло не так, попробуйте снова или повторите позже',
+      });
     }
   };
 };
@@ -77,7 +86,10 @@ export const changeTournamentStatus = (id) => {
         payload: result,
       });
     } catch (err) {
-      console.log("ERROR FROM getTournament");
+      dispatch({
+        type: ERROR,
+        payload: 'Упс, что то пошло не так, попробуйте снова или повторите позже',
+      });
     }
   };
 };

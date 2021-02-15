@@ -13,34 +13,34 @@ import { getBracket, makeBracket } from '../../../redux/actionCreators/bracket';
 
 export default function Activtournament() {
   const dispatch = useDispatch()
-  const tours = useSelector(state => state.mainPageTours);
+  const tours = useSelector(state => state.mainPageTours.status);
   const userSession = useSelector((store) => store.authReducer.userSession);
   const buttons = useSelector((state) => state.tournamentsList.userInTour);
   const [counter, setCounter] = useState(0);
-  const mainPage = useSelector(store => store.mainPage);
+  const mainPage = useSelector(store => store.mainPage.status);
   const bracket = useSelector((state) => state.bracket.bracket);
 
   useEffect(() => {
     dispatch(getTournamentsList())
   }, [counter])
-
+  
   useEffect(() => {
     dispatch(getTours(mainPage));
-  }, [counter,bracket]);
+  }, [counter, bracket]);
 
   const makeBracketHandler = async (id, tourId) => {
-   dispatch(getBracket(id, tourId));
-   dispatch(makeBracket(id, tourId));
+    dispatch(getBracket(id, tourId));
+    dispatch(makeBracket(id, tourId));
   };
 
-  const endTournamentHandler = async(tourId) =>{
+  const endTournamentHandler = async (tourId) => {
     dispatch(changeTournamentStatus(tourId))
   }
 
   return (
     <div className={styles.center}>
-      {tours.length ?
-      <Slider>
+      {tours ?
+        <Slider>
           {tours.map(tour =>
             <div className={styles.center} key={tour._id}>
               <div className="card w-75 p-3 ">
@@ -54,58 +54,58 @@ export default function Activtournament() {
                   <li className="list-group-item d-flex justify-content-center">Организатор: {tour.creator?.login}</li>
                 </ul>
                 <div className="card-body">
-              {tour.bracket?.length ? 
-                <>
-                <Bracket tourId={tour?._id} creator={tour.creator?._id} tourStatus={tour.status} />
-                  </>
+                  {tour.bracket?.length ?
+                    <>
+                      <Bracket tourId={tour?._id} creator={tour.creator?._id} tourStatus={tour.status} />
+                    </>
                     :
                     <>
-                <div className="d-flex justify-content-between">
-                  {
-                    buttons.includes(tour._id)
-                    ? <button className="btn btn-danger" onClick={async() => {
-                      await dispatch(registrationTournamnet(tour._id))
-                      await setCounter(prev => prev + 1)
-                      }}>Отписаться</button>
-                      
-                      : userSession && userSession ?
-                        <button className="btn btn-success" onClick={async () => {
-                        await dispatch(registrationTournamnet(tour._id))
-                        await setCounter(prev => prev + 1)
-                        }}>Записаться</button>
-                        :
-                        <Link to={'/signup'}><button className="btn btn-success">Записаться</button></Link>
+                      <div className="d-flex justify-content-between">
+                        {
+                          buttons.includes(tour._id)
+                            ? <button className="btn btn-danger" onClick={async () => {
+                              await dispatch(registrationTournamnet(tour._id))
+                              await setCounter(prev => prev + 1)
+                            }}>Отписаться</button>
 
-                  }
-                  {userSession?._id === tour.creator._id && tour.participants.length > 3 ?
-                     <>
-                      <button className="btn btn-warning" onClick={ () => {
-                         makeBracketHandler(tour?._id, tour?._id)
-                      }}>Завершить запись</button>
-                    </>
-                    :
-                    null
-                  }
+                            : userSession && userSession ?
+                              <button className="btn btn-success" onClick={async () => {
+                                await dispatch(registrationTournamnet(tour._id))
+                                await setCounter(prev => prev + 1)
+                              }}>Записаться</button>
+                              :
+                              <Link to={'/signup'}><button className="btn btn-success">Записаться</button></Link>
+
+                        }
+                        {userSession?._id === tour.creator._id && tour.participants.length > 3 ?
+                          <>
+                            <button className="btn btn-warning" onClick={() => {
+                              makeBracketHandler(tour?._id, tour?._id)
+                            }}>Завершить запись</button>
+                          </>
+                          :
+                          null
+                        }
 
                       </div>
-                      <div  className="d-flex justify-content-center">
+                      <div className="d-flex justify-content-center">
                         <ol className="list-group list-group-flush"> <h5><b>Список участников:</b></h5>
                           {tour.participants.map((user, i) =>
-                            <li className="list-group-item rounded-pill" key={user._id}>{`${i+1}. ${user.login}`}</li>
-                            )}
+                            <li className="list-group-item rounded-pill" key={user._id}>{`${i + 1}. ${user.login}`}</li>
+                          )}
                         </ol>
-                        </div>
+                      </div>
                     </>
-      }
+                  }
                 </div>
-          </div>
-                
-          </div>
-        )}
+              </div>
+
+            </div>
+          )}
         </Slider>
         :
         <h3>Турниров пока нет</h3>
-  }
+      }
     </div>
-    )
+  )
 }
