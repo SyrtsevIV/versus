@@ -36,3 +36,15 @@ ATLAS=
 ```sh
 npm start
 ```
+
+### Какой-то заголовок
+
+![main](readme-assets/main.gif)
+
+### Турнирная сетка
+
+![bracket](readme-assets/bracket.gif)
+
+### Страница профиля
+
+![bracket](readme-assets/profile.gif)
