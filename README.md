@@ -61,7 +61,7 @@ npm start
 * Мобильная версия приложения
 
 ### Наша команда
-* [Аркадий кузнецов](https://github.com/Kuzzarvi)
+* [Аркадий Кузнецов](https://github.com/Kuzzarvi)
 * [Дьячков Юрий](https://github.com/YuriyDyachkov)
 * [Виктор Резник](https://github.com/Vict0rFrost)
 * [Илья Сирцев](https://github.com/SyrtsevIV)
