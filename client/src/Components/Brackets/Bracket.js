@@ -11,7 +11,6 @@ import { getBracket, wsSetBracket } from '../../redux/actionCreators/bracket';
 import { useDispatch } from 'react-redux';
 
 const Bracket = ({ tourId, creator, tourStatus }) => {
-  console.log('tourId',tourId);
   // const bracket = useSelector((state) => state.bracket.bracket);
   const [bracket,setBracket] = useState()
   const dispatch = useDispatch();
