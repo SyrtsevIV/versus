@@ -8,7 +8,6 @@ router.get("/", async (req, res) => {
   try {
     const userInSession = await User.findById(req.user?._id);
     if (userInSession) {
-      console.log('ПОПАВСЯ');
       const tournamentsList = await Tournaments.find().populate("creator");
       res.json({tournamentsList, userInTournaments: userInSession.tournaments })
     } else {

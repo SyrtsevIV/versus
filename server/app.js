@@ -22,6 +22,7 @@ mongoose.connect(process.env.ATLAS, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false
 });
 
 const tableTennisTournamentRouter = require("./routes/tableTennisTournament");

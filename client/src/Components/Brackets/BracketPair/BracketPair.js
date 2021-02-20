@@ -1,5 +1,4 @@
 import style from '../bracket.module.css';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -10,6 +9,7 @@ const BracketPair = ({ match, tourId, creator, tourStatus }) => {
   const startMatchHandler = (id) => {
     history.push(`/tabletennis/match/${id}/${tourId}`);
   };
+  
   return (
     <div
       onClick={

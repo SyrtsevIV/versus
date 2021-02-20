@@ -77,7 +77,8 @@ a:hover {
 }
 
 .navbar-nav{
-  flex-direction: unset !important;
+  flex-direction: row !important;
+  align-items: center;
 }
 
 td{
@@ -98,4 +99,18 @@ td{
 
 .btn-primary:hover{
   background-color: rgb(146, 39, 1) !important;
+}
+
+.btn-dark{
+  background-color: rgba(0, 0, 255, 0.527) !important;
+  border-color: rgba(0, 0, 255, 0.527) !important;
+}
+
+.btn-dark:hover{
+  background-color: rgb(0, 0, 255) !important;
+}
+
+input:focus,
+input:active{
+  outline: none !important;
 }

@@ -36,7 +36,6 @@ router.get(
   }
 );
 
-//дописать логику, если прилетает дублированный пароль
 router.post(
   "/signin",
   passport.authenticate("local", {
@@ -47,7 +46,6 @@ router.post(
   }
 );
 
-//дописать логику, если прилетает дублированный пароль
 router.post(
   "/signup",
   passport.authenticate("local", {

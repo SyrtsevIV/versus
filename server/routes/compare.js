@@ -11,7 +11,6 @@ router.get('/:id', async (req, res) => {
     const userStat = await Stats.findOne({ user: findUser.id });
     res.json(userStat);
   } catch (error) {
-    // Что отправить в качестве ошибки?
     res.send('Не нашел такого юзера =(');
   }
 });
