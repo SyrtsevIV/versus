@@ -3,7 +3,7 @@ import styles from "./main.module.css";
 import Activtournament from './Tournament/Tournament';
 import setMainPage from '../../redux/actionCreators/mainPageStatus/mainPageAction';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import getTours from '../../redux/actionCreators/mainPageStatus/getTours/getTours';
 
 const Main = () => {

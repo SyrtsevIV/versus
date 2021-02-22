@@ -6,7 +6,6 @@ import FourTeamBracket from './FourTeamBracket/FourTeamBracket';
 import SixteenTeamBracket from './SixteenTeamBracket/SixteenTeamBracket';
 import ThirtytwoTeamBracket from './ThirtytwoTeamBracket/ThirtytwoTeamBracket';
 import styles from './bracket.module.css';
-import { useDispatch } from 'react-redux';
 
 const Bracket = ({ tourId, creator, tourStatus }) => {
   const [bracket, setBracket] = useState();
@@ -14,13 +13,14 @@ const Bracket = ({ tourId, creator, tourStatus }) => {
   wsClient.onmessage = (message) => {
     setBracket(JSON.parse(message.data).bracket);
   };
+  
+  const bracketFetch = async () => {
+    const req = await fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id || tourId}`);
+    const resJson = await req.json();
+    setBracket(resJson.bracket);
+  };
 
   useEffect(() => {
-    const bracketFetch = async () => {
-      const req = await fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id || tourId}`);
-      const resJson = await req.json();
-      setBracket(resJson.bracket);
-    };
     bracketFetch();
   }, []);
 

@@ -6,15 +6,10 @@ const ThirtytwoTeamBracket = ({ bracket, tourId, creator, tourStatus }) => {
   const refBracketWr = useRef(null);
 
   useEffect(() => {
-    // Select the node that will be observed for mutations
     const targetNode = refBracketWr.current;
-
-    // Options for the observer (which mutations to observe)
     const config = { attributes: true, childList: true, subtree: true, characterData: true };
 
-    // Callback function to execute when mutations are observed
     const callback = function (mutationsList, observer) {
-      // Use traditional 'for loops' for IE 11
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
           mutation.target.offsetParent?.classList.add(style.change);
@@ -31,10 +26,7 @@ const ThirtytwoTeamBracket = ({ bracket, tourId, creator, tourStatus }) => {
       }
     };
 
-    // Create an observer instance linked to the callback function
     const observer = new MutationObserver(callback);
-
-    // Start observing the target node for configured mutations
     observer.observe(targetNode, config);
 
     return () => observer.disconnect();

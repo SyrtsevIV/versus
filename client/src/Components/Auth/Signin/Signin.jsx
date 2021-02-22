@@ -27,8 +27,6 @@ const Signin = () => {
         <h1>{error}</h1> :
         <>
           <h1>Авторизация</h1>
-          <div>
-          </div>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">Введите Email</label>
             <input id="email" type="email" placeholder='Email' className="form-control" name='email' onChange={inputHandler} />
@@ -39,8 +37,7 @@ const Signin = () => {
           </div>
           {errorValue && errorValue ? errorValue : null}
           <div className="d-flex">
-            <button className='btn btn-primary mx-3' onClick={(e) => {
-              e.preventDefault()
+            <button className='btn btn-primary mx-3' onClick={() => {
               dispatch(signinUser(input, history, setErrorValue))
             }}>Войти</button><br />
             <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}>

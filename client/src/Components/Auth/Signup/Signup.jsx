@@ -48,8 +48,7 @@ const Signup = () => {
             </div>
             {errorValue && errorValue ? errorValue : null}
             <div className="d-flex">
-              <button className='btn btn-primary mx-3' onClick={(e) => {
-                e.preventDefault()
+              <button className='btn btn-primary mx-3' onClick={() => {
                 dispatch(signupUser(input, history, setErrorValue))
               }}>Зарегистрироваться</button><br />
               <a href={`${process.env.REACT_APP_SERVER_URL}/auth/google`}>
