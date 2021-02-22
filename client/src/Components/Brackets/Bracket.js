@@ -13,13 +13,14 @@ const Bracket = ({ tourId, creator, tourStatus }) => {
   wsClient.onmessage = (message) => {
     setBracket(JSON.parse(message.data).bracket);
   };
+  
+  const bracketFetch = async () => {
+    const req = await fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id || tourId}`);
+    const resJson = await req.json();
+    setBracket(resJson.bracket);
+  };
 
   useEffect(() => {
-    const bracketFetch = async () => {
-      const req = await fetch(`${process.env.REACT_APP_SERVER_URL}/tabletennis/tournament/${id || tourId}`);
-      const resJson = await req.json();
-      setBracket(resJson.bracket);
-    };
     bracketFetch();
   }, []);
 

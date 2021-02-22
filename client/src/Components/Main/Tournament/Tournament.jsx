@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Bracket from '../../Brackets/Bracket';
 import { getTournamentsList } from '../../../redux/actionCreators/tournamentsListCreator';
-import { changeTournamentStatus, registrationTournamnet } from '../../../redux/actionCreators/tournamentActionCreator';
+import { registrationTournamnet } from '../../../redux/actionCreators/tournamentActionCreator';
 import getTours from '../../../redux/actionCreators/mainPageStatus/getTours/getTours';
 import { getBracket, makeBracket } from '../../../redux/actionCreators/bracket';
 
@@ -61,13 +61,13 @@ useEffect(() => {
                           buttons.includes(tour._id)
                             ? <button className="btn btn-danger" onClick={async () => {
                               await dispatch(registrationTournamnet(tour._id))
-                              await setCounter(prev => prev + 1)
+                              setCounter(prev => prev + 1)
                             }}>Отписаться</button>
 
                             : userSession && userSession ?
                               <button className="btn btn-success" onClick={async () => {
                                 await dispatch(registrationTournamnet(tour._id))
-                                await setCounter(prev => prev + 1)
+                                setCounter(prev => prev + 1)
                               }}>Записаться</button>
                               :
                               <Link to={'/signup'}><button className="btn btn-success">Записаться</button></Link>
