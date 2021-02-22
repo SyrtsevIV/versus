@@ -38,28 +38,58 @@ const EightTeamBracket = ({ bracket, tourId, creator, tourStatus }) => {
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[0]} creator={creator} tourStatus={tourStatus} />
+              <BracketPair
+                tourId={tourId}
+                match={bracket.quarterfinals[0]}
+                creator={creator}
+                tourStatus={tourStatus}
+              />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[1]} creator={creator} tourStatus={tourStatus} />
+              <BracketPair
+                tourId={tourId}
+                match={bracket.quarterfinals[1]}
+                creator={creator}
+                tourStatus={tourStatus}
+              />
             </div>
           </div>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[2]} creator={creator} tourStatus={tourStatus} />
+              <BracketPair
+                tourId={tourId}
+                match={bracket.quarterfinals[2]}
+                creator={creator}
+                tourStatus={tourStatus}
+              />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.quarterfinals[3]} creator={creator} tourStatus={tourStatus} />
+              <BracketPair
+                tourId={tourId}
+                match={bracket.quarterfinals[3]}
+                creator={creator}
+                tourStatus={tourStatus}
+              />
             </div>
           </div>
         </div>
         <div className={`${style['playoff-table-tour']}`}>
           <div className={`${style['playoff-table-group']}`}>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[0]} creator={creator} tourStatus={tourStatus} />
+              <BracketPair
+                tourId={tourId}
+                match={bracket.semifinal[0]}
+                creator={creator}
+                tourStatus={tourStatus}
+              />
             </div>
             <div className={`${style['playoff-table-pair']} ${style['playoff-table-pair-style']}`}>
-              <BracketPair tourId={tourId} match={bracket.semifinal[1]} creator={creator} tourStatus={tourStatus} />
+              <BracketPair
+                tourId={tourId}
+                match={bracket.semifinal[1]}
+                creator={creator}
+                tourStatus={tourStatus}
+              />
             </div>
           </div>
         </div>
@@ -70,7 +100,12 @@ const EightTeamBracket = ({ bracket, tourId, creator, tourStatus }) => {
             </div>
           </div>
           <div className={`${style['playoff-table-third-place']} ${style['playoff-table-pair-style']}`}>
-            <BracketPair tourId={tourId} match={bracket.thirdPlace} creator={creator} tourStatus={tourStatus} />
+            <BracketPair
+              tourId={tourId}
+              match={bracket.thirdPlace}
+              creator={creator}
+              tourStatus={tourStatus}
+            />
           </div>
         </div>
       </div>

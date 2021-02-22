@@ -13,14 +13,14 @@ import { getBracket, makeBracket } from '../../../redux/actionCreators/bracket';
 
 export default function Activtournament() {
   const dispatch = useDispatch()
+  const bracket = useSelector((state) => state.bracket.bracket);
   const tours = useSelector(state => state.mainPageTours.status);
   const userSession = useSelector((store) => store.authReducer.userSession);
   const buttons = useSelector((state) => state.tournamentsList.userInTour);
-  const [counter, setCounter] = useState(0);
   const mainPage = useSelector(store => store.mainPage.status);
-  const bracket = useSelector((state) => state.bracket.bracket);
+  const [counter, setCounter] = useState(0);
 
-  useEffect(() => {
+useEffect(() => {
     dispatch(getTournamentsList())
   }, [counter])
   
