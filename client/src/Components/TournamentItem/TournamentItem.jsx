@@ -70,14 +70,14 @@ const TournamentItem = () => {
                         ?
                         <button className="btn btn-danger" onClick={async () => {
                           await dispatch(registrationTournamnet(tourItem._id))
-                          await setCounter(prev => prev + 1)
+                          setCounter(prev => prev + 1)
                         }}>Отписаться</button>
 
                         : userSession && userSession
                           ?
                           <button className="btn btn-success" onClick={async () => {
                             await dispatch(registrationTournamnet(tourItem._id))
-                            await setCounter(prev => prev + 1)
+                            setCounter(prev => prev + 1)
                           }}>Записаться</button>
                           :
                           <Link to={'/signup'}><button className="btn btn-success">Записаться</button></Link>

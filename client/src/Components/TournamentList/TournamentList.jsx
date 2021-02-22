@@ -12,7 +12,6 @@ const TournamentList = () => {
   const userSession = useSelector((store) => store.authReducer.userSession);
   const error = useSelector((store) => store.tournamentsList.error);
   const [counter, setCounter] = useState(0)
-  console.log(error);
 
   useEffect(() => {
     dispatch(getTournamentsList())
