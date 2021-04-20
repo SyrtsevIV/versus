@@ -23,12 +23,12 @@ const BracketPair = ({ match, tourId, creator, tourStatus }) => {
       onClick={matchHandler()}
     >
       <div className={`${style['playoff-table-left-player']} ${style['flex-row-sb']}`}>
-        <span>{match.player1?.login ? match.player1?.login : match?.phantom}</span>
-        <span>{match.player1?.login ? match.score.player1 : null}</span>
+        <span>{match?.player1?.login ? match.player1?.login : match?.phantom}</span>
+        <span>{match?.player1?.login ? match.score.player1 : null}</span>
       </div>
       <div className={`${style['playoff-table-right-player']} ${style['flex-row-sb']}`}>
-        <span>{match.player2 ? match.player2.login : match.phantom}</span>
-        <span>{match.player2?.login ? match.score.player2 : null}</span>
+        <span>{match?.player2 ? match.player2.login : match?.phantom}</span>
+        <span>{match?.player2?.login ? match.score.player2 : null}</span>
       </div>
     </div>
   );
